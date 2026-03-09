@@ -993,10 +993,83 @@ input:checked + .toggle-slider::before { transform: translateX(20px); background
 
 <script>
 // ============================================================
-//  APEX — Smart Liquidity Scanner
-//  Strategies: Liq Heatmap + Volume Ignition + CVD + OI + Structure
-//  Pure SPOT LONG only
+//  APEX — Smart Liquidity Scanner  (v1.1)
 // ============================================================
+
+// ===== CORS-AWARE API LAYER =====
+const BINANCE_BASE = 'https://api.binance.com';
+const CORS_PROXIES = [
+  'https://corsproxy.io/?',
+  'https://api.allorigins.win/raw?url=',
+];
+let _proxyIdx = 0;
+const _apiCache = new Map();
+const _CACHE_TTL = 3 * 60 * 1000; // 3 min
+
+async function apiFetch(path) {
+  // Serve from cache if fresh
+  if (_apiCache.has(path)) {
+    const c = _apiCache.get(path);
+    if (Date.now() - c.ts < _CACHE_TTL) return c.data;
+  }
+  const url = BINANCE_BASE + path;
+
+  // 1. Try direct (works on HTTPS like GitHub Pages)
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 7000);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (res.ok) {
+      const data = await res.json();
+      _apiCache.set(path, { data, ts: Date.now() });
+      return data;
+    }
+  } catch(e) { /* fall through to proxy */ }
+
+  // 2. Try CORS proxies
+  for (let i = 0; i < CORS_PROXIES.length; i++) {
+    const proxy = CORS_PROXIES[(_proxyIdx + i) % CORS_PROXIES.length];
+    try {
+      const pUrl = proxy + encodeURIComponent(url);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 12000);
+      const res = await fetch(pUrl, { signal: ctrl.signal });
+      clearTimeout(t);
+      if (res.ok) {
+        const text = await res.text();
+        const data = JSON.parse(text);
+        _proxyIdx = (_proxyIdx + i) % CORS_PROXIES.length; // lock to working proxy
+        _apiCache.set(path, { data, ts: Date.now() });
+        return data;
+      }
+    } catch(e) { /* try next proxy */ }
+  }
+  throw new Error('All API endpoints failed for: ' + path);
+}
+
+// Rate-limited kline queue — 120ms between calls keeps under Binance 1200/min
+const _klineQ = [];
+let _klineRunning = false;
+function fetchKlines(symbol, interval, limit) {
+  return new Promise((resolve, reject) => {
+    _klineQ.push({ symbol, interval, limit, resolve, reject });
+    if (!_klineRunning) _drainQ();
+  });
+}
+async function _drainQ() {
+  _klineRunning = true;
+  while (_klineQ.length > 0) {
+    const job = _klineQ.shift();
+    try {
+      const data = await apiFetch(`/api/v3/klines?symbol=${job.symbol}&interval=${job.interval}&limit=${job.limit}`);
+      job.resolve(data);
+    } catch(e) { job.reject(e); }
+    if (_klineQ.length > 0) await new Promise(r => setTimeout(r, 120));
+  }
+  _klineRunning = false;
+}
+
 
 // ===== STATE =====
 const STATE = {
@@ -1191,12 +1264,10 @@ function updateCountdown() {
 async function fetchBTCData() {
   try {
     // Binance public API
-    const [tickerRes, klinesRes] = await Promise.all([
-      fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT'),
-      fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=7'),
+    const [ticker, klines] = await Promise.all([
+      apiFetch('/api/v3/ticker/24hr?symbol=BTCUSDT'),
+      apiFetch('/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=7'),
     ]);
-    const ticker = await tickerRes.json();
-    const klines = await klinesRes.json();
 
     const price = parseFloat(ticker.lastPrice);
     const change = parseFloat(ticker.priceChangePercent);
@@ -1321,10 +1392,7 @@ async function runScan() {
 
   try {
     // Fetch top gainers + volume data from Binance
-    const [ticker24hRes] = await Promise.all([
-      fetch('https://api.binance.com/api/v3/ticker/24hr'),
-    ]);
-    const all24h = await ticker24hRes.json();
+    const all24h = await apiFetch('/api/v3/ticker/24hr');
 
     // Filter USDT pairs only, exclude stablecoins
     const stables = ['USDT','BUSD','USDC','TUSD','DAI','FDUSD','USDP'];
@@ -1355,7 +1423,10 @@ async function runScan() {
 
     // Score each candidate
     const signals = [];
+    let processed = 0;
     for (const coin of candidates) {
+      processed++;
+      setScanState('scanning', `Analyzing ${processed}/${candidates.length}: ${coin.symbol.replace('USDT','')}...`);
       const signal = await scoreCandidate(coin, byVol);
       if (signal && signal.totalScore >= 3) {
         signals.push(signal);
@@ -1380,8 +1451,17 @@ async function runScan() {
     renderSignals();
   } catch(e) {
     console.error('Scan error:', e);
-    setScanState('', 'Scan failed — check connection');
-    toast('Scan failed. Check your internet connection.', 'warning');
+    const msg = e.message || '';
+    if (msg.includes('abort') || msg.includes('timeout')) {
+      setScanState('', 'Timeout — retrying via proxy...');
+      toast('Slow connection. Try scanning again.', 'warning');
+    } else if (msg.includes('All endpoints')) {
+      setScanState('', 'Network blocked — try on HTTPS/GitHub Pages');
+      toast('CORS blocked on HTTP. Deploy to GitHub Pages for full access, or try again.', 'warning');
+    } else {
+      setScanState('', 'Scan error — see console');
+      toast('Scan error: ' + (e.message || 'unknown'), 'warning');
+    }
   }
 }
 
@@ -1399,8 +1479,7 @@ async function scoreCandidate(coin, allByVol) {
   // --- Fetch klines for deeper analysis ---
   let klines1h = [];
   try {
-    const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=168`);
-    klines1h = await res.json();
+    klines1h = await fetchKlines(symbol, '1h', 168);
   } catch(e) { return null; }
 
   if (!klines1h || klines1h.length < 20) return null;
@@ -1825,8 +1904,7 @@ async function runBacktest() {
   const limit = Math.min(1000, Math.floor(days * 1440 / (tfMinutes[tf] || 240)));
 
   try {
-    const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol.toUpperCase()}&interval=${tf}&limit=${limit}`);
-    const klines = await res.json();
+    const klines = await fetchKlines(symbol.toUpperCase(), tf, limit);
 
     if (!klines || klines.length < 50) {
       toast('Not enough data for backtest', 'warning');
