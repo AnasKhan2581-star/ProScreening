@@ -32,27 +32,32 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 
 /* ===== LOADING ===== */
 #loading-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg0);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0}
-.lo-inner{display:flex;flex-direction:column;align-items:center;gap:28px;max-width:480px;width:100%;padding:0 24px}
+.lo-inner{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:500px;width:100%;padding:0 24px}
 .lo-logo{display:flex;align-items:center;gap:12px}
 .lo-logo-mark{width:44px;height:44px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 40px rgba(0,229,160,0.3)}
 .lo-logo-name{font-family:var(--font-display);font-size:26px;font-weight:600;color:var(--text);letter-spacing:-0.02em}
 .lo-logo-name span{color:var(--green)}
-.lo-title{font-size:13px;color:var(--text2);text-align:center;line-height:1.7;font-weight:400}
-.lo-steps{width:100%;display:flex;flex-direction:column;gap:7px}
-.lo-step{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--bg2);transition:all 0.3s}
-.lo-step.active{border-color:rgba(0,229,160,0.25);background:rgba(0,229,160,0.05)}
-.lo-step.done{border-color:rgba(0,229,160,0.1);background:transparent;opacity:0.65}
-.lo-step-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;color:var(--text3);font-family:var(--font-mono);background:var(--bg3);transition:all 0.3s}
-.lo-step.active .lo-step-icon{border-color:var(--green);color:var(--green);background:rgba(0,229,160,0.1)}
-.lo-step.done .lo-step-icon{border-color:var(--green2);color:var(--green2)}
-.lo-step-text{font-size:12px;color:var(--text2);flex:1}
+.lo-title{font-size:12px;color:var(--text2);text-align:center;line-height:1.7;font-weight:400}
+.lo-progress-outer{width:100%;background:var(--bg3);border-radius:4px;height:4px;overflow:hidden;border:1px solid var(--border)}
+.lo-progress-inner{height:100%;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:4px;width:0%;transition:width 0.4s ease}
+.lo-steps{width:100%;display:flex;flex-direction:column;gap:6px}
+.lo-step{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--bg2);transition:all 0.3s}
+.lo-step.active{border-color:rgba(0,229,160,0.3);background:rgba(0,229,160,0.06)}
+.lo-step.done{border-color:rgba(0,229,160,0.08);background:transparent;opacity:0.55}
+.lo-step.error{border-color:rgba(255,92,125,0.3);background:rgba(255,92,125,0.05)}
+.lo-step-num{width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;color:var(--text3);font-family:var(--font-mono);background:var(--bg3);transition:all 0.3s}
+.lo-step.active .lo-step-num{border-color:var(--green);color:var(--green);background:rgba(0,229,160,0.12)}
+.lo-step.done .lo-step-num{border-color:var(--green2);color:var(--green2);background:rgba(0,229,160,0.08)}
+.lo-step.error .lo-step-num{border-color:var(--gold);color:var(--gold)}
+.lo-step-text{font-size:11.5px;color:var(--text2);flex:1;line-height:1.4}
 .lo-step.active .lo-step-text{color:var(--text)}
-.lo-spin{width:12px;height:12px;border:1.5px solid rgba(0,229,160,0.3);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
+.lo-spin{width:12px;height:12px;border:1.5px solid rgba(0,229,160,0.25);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .lo-check{color:var(--green);font-size:12px;flex-shrink:0}
-.lo-bar-wrap{width:100%;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.lo-bar{height:100%;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:2px;width:0%;transition:width 0.5s ease}
+.lo-warn{color:var(--gold);font-size:12px;flex-shrink:0}
 .lo-status{font-size:11px;color:var(--text3);font-family:var(--font-mono);text-align:center;min-height:16px}
+.lo-source-note{font-size:10px;color:var(--text3);font-family:var(--font-mono);text-align:center;margin-top:-8px}
+.lo-source-note span{color:var(--green)}
 
 /* ===== MAIN APP ===== */
 #app{display:none;opacity:0;transition:opacity 0.6s}
@@ -61,7 +66,7 @@ body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(r
 /* ===== HEADER ===== */
 header{position:sticky;top:0;z-index:200;background:rgba(5,8,12,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;gap:16px;max-width:1320px;margin:0 auto}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
 .logo-mark{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;box-shadow:0 0 20px rgba(0,229,160,0.25)}
 .logo-name{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--text);letter-spacing:-0.02em}
 .logo-name span{color:var(--green)}
@@ -71,7 +76,7 @@ nav{display:flex;gap:4px}
 .nav-btn.active{color:var(--green);background:var(--green3)}
 .header-right{display:flex;align-items:center;gap:10px}
 .halal-pill{background:var(--gold2);border:1px solid rgba(240,180,41,0.2);color:var(--gold);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);white-space:nowrap}
-.data-badge{background:var(--green4);border:1px solid rgba(0,229,160,0.15);color:var(--green);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);white-space:nowrap;display:flex;align-items:center;gap:5px;cursor:default}
+.data-badge{background:var(--green4);border:1px solid rgba(0,229,160,0.15);color:var(--green);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);white-space:nowrap;display:flex;align-items:center;gap:5px}
 .data-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .hamburger{display:none;background:none;border:1px solid var(--border2);color:var(--text2);width:34px;height:34px;border-radius:var(--r-sm);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
@@ -102,8 +107,6 @@ nav{display:flex;gap:4px}
 
 /* ===== TICKER ===== */
 .market-ticker{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;margin:28px 0 22px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-
-/* TICKER ITEM — relative so tooltip is positioned inside */
 .ticker-item{display:flex;flex-direction:column;gap:3px;position:relative;cursor:help}
 .ticker-label{font-size:9px;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.08em;text-transform:uppercase}
 .ticker-val{font-size:14px;font-weight:500;font-family:var(--font-mono)}
@@ -112,43 +115,17 @@ nav{display:flex;gap:4px}
 .ticker-live{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text3);font-family:var(--font-mono)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
 
-/* TICKER TOOLTIP */
-/* Floating tooltip — attached to body to avoid overflow clipping */
-#tk-floating-tooltip{
-  display:none;
-  position:fixed;
-  background:var(--bg3);
-  border:1px solid var(--border2);
-  border-radius:var(--r-sm);
-  padding:11px 14px;
-  min-width:210px;
-  z-index:9000;
-  pointer-events:none;
-  box-shadow:0 8px 32px rgba(0,0,0,0.6);
-}
-#tk-floating-tooltip::after{
-  content:'';
-  position:absolute;
-  top:100%;left:50%;
-  transform:translateX(-50%);
-  border:6px solid transparent;
-  border-top-color:var(--bg3);
-}
+/* floating tooltip */
+#tk-floating-tooltip{display:none;position:fixed;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-sm);padding:11px 14px;min-width:210px;z-index:9000;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.6)}
+#tk-floating-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--bg3)}
 #tk-floating-tooltip.visible{display:block}
-.tt-source{font-size:10px;font-family:var(--font-mono);margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.tt-source .tag{font-size:9px;padding:2px 7px;border-radius:100px;border:1px solid}
-.tt-source .tag.ai{color:var(--green);border-color:rgba(0,229,160,0.3);background:rgba(0,229,160,0.08)}
-.tt-source .tag.research{color:var(--gold);border-color:rgba(240,180,41,0.3);background:rgba(240,180,41,0.08)}
-.tt-row{display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--text2);margin-bottom:3px}
-.tt-row strong{color:var(--text);font-family:var(--font-mono)}
-.tt-time{font-size:9px;color:var(--text3);font-family:var(--font-mono);margin-top:6px;border-top:1px solid var(--border);padding-top:5px}
 
 /* ===== DATA FRESHNESS ===== */
 .data-freshness{background:rgba(0,229,160,0.04);border:1px solid rgba(0,229,160,0.12);border-radius:var(--r-sm);padding:10px 16px;margin-bottom:20px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .data-freshness strong{color:var(--green)}
 .data-freshness .sep{color:var(--text3)}
 .source-chip{font-size:9px;padding:2px 7px;border-radius:100px;font-family:var(--font-mono);border:1px solid}
-.source-chip.ai{color:var(--green);border-color:rgba(0,229,160,0.25)}
+.source-chip.yf{color:var(--blue);border-color:rgba(91,188,255,0.3)}
 .source-chip.fb{color:var(--gold);border-color:rgba(240,180,41,0.25)}
 
 /* ===== FILTER ===== */
@@ -325,16 +302,17 @@ nav{display:flex;gap:4px}
       <div class="lo-logo-mark">☪</div>
       <div class="lo-logo-name">Halal<span>Vest</span></div>
     </div>
-    <div class="lo-title">Fetching live market data via AI search · 15–25 sec, once per session</div>
-    <div class="lo-bar-wrap"><div class="lo-bar" id="lo-bar"></div></div>
+    <div class="lo-title">Fetching adjusted close prices from Yahoo Finance · Accounts for splits &amp; dividends</div>
+    <div class="lo-progress-outer"><div class="lo-progress-inner" id="lo-bar"></div></div>
     <div class="lo-steps" id="lo-steps">
-      <div class="lo-step" id="lstep-0"><div class="lo-step-icon" id="lsi-0">1</div><span class="lo-step-text">Initialising AI pipeline for 21 portfolios</span><span id="lind-0"></span></div>
-      <div class="lo-step" id="lstep-1"><div class="lo-step-icon" id="lsi-1">2</div><span class="lo-step-text">Fetching NSE market index data (NIFTY, SENSEX)</span><span id="lind-1"></span></div>
-      <div class="lo-step" id="lstep-2"><div class="lo-step-icon" id="lsi-2">3</div><span class="lo-step-text">Fetching 1M · 6M · 1Y · 3Y · 5Y · 10Y returns</span><span id="lind-2"></span></div>
-      <div class="lo-step" id="lstep-3"><div class="lo-step-icon" id="lsi-3">4</div><span class="lo-step-text">Computing weighted portfolio CAGRs</span><span id="lind-3"></span></div>
-      <div class="lo-step" id="lstep-4"><div class="lo-step-icon" id="lsi-4">5</div><span class="lo-step-text">Building app · caching session data</span><span id="lind-4"></span></div>
+      <div class="lo-step" id="lstep-0"><div class="lo-step-num" id="lsi-0">1</div><span class="lo-step-text">Initialising Yahoo Finance pipeline · 21 portfolios</span><span id="lind-0"></span></div>
+      <div class="lo-step" id="lstep-1"><div class="lo-step-num" id="lsi-1">2</div><span class="lo-step-text">Fetching NSE index data (NIFTY 50, SENSEX, IT, PHARMA)</span><span id="lind-1"></span></div>
+      <div class="lo-step" id="lstep-2"><div class="lo-step-num" id="lsi-2">3</div><span class="lo-step-text">Fetching 10Y adjclose history for portfolio holdings</span><span id="lind-2"></span></div>
+      <div class="lo-step" id="lstep-3"><div class="lo-step-num" id="lsi-3">4</div><span class="lo-step-text">Computing split-adjusted 1M · 6M · 1Y · 3Y · 5Y · 10Y CAGRs</span><span id="lind-3"></span></div>
+      <div class="lo-step" id="lstep-4"><div class="lo-step-num" id="lsi-4">5</div><span class="lo-step-text">Weighting by allocation · Building app · Caching session</span><span id="lind-4"></span></div>
     </div>
     <div class="lo-status" id="lo-status">Initialising…</div>
+    <div class="lo-source-note">Data: <span>Yahoo Finance</span> adjClose · CORS proxy: allorigins.win · Once per session</div>
   </div>
 </div>
 
@@ -343,10 +321,10 @@ nav{display:flex;gap:4px}
 <div id="tk-floating-tooltip"></div>
 <header>
   <div class="header-inner">
-    <a class="logo" href="#" onclick="showPage('portfolios');return false">
+    <div class="logo" onclick="showPage('portfolios')">
       <div class="logo-mark">☪</div>
       <div class="logo-name">Halal<span>Vest</span></div>
-    </a>
+    </div>
     <nav id="main-nav">
       <button class="nav-btn active" onclick="showPage('portfolios',this)">Portfolios</button>
       <button class="nav-btn" onclick="showPage('compare',this)">Compare</button>
@@ -374,49 +352,33 @@ nav{display:flex;gap:4px}
 <div class="page active" id="page-portfolios">
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow"><span class="dot"></span>AI-Powered Live Data · NSE India</div>
+    <div class="hero-eyebrow"><span class="dot"></span>Yahoo Finance · Adj. Close · NSE India</div>
     <h1>Invest <em>Halal.</em><br>Grow with Conviction.</h1>
-    <p class="hero-sub">21 Shariah-compliant portfolios across every risk level. Returns sourced fresh every session via Claude AI web search. Zero riba. Built for Indian Muslims who want money to work ethically.</p>
+    <p class="hero-sub">21 Shariah-compliant portfolios across every risk level. Returns computed from split-adjusted close prices via Yahoo Finance. Zero riba. Built for Indian Muslims who want money to work ethically.</p>
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-n">21</div><div class="hstat-l">Portfolios</div></div>
       <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Riba</div></div>
-      <div class="hstat"><div class="hstat-n">AI</div><div class="hstat-l">Data Source</div></div>
+      <div class="hstat"><div class="hstat-n">Adj</div><div class="hstat-l">Returns</div></div>
       <div class="hstat"><div class="hstat-n">NSE</div><div class="hstat-l">Exchange</div></div>
     </div>
   </div>
 
-  <!-- MARKET TICKER — tooltips injected by JS -->
   <div class="market-ticker">
-    <div class="ticker-item" id="ti-nifty">
-      <div class="ticker-label">NIFTY 50</div>
-      <div class="ticker-val" id="tk-nifty">—</div>
-    </div>
+    <div class="ticker-item" id="ti-nifty"><div class="ticker-label">NIFTY 50</div><div class="ticker-val" id="tk-nifty">—</div></div>
     <div class="ticker-divider"></div>
-    <div class="ticker-item" id="ti-sensex">
-      <div class="ticker-label">SENSEX</div>
-      <div class="ticker-val" id="tk-sensex">—</div>
-    </div>
+    <div class="ticker-item" id="ti-sensex"><div class="ticker-label">SENSEX</div><div class="ticker-val" id="tk-sensex">—</div></div>
     <div class="ticker-divider"></div>
-    <div class="ticker-item" id="ti-it">
-      <div class="ticker-label">NIFTY IT</div>
-      <div class="ticker-val" id="tk-it">—</div>
-    </div>
+    <div class="ticker-item" id="ti-it"><div class="ticker-label">NIFTY IT</div><div class="ticker-val" id="tk-it">—</div></div>
     <div class="ticker-divider"></div>
-    <div class="ticker-item" id="ti-pharma">
-      <div class="ticker-label">NIFTY PHARMA</div>
-      <div class="ticker-val" id="tk-pharma">—</div>
-    </div>
+    <div class="ticker-item" id="ti-pharma"><div class="ticker-label">NIFTY PHARMA</div><div class="ticker-val" id="tk-pharma">—</div></div>
     <div class="ticker-divider"></div>
-    <div class="ticker-item" id="ti-usd">
-      <div class="ticker-label">USD/INR</div>
-      <div class="ticker-val neutral" id="tk-usd">—</div>
-    </div>
-    <div class="ticker-live"><div class="live-dot"></div><span id="ticker-source-label">SESSION DATA</span></div>
+    <div class="ticker-item" id="ti-usd"><div class="ticker-label">USD/INR</div><div class="ticker-val neutral" id="tk-usd">—</div></div>
+    <div class="ticker-live"><div class="live-dot"></div><span id="ticker-source-label">LOADING</span></div>
   </div>
 
   <div class="data-freshness" id="data-freshness">
-    <span>⚡</span>
-    <span><strong id="df-source-label">AI-sourced data</strong> <span class="sep">·</span> <span id="df-source-desc">Fetched this session via Claude AI web search · Sources: Screener.in, Moneycontrol, Tickertape</span> <span class="sep">·</span> <span id="fetch-time">—</span></span>
+    <span>📊</span>
+    <span><strong id="df-source-label">Yahoo Finance adjClose</strong> <span class="sep">·</span> <span id="df-source-desc">Split &amp; dividend-adjusted · 10Y history · CORS via allorigins.win</span> <span class="sep">·</span> <span id="fetch-time">—</span></span>
     <span id="df-source-chip"></span>
   </div>
 
@@ -476,12 +438,12 @@ nav{display:flex;gap:4px}
   <div class="about-section">
     <h2>What is HalalVest?</h2>
     <p>HalalVest is a curated portfolio platform for Muslim investors in India who want to grow wealth without compromising their faith. Every stock in our 21 portfolios is screened against Shariah principles — no banks, NBFCs, alcohol, tobacco, gambling, weapons, or adult content.</p>
-    <p>HalalVest fetches fresh return data every session via Claude AI with web search. It queries Screener.in, Moneycontrol, and Tickertape for real CAGR figures and falls back gracefully to research-backed sector benchmarks when needed.</p>
+    <p>HalalVest fetches real adjusted close prices from Yahoo Finance on every session load. Returns are computed from the <strong>adjClose</strong> column, which accounts for stock splits, bonus issues, and dividends — giving you accurate, apples-to-apples historical performance.</p>
   </div>
   <div class="about-section">
     <h2>How the data engine works</h2>
-    <p>On load, HalalVest calls the Claude AI API with web search enabled. Claude searches Indian financial databases and returns structured JSON with 1M, 6M, 1Y, 3Y, 5Y, and 10Y return data for key holdings. These are weighted by portfolio allocation and cached in your browser session — so it only runs once per tab.</p>
-    <p><strong>Fallback:</strong> If the AI fetch fails or returns partial data, HalalVest uses research-backed sector benchmark ranges derived from 10+ years of NSE sector index data. These are clearly labelled "Research Est." in the UI.</p>
+    <p>On load, HalalVest fetches 10Y monthly adjusted close data for all unique NSE tickers in the portfolios using Yahoo Finance's chart API (via a CORS proxy). CAGR for each period is computed as: <strong>((P_end / P_start) ^ (1/years)) − 1</strong>, where prices are split and dividend adjusted.</p>
+    <p>Portfolio returns are a weighted average of individual stock returns, using allocation weights. Data is cached in <code>sessionStorage</code> so the fetch only runs once per tab. If Yahoo Finance is unavailable or rate-limits, research benchmark estimates are shown instead and clearly labelled.</p>
   </div>
   <div class="about-section">
     <h2>Halal Screening Criteria</h2>
@@ -525,7 +487,7 @@ nav{display:flex;gap:4px}
           <button class="tbtn" onclick="loadChart('10y',this)">10Y</button>
         </div>
         <div class="chart-wrap"><canvas id="main-chart"></canvas></div>
-        <div class="chart-info" id="chart-info-text">📡 Simulated trajectory based on portfolio CAGR data</div>
+        <div class="chart-info" id="chart-info-text">📊 Simulated trajectory based on adjClose CAGR</div>
         <div class="stats-grid" id="m-stats"></div>
       </div>
       <div class="tab-pane" id="tab-holdings">
@@ -557,7 +519,7 @@ nav{display:flex;gap:4px}
           <div class="cres"><div class="cres-label">Total Value</div><div class="cres-val" id="c-total">—</div></div>
         </div>
         <div class="cagr-note" id="c-cagr-note"></div>
-        <div class="calc-note">⚠ Returns use sourced CAGR data. Past performance ≠ future results. For planning only — not financial advice. Consult a SEBI-registered advisor.</div>
+        <div class="calc-note">⚠ Returns use adjClose CAGR from Yahoo Finance. Past performance ≠ future results. For planning only — not financial advice. Consult a SEBI-registered advisor.</div>
       </div>
       <div class="tab-pane" id="tab-risk"><div id="risk-content"></div></div>
     </div>
@@ -598,7 +560,7 @@ const PORTFOLIOS = [
     stocks:[{n:'KPR Mill',t:'KPRMILL',w:22,s:'Textiles'},{n:'Vardhman Textiles',t:'VTL',w:20,s:'Textiles'},{n:'Page Industries',t:'PAGEIND',w:18,s:'Innerwear'},{n:'Indo Count Industries',t:'ICIL',w:15,s:'Home Textiles'},{n:'Trident',t:'TRIDENT',w:12,s:'Home Textiles'},{n:'Grasim Industries',t:'GRASIM',w:13,s:'Fibres'}]},
   {id:13,emoji:'🌾',name:'Agri & Food Processing',desc:'PI Industries, Kaveri Seed — food security plays with strong pricing power and moats.',vol:'medium',tags:['midcap','largecap'],sectors:['Agriculture'],market:'good',marketLabel:'✓ Defensive',color:'#00e5a0',sharpe:1.14,sortino:1.48,beta:0.78,stdDev:17.8,maxDD:-26,
     stocks:[{n:'PI Industries',t:'PIIND',w:28,s:'Agrochem'},{n:'Kaveri Seed',t:'KSCL',w:20,s:'Seeds'},{n:'Sumitomo Chemical India',t:'SUMICHEM',w:18,s:'Agrochem'},{n:'Godrej Agrovet',t:'GODREJAGRO',w:18,s:'Agri'},{n:'Rallis India',t:'RALLIS',w:16,s:'Agrochem'}]},
-  {id:14,emoji:'🏭',name:'Capital Goods Super Cycle',desc:'Kalpataru, KEC, BEL — domestic capex boom with 5-10 year order visibility and book-to-bill > 2x.',vol:'medium',tags:['midcap','largecap'],sectors:['Capital Goods'],market:'good',marketLabel:'✓ Strong Cycle',color:'#f0b429',sharpe:1.38,sortino:1.72,beta:1.02,stdDev:22.8,maxDD:-31,
+  {id:14,emoji:'🏭',name:'Capital Goods Super Cycle',desc:'Kalpataru, KEC, BEL — domestic capex boom with 5-10 year order visibility.',vol:'medium',tags:['midcap','largecap'],sectors:['Capital Goods'],market:'good',marketLabel:'✓ Strong Cycle',color:'#f0b429',sharpe:1.38,sortino:1.72,beta:1.02,stdDev:22.8,maxDD:-31,
     stocks:[{n:'KEC International',t:'KEC',w:20,s:'T&D'},{n:'BEL',t:'BEL',w:18,s:'Electronics'},{n:'BEML',t:'BEML',w:14,s:'Mining Equip'},{n:'Texmaco Rail',t:'TEXRAIL',w:12,s:'Rail'},{n:'HG Infra Engineering',t:'HGINFRA',w:12,s:'Roads'},{n:'G R Infraprojects',t:'GRINFRA',w:12,s:'Roads'},{n:'Kalpataru Projects',t:'KPIL',w:12,s:'EPC'}]},
   {id:15,emoji:'🌙',name:'Micro Cap Moonshots',desc:'Ultra-high risk micro-caps with 5-10x potential over a decade. Max 5% allocation.',vol:'veryhigh',tags:['smallcap'],sectors:['Micro Cap'],market:'avoid',marketLabel:'✗ High Risk Only',color:'#c4b5fd',sharpe:0.82,sortino:0.98,beta:1.82,stdDev:44.8,maxDD:-68,
     stocks:[{n:'Authum Investment',t:'AUTHUM',w:12,s:'Investment'},{n:'Maan Aluminium',t:'MAANALUM',w:10,s:'Aluminium'},{n:'Pennar Industries',t:'PENNARIND',w:11,s:'Steel'},{n:'Yasho Industries',t:'YASHIND',w:10,s:'Chemicals'},{n:'Jai Balaji Industries',t:'JAIBALAJI',w:10,s:'Steel'},{n:'Indo Amines',t:'INDOAMIN',w:10,s:'Chemicals'},{n:'Shree Pushkar Chem',t:'SHREEPUSHK',w:10,s:'Dyes'},{n:'Genus Power',t:'GENUSPOWER',w:27,s:'Smart Meters'}]},
@@ -615,7 +577,7 @@ const PORTFOLIOS = [
 ];
 
 // ================================================================
-// RESEARCH FALLBACK DATA
+// RESEARCH FALLBACK DATA (used when Yahoo Finance is unavailable)
 // ================================================================
 const RESEARCH_DATA = {
   0:  {r1mo:2.1, r6mo:9.8,  r1y:22.4, r3y:28.6, r5y:24.8, r10y:17.2},
@@ -641,127 +603,231 @@ const RESEARCH_DATA = {
   20: {r1mo:5.6, r6mo:24.8, r1y:58.4, r3y:72.6, r5y:64.8, r10y:38.4},
 };
 
-const RESEARCH_MARKET = {
-  nifty50:    {value:22419, change_pct:-0.58},
-  sensex:     {value:73825, change_pct:-0.52},
-  niftyIT:    {value:36142, change_pct:-0.91},
-  niftyPharma:{value:21638, change_pct:0.42},
-  usdInr:     {value:84.47}
+// ================================================================
+// YAHOO FINANCE CONFIG
+// ================================================================
+// CORS proxy — allorigins.win works from GitHub Pages (no server needed)
+// Yahoo Finance NSE stocks use .NS suffix, indices use different symbols
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
+// NSE index Yahoo Finance symbols
+const INDEX_SYMBOLS = {
+  nifty50:     '^NSEI',
+  sensex:      '^BSESN',
+  niftyIT:     '^CNXIT',
+  niftyPharma: 'NIFTYPHARMA.NS', // fallback: ^CNXPHARMA
+  usdInr:      'INR=X'
 };
 
 // ================================================================
 // GLOBAL STATE
 // ================================================================
-let portfolioData = {};
-let marketData = {};
+let portfolioData  = {};
+let marketData     = {};
 let fetchTimestamp = null;
-let dataSource = 'research';
-// Per-ticker source tracking for tooltips
-let tickerMeta = {};
+let dataSource     = 'research';
+let stockCache     = {}; // raw adjClose arrays by ticker
+let tickerMeta     = {};
 
 // ================================================================
-// LOADING UI
+// LOADING UI HELPERS
 // ================================================================
-function setLoStep(idx, state) {
+function setLoStep(idx, state, extraText) {
   const step = document.getElementById(`lstep-${idx}`);
   const icon = document.getElementById(`lsi-${idx}`);
   const ind  = document.getElementById(`lind-${idx}`);
   if (!step) return;
-  step.className = 'lo-step' + (state==='active' ? ' active' : state==='done' ? ' done' : '');
-  if (state === 'active') ind.innerHTML = '<div class="lo-spin"></div>';
-  else if (state === 'done') ind.innerHTML = '<span class="lo-check">✓</span>';
-  else ind.innerHTML = '';
-}
-function setLoBar(pct) { document.getElementById('lo-bar').style.width = pct + '%'; }
-function setLoStatus(txt) { document.getElementById('lo-status').textContent = txt; }
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-// ================================================================
-// AI FETCH — FIX: added anthropic-beta header required for web_search tool
-// ================================================================
-async function callClaude(systemPrompt, userPrompt) {
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4000,
-      system: systemPrompt,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: userPrompt }]
-    })
-  });
-  if (!resp.ok) {
-    const err = await resp.text();
-    throw new Error(`API ${resp.status}: ${err.slice(0,300)}`);
+  step.className = 'lo-step' + (state==='active'?' active':state==='done'?' done':state==='warn'?' error':'');
+  if (state==='active') ind.innerHTML='<div class="lo-spin"></div>';
+  else if (state==='done') ind.innerHTML='<span class="lo-check">✓</span>';
+  else if (state==='warn') ind.innerHTML='<span class="lo-warn">~</span>';
+  else ind.innerHTML='';
+  if (extraText) {
+    const el = step.querySelector('.lo-step-text');
+    if (el) el.textContent = extraText;
   }
+}
+function setLoBar(pct) { document.getElementById('lo-bar').style.width = pct+'%'; }
+function setLoStatus(txt) { document.getElementById('lo-status').textContent = txt; }
+function delay(ms) { return new Promise(r=>setTimeout(r,ms)); }
+
+// ================================================================
+// YAHOO FINANCE FETCH — adjClose via CORS proxy
+// ================================================================
+/**
+ * Fetch Yahoo Finance chart data for a symbol.
+ * Returns { timestamps: [...], adjClose: [...] } or null on failure.
+ * interval: '1mo', range: '10y' / '1y' / etc.
+ */
+async function fetchYahooChart(symbol, interval='1mo', range='10y') {
+  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${interval}&range=${range}&includeAdjustedClose=true`;
+  const proxyUrl = CORS_PROXY + encodeURIComponent(yfUrl);
+  const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
   const data = await resp.json();
-  const text = (data.content || [])
-    .filter(b => b.type === 'text')
-    .map(b => b.text)
-    .join('\n');
-  return text;
+  const result = data?.chart?.result?.[0];
+  if (!result) throw new Error('No result');
+  const timestamps = result.timestamp || [];
+  // adjClose is the split+dividend adjusted column
+  const adjCloseArr = result.indicators?.adjclose?.[0]?.adjclose
+    || result.indicators?.quote?.[0]?.close
+    || [];
+  if (!adjCloseArr.length) throw new Error('No adjClose data');
+  return { timestamps, adjClose: adjCloseArr };
 }
 
-function extractJSON(raw) {
-  if (!raw) return null;
-  let s = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
-  const start = s.indexOf('{');
-  const end   = s.lastIndexOf('}');
-  if (start === -1 || end === -1) return null;
-  try { return JSON.parse(s.slice(start, end + 1)); } catch { return null; }
+/**
+ * Given adjClose array, compute return percentages for various periods.
+ * Uses the most recent valid (non-null) price as end point,
+ * and the price approximately N months ago as start point.
+ */
+function computeReturnsFromAdjClose(adjCloseRaw, timestampsRaw) {
+  // Filter out null values
+  const paired = adjCloseRaw.map((v, i) => ({ v, t: timestampsRaw[i] }))
+                            .filter(x => x.v != null && !isNaN(x.v) && x.v > 0);
+  if (paired.length < 2) return null;
+
+  const latest = paired[paired.length - 1];
+  const latestDate = new Date(latest.t * 1000);
+  const endPrice = latest.v;
+
+  function getStartPrice(monthsAgo) {
+    const targetDate = new Date(latestDate);
+    targetDate.setMonth(targetDate.getMonth() - monthsAgo);
+    const targetTs = targetDate.getTime() / 1000;
+    // Find closest data point at or before targetDate
+    let closest = null;
+    for (const p of paired) {
+      if (p.t <= targetTs) closest = p;
+    }
+    return closest ? closest.v : null;
+  }
+
+  function pctReturn(monthsAgo) {
+    const startPrice = getStartPrice(monthsAgo);
+    if (!startPrice) return null;
+    return ((endPrice / startPrice) - 1) * 100;
+  }
+
+  function cagrReturn(monthsAgo) {
+    const startPrice = getStartPrice(monthsAgo);
+    if (!startPrice) return null;
+    const years = monthsAgo / 12;
+    return (Math.pow(endPrice / startPrice, 1 / years) - 1) * 100;
+  }
+
+  return {
+    r1mo:  pctReturn(1),
+    r6mo:  pctReturn(6),
+    r1y:   pctReturn(12),
+    r3y:   cagrReturn(36),
+    r5y:   cagrReturn(60),
+    r10y:  cagrReturn(120),
+  };
 }
 
-async function fetchMarketDataViaAI() {
-  const sys = `You are a financial data assistant for Indian markets. Search for today's exact index values.
-Return ONLY valid JSON with no markdown, no backticks, no commentary. Use 0 for unavailable fields.`;
-  const prompt = `Search for today's values for: NIFTY 50 index level, BSE SENSEX level, NIFTY IT index, NIFTY PHARMA index, USD to INR exchange rate.
-Return ONLY this exact JSON (no backticks, no explanation, no extra text):
-{"nifty50":{"value":0,"change_pct":0},"sensex":{"value":0,"change_pct":0},"niftyIT":{"value":0,"change_pct":0},"niftyPharma":{"value":0,"change_pct":0},"usdInr":{"value":0}}`;
-  const raw = await callClaude(sys, prompt);
-  return extractJSON(raw);
+/**
+ * Fetch a single NSE stock's adjClose data.
+ * Yahoo Finance NSE tickers: TCS.NS, INFY.NS etc.
+ */
+async function fetchStockReturns(nseTicker) {
+  if (stockCache[nseTicker]) return stockCache[nseTicker];
+  try {
+    const data = await fetchYahooChart(`${nseTicker}.NS`, '1mo', '10y');
+    const returns = computeReturnsFromAdjClose(data.adjClose, data.timestamps);
+    if (returns) {
+      returns.fromYF = true;
+      stockCache[nseTicker] = returns;
+      return returns;
+    }
+  } catch (e) {
+    console.warn(`YF fetch failed for ${nseTicker}.NS:`, e.message);
+  }
+  return null;
 }
 
-async function fetchReturnsBatch(portfolioIds) {
-  const tickers = [...new Set(
-    portfolioIds.flatMap(id => {
-      const p = PORTFOLIOS.find(x => x.id === id);
-      return p ? p.stocks.slice(0, 3).map(s => s.t) : [];
-    })
-  )].slice(0, 12);
-
-  const sys = `You are a financial data expert on NSE-listed Indian stocks. Search Screener.in, Moneycontrol.com, or Tickertape.in for historical stock return data.
-Return ONLY valid JSON with no markdown, no backticks, no commentary. Use null for unavailable data.`;
-  const prompt = `Search for return data for these NSE stocks: ${tickers.join(', ')}
-Return ONLY this JSON (no markdown, no backticks, no extra text):
-{"stocks":{"TICKER":{"r1mo":0,"r6mo":0,"r1y":0,"r3y":0,"r5y":0,"r10y":0}}}
-Tickers: ${tickers.join(', ')}
-r1mo=1-month%, r6mo=6-month%, r1y=1-year%, r3y=3y CAGR%, r5y=5y CAGR%, r10y=10y CAGR%`;
-  const raw = await callClaude(sys, prompt);
-  return extractJSON(raw);
+/**
+ * Fetch index data — Yahoo Finance uses different symbols for NSE indices.
+ * Returns { value, change_pct }.
+ */
+async function fetchIndexData(symbol) {
+  try {
+    const data = await fetchYahooChart(symbol, '1d', '5d');
+    const prices = data.adjClose.filter(v => v != null);
+    if (prices.length < 2) return null;
+    const last  = prices[prices.length - 1];
+    const prev  = prices[prices.length - 2];
+    const change_pct = ((last - prev) / prev) * 100;
+    return { value: last, change_pct };
+  } catch (e) {
+    console.warn(`Index fetch failed for ${symbol}:`, e.message);
+    return null;
+  }
 }
 
-function computeWeightedPortfolioReturn(portfolio, stockData, field) {
-  if (!stockData?.stocks) return null;
-  let total = 0, wt = 0;
-  for (const s of portfolio.stocks.slice(0, 4)) {
-    const sd = stockData.stocks[s.t];
-    if (sd && sd[field] != null && !isNaN(sd[field]) && sd[field] !== 0) {
-      total += sd[field] * s.w;
-      wt += s.w;
+// ================================================================
+// BATCH FETCH WITH CONCURRENCY CONTROL
+// ================================================================
+/**
+ * Fetch multiple tickers with max N concurrent requests to avoid
+ * being rate-limited by Yahoo Finance / allorigins.
+ */
+async function fetchBatch(tickers, concurrency = 4, onProgress) {
+  const results = {};
+  let idx = 0;
+  async function worker() {
+    while (idx < tickers.length) {
+      const ticker = tickers[idx++];
+      results[ticker] = await fetchStockReturns(ticker);
+      if (onProgress) onProgress(ticker, results[ticker]);
     }
   }
-  return wt >= 15 ? total / wt : null;
+  const workers = Array.from({ length: Math.min(concurrency, tickers.length) }, worker);
+  await Promise.all(workers);
+  return results;
+}
+
+// ================================================================
+// PORTFOLIO RETURN COMPUTATION
+// ================================================================
+/**
+ * Compute weighted portfolio return from fetched stock data.
+ * Uses top holdings (up to 5) to compute a weighted average.
+ */
+function computePortfolioReturns(portfolio, stockResults) {
+  const fields = ['r1mo', 'r6mo', 'r1y', 'r3y', 'r5y', 'r10y'];
+  const computed = {};
+  let anyFromYF = false;
+
+  for (const field of fields) {
+    let totalWeight = 0, weightedSum = 0;
+    for (const stock of portfolio.stocks.slice(0, 5)) {
+      const sd = stockResults[stock.t];
+      if (sd && sd[field] != null && !isNaN(sd[field]) && Math.abs(sd[field]) < 500) {
+        weightedSum  += sd[field] * stock.w;
+        totalWeight  += stock.w;
+        if (sd.fromYF) anyFromYF = true;
+      }
+    }
+    // Need at least 20% weight coverage to trust the weighted average
+    if (totalWeight >= 20) {
+      computed[field] = parseFloat((weightedSum / totalWeight).toFixed(2));
+    } else {
+      // Fall back to research data for this field
+      computed[field] = RESEARCH_DATA[portfolio.id][field];
+    }
+  }
+
+  computed.fromYF = anyFromYF;
+  return computed;
 }
 
 // ================================================================
 // MAIN DATA PIPELINE
 // ================================================================
 async function runDataPipeline() {
-  const cached = sessionStorage.getItem('hv_data_v7');
+  // Check session cache first
+  const cached = sessionStorage.getItem('hv_yf_v3');
   if (cached) {
     try {
       const p = JSON.parse(cached);
@@ -772,105 +838,109 @@ async function runDataPipeline() {
       tickerMeta     = p.tickerMeta || {};
       PORTFOLIOS.forEach(port => { port._returns = portfolioData[port.id]; });
       for (let i = 0; i < 5; i++) setLoStep(i, 'done');
-      setLoBar(100); setLoStatus('Loaded from session cache — instant start!');
-      await delay(500);
+      setLoBar(100);
+      setLoStatus('Loaded from session cache — instant start!');
+      await delay(400);
       return;
     } catch (e) { /* fall through */ }
   }
 
-  setLoStep(0, 'active'); setLoBar(8);
-  setLoStatus('Building AI search queries…');
-  await delay(400);
-  setLoStep(0, 'done');
-
-  // Market data
-  setLoStep(1, 'active'); setLoBar(18);
-  setLoStatus('Fetching NIFTY 50, SENSEX, USD/INR via AI web search…');
-  let mktFromAI = false;
-  try {
-    const mkt = await fetchMarketDataViaAI();
-    if (mkt && (mkt.nifty50?.value > 10000 || mkt.sensex?.value > 30000)) {
-      marketData = mkt;
-      mktFromAI = true;
-    }
-  } catch (e) { console.warn('Market AI fetch failed:', e.message); }
-  if (!mktFromAI) marketData = RESEARCH_MARKET;
-
-  // Build per-ticker metadata for tooltips
-  const now = new Date().toLocaleString('en-IN', {
-    hour:'2-digit', minute:'2-digit', day:'2-digit', month:'short'
-  });
-  tickerMeta = {
-    nifty50:    { fromAI: mktFromAI, value: marketData.nifty50?.value, change: marketData.nifty50?.change_pct, label: 'NIFTY 50', source: mktFromAI ? 'NSE India · Claude AI web search' : 'Research fallback · April 2025 estimate', time: now },
-    sensex:     { fromAI: mktFromAI, value: marketData.sensex?.value,  change: marketData.sensex?.change_pct,  label: 'BSE SENSEX', source: mktFromAI ? 'BSE India · Claude AI web search' : 'Research fallback · April 2025 estimate', time: now },
-    niftyIT:    { fromAI: mktFromAI, value: marketData.niftyIT?.value, change: marketData.niftyIT?.change_pct, label: 'NIFTY IT', source: mktFromAI ? 'NSE India · Claude AI web search' : 'Research fallback · April 2025 estimate', time: now },
-    niftyPharma:{ fromAI: mktFromAI, value: marketData.niftyPharma?.value, change: marketData.niftyPharma?.change_pct, label: 'NIFTY Pharma', source: mktFromAI ? 'NSE India · Claude AI web search' : 'Research fallback · April 2025 estimate', time: now },
-    usdInr:     { fromAI: mktFromAI, value: marketData.usdInr?.value, label: 'USD/INR', source: mktFromAI ? 'RBI / Forex · Claude AI web search' : 'Research fallback · April 2025 estimate', time: now },
-  };
-
-  setLoStep(1, 'done'); setLoBar(30);
-
-  // Returns
-  setLoStep(2, 'active');
-  setLoStatus('Fetching stock returns from NSE data sources…');
-  let sd1 = null, sd2 = null, sd3 = null;
-  let aiSuccess = 0;
-  try {
-    [sd1, sd2, sd3] = await Promise.allSettled([
-      fetchReturnsBatch([0,1,2,3,4,5,6]),
-      fetchReturnsBatch([7,8,9,10,11,12,13]),
-      fetchReturnsBatch([14,15,16,17,18,19,20]),
-    ]).then(results => results.map(r => r.status === 'fulfilled' ? r.value : null));
-    if (sd1?.stocks) aiSuccess++;
-    if (sd2?.stocks) aiSuccess++;
-    if (sd3?.stocks) aiSuccess++;
-  } catch (e) { /* all fallback */ }
-
-  setLoBar(72); setLoStep(2, 'done');
-
-  setLoStep(3, 'active');
-  setLoStatus('Computing weighted portfolio CAGRs…');
+  // Step 0 — init
+  setLoStep(0, 'active'); setLoBar(5);
+  setLoStatus('Preparing fetch queue…');
   await delay(300);
 
-  let aiPortfolios = 0;
+  // Collect unique tickers across all portfolios (top 5 per portfolio)
+  const allTickers = [...new Set(
+    PORTFOLIOS.flatMap(p => p.stocks.slice(0, 5).map(s => s.t))
+  )];
+  setLoStep(0, 'done');
+
+  // Step 1 — market indices
+  setLoStep(1, 'active'); setLoBar(12);
+  setLoStatus('Fetching NIFTY 50, SENSEX, IT, PHARMA indices…');
+
+  const [niftyData, sensexData, itData, pharmaData, usdInrData] = await Promise.allSettled([
+    fetchIndexData(INDEX_SYMBOLS.nifty50),
+    fetchIndexData(INDEX_SYMBOLS.sensex),
+    fetchIndexData(INDEX_SYMBOLS.niftyIT),
+    fetchIndexData(INDEX_SYMBOLS.niftyPharma),
+    fetchIndexData(INDEX_SYMBOLS.usdInr),
+  ]).then(results => results.map(r => r.status === 'fulfilled' ? r.value : null));
+
+  const now = new Date().toLocaleString('en-IN', {
+    hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short'
+  });
+
+  // Build marketData — fall back to research values if fetch failed
+  const RMkt = { nifty50:{value:22419,change_pct:-0.58}, sensex:{value:73825,change_pct:-0.52}, niftyIT:{value:36142,change_pct:-0.91}, niftyPharma:{value:21638,change_pct:0.42}, usdInr:{value:84.47} };
+  marketData = {
+    nifty50:     niftyData     || RMkt.nifty50,
+    sensex:      sensexData    || RMkt.sensex,
+    niftyIT:     itData        || RMkt.niftyIT,
+    niftyPharma: pharmaData    || RMkt.niftyPharma,
+    usdInr:      usdInrData    || RMkt.usdInr,
+  };
+
+  const mktFromYF = !!niftyData || !!sensexData;
+  tickerMeta = {
+    nifty50:     { fromYF: !!niftyData,    ...marketData.nifty50,    label: 'NIFTY 50',     source: niftyData     ? 'Yahoo Finance (^NSEI)' : 'Research est.', time: now },
+    sensex:      { fromYF: !!sensexData,   ...marketData.sensex,     label: 'BSE SENSEX',   source: sensexData    ? 'Yahoo Finance (^BSESN)' : 'Research est.', time: now },
+    niftyIT:     { fromYF: !!itData,       ...marketData.niftyIT,    label: 'NIFTY IT',     source: itData        ? 'Yahoo Finance (^CNXIT)' : 'Research est.', time: now },
+    niftyPharma: { fromYF: !!pharmaData,   ...marketData.niftyPharma,label: 'NIFTY PHARMA', source: pharmaData    ? 'Yahoo Finance (NIFTYPHARMA.NS)' : 'Research est.', time: now },
+    usdInr:      { fromYF: !!usdInrData,   ...marketData.usdInr,     label: 'USD/INR',      source: usdInrData    ? 'Yahoo Finance (INR=X)' : 'Research est.', time: now },
+  };
+
+  setLoStep(1, mktFromYF ? 'done' : 'warn'); setLoBar(22);
+
+  // Step 2 — stock adjClose data
+  setLoStep(2, 'active');
+  setLoStatus(`Fetching adjClose for ${allTickers.length} unique NSE tickers…`);
+
+  let fetchedCount = 0;
+  const stockResults = await fetchBatch(allTickers, 4, (ticker, result) => {
+    fetchedCount++;
+    const pct = Math.round(22 + (fetchedCount / allTickers.length) * 45);
+    setLoBar(pct);
+    setLoStatus(`adjClose fetched: ${ticker}.NS (${fetchedCount}/${allTickers.length})`);
+  });
+
+  const yfCount = Object.values(stockResults).filter(v => v?.fromYF).length;
+  setLoStep(2, yfCount > 0 ? 'done' : 'warn',
+    `adjClose data: ${yfCount}/${allTickers.length} stocks from Yahoo Finance`);
+  setLoBar(70);
+
+  // Step 3 — compute weighted returns
+  setLoStep(3, 'active');
+  setLoStatus('Computing split-adjusted weighted CAGRs…');
+  await delay(200);
+
+  let yfPortfolios = 0;
   for (const p of PORTFOLIOS) {
-    const batchSD = p.id <= 6 ? sd1 : p.id <= 13 ? sd2 : sd3;
-    const res = RESEARCH_DATA[p.id];
-    const fields = ['r1mo','r6mo','r1y','r3y','r5y','r10y'];
-    const computed = {};
-    let fromAI = false;
-    for (const f of fields) {
-      const aiVal = computeWeightedPortfolioReturn(p, batchSD, f);
-      if (aiVal != null && Math.abs(aiVal) < 300) {
-        computed[f] = parseFloat(aiVal.toFixed(2));
-        fromAI = true;
-      } else {
-        computed[f] = res[f];
-      }
-    }
-    computed.fromAI = fromAI;
-    if (fromAI) aiPortfolios++;
+    const computed = computePortfolioReturns(p, stockResults);
+    if (computed.fromYF) yfPortfolios++;
     portfolioData[p.id] = computed;
     p._returns = computed;
   }
-  dataSource = aiPortfolios >= 10 ? 'ai' : aiPortfolios >= 4 ? 'hybrid' : 'research';
 
-  setLoStep(3, 'done'); setLoBar(90);
+  dataSource = yfPortfolios >= 14 ? 'yahoo' : yfPortfolios >= 5 ? 'hybrid' : 'research';
+  setLoStep(3, 'done'); setLoBar(88);
 
+  // Step 4 — finalise & cache
   setLoStep(4, 'active');
   setLoStatus('Caching session data…');
   fetchTimestamp = now;
   try {
-    sessionStorage.setItem('hv_data_v7', JSON.stringify({
+    sessionStorage.setItem('hv_yf_v3', JSON.stringify({
       portfolioData, marketData, fetchTimestamp, dataSource, tickerMeta
     }));
   } catch(e) {}
   await delay(300);
   setLoStep(4, 'done'); setLoBar(100);
   setLoStatus(
-    dataSource === 'ai' ? `AI data ready — ${aiPortfolios}/21 portfolios AI-sourced!` :
-    dataSource === 'hybrid' ? `Hybrid data — ${aiPortfolios}/21 AI + research estimates.` :
-    'Research benchmark data ready.'
+    dataSource === 'yahoo'   ? `Yahoo Finance data ready — ${yfPortfolios}/21 portfolios live!` :
+    dataSource === 'hybrid'  ? `Hybrid — ${yfPortfolios}/21 from Yahoo Finance + research estimates.` :
+    'Using research benchmark estimates — Yahoo Finance unavailable.'
   );
   await delay(700);
 }
@@ -882,19 +952,21 @@ async function init() {
   try {
     await runDataPipeline();
   } catch (e) {
+    console.error('Pipeline error:', e);
     PORTFOLIOS.forEach(p => {
-      portfolioData[p.id] = { ...RESEARCH_DATA[p.id], fromAI: false };
+      portfolioData[p.id] = { ...RESEARCH_DATA[p.id], fromYF: false };
       p._returns = portfolioData[p.id];
     });
-    marketData = RESEARCH_MARKET;
-    dataSource = 'research';
+    marketData     = { nifty50:{value:22419,change_pct:-0.58}, sensex:{value:73825,change_pct:-0.52}, niftyIT:{value:36142,change_pct:-0.91}, niftyPharma:{value:21638,change_pct:0.42}, usdInr:{value:84.47} };
+    dataSource     = 'research';
     fetchTimestamp = new Date().toLocaleString('en-IN');
     for (let i = 0; i < 5; i++) setLoStep(i, 'done');
     setLoBar(100);
-    setLoStatus('Using research benchmark data.');
+    setLoStatus('Using research benchmark data (Yahoo Finance unavailable).');
     await delay(600);
   }
 
+  // Hide loading, show app
   const lo = document.getElementById('loading-overlay');
   lo.style.transition = 'opacity 0.5s';
   lo.style.opacity = '0';
@@ -910,77 +982,66 @@ async function init() {
 }
 
 // ================================================================
-// TICKER + FLOATING TOOLTIP (body-level, avoids overflow clipping)
+// FLOATING TOOLTIP
 // ================================================================
-function buildTooltipHTML(meta) {
-  if (!meta) return '';
-  const isAI = meta.fromAI;
-  const tagCls = isAI ? 'ai' : 'research';
-  const tagLbl = isAI ? '● AI Live' : '● Research Est.';
-  const tagColor = isAI ? 'var(--green)' : 'var(--gold)';
-  const tagBorder = isAI ? 'rgba(0,229,160,0.3)' : 'rgba(240,180,41,0.3)';
-  const tagBg = isAI ? 'rgba(0,229,160,0.08)' : 'rgba(240,180,41,0.08)';
-  const changeRow = meta.change != null
-    ? `<div style="display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--text2);margin-bottom:3px"><span>Change</span><strong style="font-family:var(--font-mono);color:${meta.change >= 0 ? 'var(--green)' : 'var(--red)'}">${meta.change >= 0 ? '+' : ''}${Number(meta.change).toFixed(2)}%</strong></div>`
-    : '';
-  const rawVal = meta.label === 'USD/INR'
-    ? `₹${Number(meta.value).toFixed(2)}`
-    : Number(meta.value).toLocaleString('en-IN');
-  return `<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
-      <span style="font-size:9px;padding:2px 8px;border-radius:100px;border:1px solid ${tagBorder};background:${tagBg};color:${tagColor};font-family:var(--font-mono)">${tagLbl}</span>
-      <span style="color:var(--text3);font-size:10px;font-family:var(--font-mono)">${meta.label}</span>
-    </div>
-    <div style="display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--text2);margin-bottom:3px"><span>Value</span><strong style="font-family:var(--font-mono);color:var(--text)">${rawVal}</strong></div>
-    ${changeRow}
-    <div style="font-size:10px;color:var(--text3);margin-bottom:3px;margin-top:4px">${meta.source}</div>
-    <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);border-top:1px solid var(--border);padding-top:5px;margin-top:5px">Fetched ${meta.time}</div>`;
-}
-
-// Floating tooltip state
 const _ftt = { el: null };
 function initFloatingTooltip() {
   _ftt.el = document.getElementById('tk-floating-tooltip');
   document.addEventListener('scroll', hideFloatingTT, true);
 }
+function buildTooltipHTML(meta) {
+  if (!meta) return '';
+  const isYF  = meta.fromYF;
+  const col   = isYF ? 'var(--blue)' : 'var(--gold)';
+  const bdr   = isYF ? 'rgba(91,188,255,0.3)' : 'rgba(240,180,41,0.3)';
+  const bg    = isYF ? 'rgba(91,188,255,0.08)' : 'rgba(240,180,41,0.08)';
+  const lbl   = isYF ? '● Yahoo Finance' : '● Research Est.';
+  const chg   = meta.change_pct != null ? meta.change_pct : meta.change;
+  const rawVal = meta.label === 'USD/INR'
+    ? `₹${Number(meta.value).toFixed(2)}`
+    : Number(meta.value).toLocaleString('en-IN', {maximumFractionDigits:0});
+  const changeRow = chg != null
+    ? `<div style="display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--text2);margin-bottom:3px"><span>Change</span><strong style="font-family:var(--font-mono);color:${Number(chg)>=0?'var(--green)':'var(--red)'}">${Number(chg)>=0?'+':''}${Number(chg).toFixed(2)}%</strong></div>` : '';
+  return `<div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
+    <span style="font-size:9px;padding:2px 8px;border-radius:100px;border:1px solid ${bdr};background:${bg};color:${col};font-family:var(--font-mono)">${lbl}</span>
+    <span style="color:var(--text3);font-size:10px;font-family:var(--font-mono)">${meta.label}</span></div>
+  <div style="display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--text2);margin-bottom:3px"><span>Value</span><strong style="font-family:var(--font-mono);color:var(--text)">${rawVal}</strong></div>
+  ${changeRow}
+  <div style="font-size:10px;color:var(--text3);margin-top:4px;margin-bottom:2px">${meta.source}</div>
+  <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);border-top:1px solid var(--border);padding-top:5px;margin-top:4px">Fetched ${meta.time}</div>`;
+}
 function showFloatingTT(anchorEl, meta) {
   if (!_ftt.el || !meta) return;
   _ftt.el.innerHTML = buildTooltipHTML(meta);
   _ftt.el.classList.add('visible');
-  positionFloatingTT(anchorEl);
-}
-function positionFloatingTT(anchorEl) {
-  if (!_ftt.el || !anchorEl) return;
   const rect = anchorEl.getBoundingClientRect();
-  const ttW = 220;
+  const ttW = 230;
   let left = rect.left + rect.width / 2 - ttW / 2;
-  // Keep within viewport
   left = Math.max(8, Math.min(left, window.innerWidth - ttW - 8));
-  const top = rect.top - _ftt.el.offsetHeight - 12;
-  _ftt.el.style.left = left + 'px';
-  _ftt.el.style.top = (top < 8 ? rect.bottom + 12 : top) + 'px';
+  const top = rect.top - _ftt.el.offsetHeight - 14;
+  _ftt.el.style.left  = left + 'px';
+  _ftt.el.style.top   = (top < 8 ? rect.bottom + 14 : top) + 'px';
   _ftt.el.style.width = ttW + 'px';
 }
-function hideFloatingTT() {
-  if (_ftt.el) _ftt.el.classList.remove('visible');
-}
+function hideFloatingTT() { if (_ftt.el) _ftt.el.classList.remove('visible'); }
 
+// ================================================================
+// TICKER RENDER
+// ================================================================
 function renderTicker() {
-  const m = marketData;
-
   function setTk(elId, metaKey, val, chg) {
     const el = document.getElementById(elId);
     if (!el || val == null) return;
     const s = chg >= 0 ? '+' : '';
-    el.textContent = `${Number(val).toLocaleString('en-IN')} (${s}${Number(chg).toFixed(2)}%)`;
+    el.textContent = `${Number(val).toLocaleString('en-IN', {maximumFractionDigits:0})} (${s}${Number(chg).toFixed(2)}%)`;
     el.className = `ticker-val ${chg >= 0 ? 'up' : 'dn'}`;
-    // Attach hover to the parent ticker-item
     const item = el.closest('.ticker-item');
     if (item) {
       item.addEventListener('mouseenter', () => showFloatingTT(item, tickerMeta[metaKey]));
       item.addEventListener('mouseleave', hideFloatingTT);
     }
   }
-
+  const m = marketData;
   setTk('tk-nifty',  'nifty50',     m.nifty50?.value,     m.nifty50?.change_pct);
   setTk('tk-sensex', 'sensex',       m.sensex?.value,      m.sensex?.change_pct);
   setTk('tk-it',     'niftyIT',      m.niftyIT?.value,     m.niftyIT?.change_pct);
@@ -989,25 +1050,24 @@ function renderTicker() {
   const usdEl = document.getElementById('tk-usd');
   if (usdEl && m.usdInr?.value) {
     usdEl.textContent = `₹${Number(m.usdInr.value).toFixed(2)}`;
-    usdEl.className = 'ticker-val neutral';
     const item = usdEl.closest('.ticker-item');
     if (item) {
-      item.addEventListener('mouseenter', () => showFloatingTT(item, tickerMeta['usdInr']));
+      item.addEventListener('mouseenter', () => showFloatingTT(item, tickerMeta.usdInr));
       item.addEventListener('mouseleave', hideFloatingTT);
     }
   }
-
-  // Update live label
   const lbl = document.getElementById('ticker-source-label');
   if (lbl) {
-    const anyAI = Object.values(tickerMeta).some(x => x?.fromAI);
-    lbl.textContent = anyAI ? 'AI LIVE DATA' : 'RESEARCH EST.';
-    lbl.style.color = anyAI ? 'var(--green)' : 'var(--gold)';
+    const anyYF = Object.values(tickerMeta).some(x => x?.fromYF);
+    lbl.textContent = anyYF ? 'YAHOO FINANCE' : 'RESEARCH EST.';
+    lbl.style.color = anyYF ? 'var(--blue)' : 'var(--gold)';
   }
-
   initFloatingTooltip();
 }
 
+// ================================================================
+// DATA FRESHNESS BAR
+// ================================================================
 function updateFreshnessBar() {
   const ftEl   = document.getElementById('fetch-time');
   const badge  = document.getElementById('data-badge-text');
@@ -1015,21 +1075,20 @@ function updateFreshnessBar() {
   const labelEl= document.getElementById('df-source-label');
   const descEl = document.getElementById('df-source-desc');
   if (ftEl && fetchTimestamp) ftEl.textContent = `Fetched ${fetchTimestamp}`;
-
-  if (dataSource === 'ai') {
-    if (badge)   badge.textContent  = 'Live AI Data';
-    if (labelEl) labelEl.textContent= 'AI-sourced data';
-    if (descEl)  descEl.textContent = 'Fetched this session via Claude AI web search · Screener.in, Moneycontrol, Tickertape';
-    if (chipEl)  chipEl.innerHTML   = '<span class="source-chip ai">● AI LIVE</span>';
+  if (dataSource === 'yahoo') {
+    if (badge)   badge.textContent  = 'Yahoo Finance';
+    if (labelEl) labelEl.textContent= 'Yahoo Finance adjClose';
+    if (descEl)  descEl.textContent = 'Split & dividend-adjusted returns · 10Y history · CORS via allorigins.win';
+    if (chipEl)  chipEl.innerHTML   = '<span class="source-chip yf">● YAHOO FINANCE</span>';
   } else if (dataSource === 'hybrid') {
-    if (badge)   badge.textContent  = 'Hybrid Data';
+    if (badge)   badge.textContent  = 'YF + Estimates';
     if (labelEl) labelEl.textContent= 'Hybrid data';
-    if (descEl)  descEl.textContent = 'Mix of AI-sourced returns and NSE sector benchmark estimates';
-    if (chipEl)  chipEl.innerHTML   = '<span class="source-chip ai">AI+EST</span>';
+    if (descEl)  descEl.textContent = 'Mix of Yahoo Finance adjClose and research sector estimates';
+    if (chipEl)  chipEl.innerHTML   = '<span class="source-chip yf">YF+EST</span>';
   } else {
     if (badge)   badge.textContent  = 'Research Est.';
     if (labelEl) labelEl.textContent= 'Research benchmark data';
-    if (descEl)  descEl.textContent = 'NSE sector index historical CAGR benchmarks — AI fetch unavailable this session';
+    if (descEl)  descEl.textContent = 'NSE sector index historical CAGR benchmarks — Yahoo Finance unavailable this session';
     if (chipEl)  chipEl.innerHTML   = '<span class="source-chip fb">● RESEARCH EST.</span>';
   }
 }
@@ -1038,7 +1097,7 @@ function updateFreshnessBar() {
 // RENDER CARDS
 // ================================================================
 const volBadgeClass = {low:'badge-low',medium:'badge-med',high:'badge-high',veryhigh:'badge-vhigh'};
-const volLabel = {low:'LOW VOL',medium:'MED VOL',high:'HIGH VOL',veryhigh:'V.HIGH VOL'};
+const volLabel      = {low:'LOW VOL',medium:'MED VOL',high:'HIGH VOL',veryhigh:'V.HIGH VOL'};
 let activeFilter = 'all', activeSearch = '';
 
 function renderCards() {
@@ -1047,15 +1106,15 @@ function renderCards() {
   PORTFOLIOS.forEach(p => {
     const r = p._returns || RESEARCH_DATA[p.id];
     const fmtR = v => v != null
-      ? `<div class="metric-val ${v >= 0 ? 'g' : 'r'}">${v >= 0 ? '+' : ''}${Number(v).toFixed(1)}%</div>`
+      ? `<div class="metric-val ${v>=0?'g':'r'}">${v>=0?'+':''}${Number(v).toFixed(1)}%</div>`
       : `<div class="metric-val" style="color:var(--text3)">N/A</div>`;
-    const srcTag = r?.fromAI
-      ? '<span style="font-size:9px;color:var(--green);font-family:var(--font-mono)"> · AI</span>'
+    const srcTag = r?.fromYF
+      ? '<span style="font-size:9px;color:var(--blue);font-family:var(--font-mono)"> · YF</span>'
       : '<span style="font-size:9px;color:var(--text3);font-family:var(--font-mono)"> · est.</span>';
     const card = document.createElement('div');
     card.className = 'sc-card';
-    card.dataset.id = p.id;
-    card.dataset.vol = p.vol;
+    card.dataset.id   = p.id;
+    card.dataset.vol  = p.vol;
     card.dataset.tags = p.tags.join(',');
     card.dataset.name = p.name.toLowerCase();
     card.style.setProperty('--card-accent', p.color);
@@ -1094,12 +1153,12 @@ function renderCards() {
 function drawMiniChart(p) {
   const canvas = document.getElementById(`mc-${p.id}`);
   if (!canvas) return;
-  const r = p._returns || RESEARCH_DATA[p.id];
+  const r    = p._returns || RESEARCH_DATA[p.id];
   const cagr = r?.r3y ?? 15;
-  const pts = generateTrajectory(cagr, 36);
+  const pts  = generateTrajectory(cagr, 36);
   const isUp = pts[pts.length - 1] >= pts[0];
-  const col = isUp ? '#00e5a0' : '#ff5c7d';
-  const ctx = canvas.getContext('2d');
+  const col  = isUp ? '#00e5a0' : '#ff5c7d';
+  const ctx  = canvas.getContext('2d');
   const w = canvas.width, h = canvas.height;
   ctx.clearRect(0, 0, w, h);
   const mn = Math.min(...pts), mx = Math.max(...pts), rng = mx - mn || 1;
@@ -1171,7 +1230,7 @@ function openModal(id) {
   const r = p._returns || RESEARCH_DATA[p.id];
 
   document.getElementById('m-title').textContent = `${p.emoji} ${p.name}`;
-  document.getElementById('m-sub').textContent = p.desc;
+  document.getElementById('m-sub').textContent   = p.desc;
 
   document.getElementById('m-holdings').innerHTML = p.stocks.map((s, i) => `
     <tr>
@@ -1184,15 +1243,15 @@ function openModal(id) {
     </tr>`).join('');
 
   const periods = [{k:'r1mo',l:'1M'},{k:'r6mo',l:'6M'},{k:'r1y',l:'1Y'},{k:'r3y',l:'3Y CAGR'},{k:'r5y',l:'5Y CAGR'},{k:'r10y',l:'10Y CAGR'}];
-  document.getElementById('m-returns').innerHTML = periods.map(({k, l}) => {
+  document.getElementById('m-returns').innerHTML = periods.map(({k,l}) => {
     const v = r?.[k];
-    return `<div class="ret-box">
-      <div class="ret-period">${l}</div>
-      <div class="ret-val ${v != null ? (v >= 0 ? 'up' : 'dn') : ''}">${v != null ? (v >= 0 ? '+' : '') + Number(v).toFixed(1) + '%' : 'N/A'}</div>
-    </div>`;
+    return `<div class="ret-box"><div class="ret-period">${l}</div>
+      <div class="ret-val ${v!=null?(v>=0?'up':'dn'):''}">${v!=null?(v>=0?'+':'')+Number(v).toFixed(1)+'%':'N/A'}</div></div>`;
   }).join('');
 
-  const srcText = r?.fromAI ? '📡 AI-sourced CAGR data · weighted from top holdings via Claude web search' : '📊 Research benchmark estimates · NSE sector index historical data';
+  const srcText = r?.fromYF
+    ? '📊 Yahoo Finance adjClose CAGR · split & dividend adjusted · weighted from holdings'
+    : '📐 Research benchmark estimates · NSE sector index historical data';
   document.getElementById('chart-info-text').textContent = srcText;
 
   document.getElementById('m-stats').innerHTML = `
@@ -1201,7 +1260,7 @@ function openModal(id) {
     <div class="stat-box"><div class="stat-box-label">Beta vs NIFTY</div><div class="stat-box-val b">${p.beta}</div></div>
     <div class="stat-box"><div class="stat-box-label">Std Dev (Ann.)</div><div class="stat-box-val y">${p.stdDev}%</div></div>`;
 
-  const riskN = {low:2,medium:3,high:4,veryhigh:5}[p.vol] || 3;
+  const riskN = {low:2,medium:3,high:4,veryhigh:5}[p.vol]||3;
   document.getElementById('risk-content').innerHTML = `
     <div class="risk-dots">
       ${[1,2,3,4,5].map(l=>`<div class="rdot ${l<=riskN?`on-${l}`:''}"></div>`).join('')}
@@ -1227,7 +1286,7 @@ function openModal(id) {
         <div class="suit-verdict" style="color:${p.market==='avoid'?'var(--red)':'var(--text2)'}">${p.market==='avoid'?'Avoid':'Caution'}</div>
       </div>
     </div>
-    <div class="halal-check"><strong>☪ Halal Status: Verified</strong><br>All holdings screened for riba exposure, haram business activities, and excessive leverage. Re-screened quarterly. Debt/assets < 33%. Interest income < 5% revenue. AAOIFI-aligned methodology.</div>`;
+    <div class="halal-check"><strong>☪ Halal Status: Verified</strong><br>All holdings screened for riba exposure, haram business activities, and excessive leverage. Re-screened quarterly. Debt/assets &lt; 33%. Interest income &lt; 5% revenue. AAOIFI-aligned methodology.</div>`;
 
   switchTab('overview', null);
   document.getElementById('overlay').classList.add('open');
@@ -1240,58 +1299,48 @@ function loadChart(range, btn) {
   if (!currentP) return;
   document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  else document.querySelectorAll('.tbtn').forEach(b => { if (b.textContent === '3Y') b.classList.add('active'); });
+  else document.querySelectorAll('.tbtn').forEach(b => { if (b.textContent==='3Y') b.classList.add('active'); });
   if (mainChart) { mainChart.destroy(); mainChart = null; }
 
   const r = currentP._returns || RESEARCH_DATA[currentP.id];
   const monthsMap = {'1mo':1,'6mo':6,'1y':12,'3y':36,'5y':60,'10y':120};
   const cagrMap   = {'1mo':r.r1mo,'6mo':r.r6mo,'1y':r.r1y,'3y':r.r3y,'5y':r.r5y,'10y':r.r10y};
-  const months = monthsMap[range] || 36;
-  const cagr   = cagrMap[range]  || r.r3y || 15;
+  const months = monthsMap[range]||36;
+  const cagr   = cagrMap[range]||r.r3y||15;
   const pts    = generateTrajectory(cagr, months);
-  const isUp   = pts[pts.length - 1] >= pts[0];
+  const isUp   = pts[pts.length-1] >= pts[0];
   const col    = isUp ? '#00e5a0' : '#ff5c7d';
 
-  const labels = pts.map((_, i) => {
+  const labels = pts.map((_,i) => {
     const d = new Date();
     d.setMonth(d.getMonth() - (months - i));
     return months > 24
       ? d.getFullYear().toString()
-      : d.toLocaleDateString('en-IN', {month:'short', year:'2-digit'});
+      : d.toLocaleDateString('en-IN', {month:'short',year:'2-digit'});
   });
 
-  const ctx = document.getElementById('main-chart').getContext('2d');
-  const grad = ctx.createLinearGradient(0, 0, 0, 270);
-  grad.addColorStop(0, isUp ? 'rgba(0,229,160,0.22)' : 'rgba(255,92,125,0.22)');
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  const ctx  = document.getElementById('main-chart').getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,0,270);
+  grad.addColorStop(0, isUp?'rgba(0,229,160,0.22)':'rgba(255,92,125,0.22)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
 
   mainChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        data: pts,
-        borderColor: col, borderWidth: 2,
-        fill: true, backgroundColor: grad,
-        pointRadius: 0, pointHoverRadius: 5, tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: {mode:'index', intersect:false},
-      plugins: {
-        legend: {display:false},
-        tooltip: {
-          backgroundColor:'#1a2640', borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
+    type:'line',
+    data:{ labels, datasets:[{ data:pts, borderColor:col, borderWidth:2, fill:true, backgroundColor:grad, pointRadius:0, pointHoverRadius:5, tension:0.4 }] },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'#1a2640', borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
           titleColor:'#7a8faa', bodyColor:'#eef2ff',
-          callbacks: {label: ctx => `  ${(ctx.parsed.y - 100).toFixed(2)}% return`}
-        }
+          callbacks:{label:ctx=>`  ${(ctx.parsed.y-100).toFixed(2)}% return`} }
       },
-      scales: {
-        x: {grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#334155', font:{size:10}, maxTicksLimit:8}},
-        y: {grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#334155', font:{size:10}, callback: v => (v-100).toFixed(0)+'%'}}
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#334155',font:{size:10},maxTicksLimit:8}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#334155',font:{size:10},callback:v=>(v-100).toFixed(0)+'%'}}
       },
-      animation: {duration:500}
+      animation:{duration:500}
     }
   });
 }
@@ -1299,12 +1348,12 @@ function loadChart(range, btn) {
 function switchTab(name) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.mtab').forEach(b => b.classList.remove('active'));
-  const pane = document.getElementById('tab-' + name);
+  const pane = document.getElementById('tab-'+name);
   if (pane) pane.classList.add('active');
   document.querySelectorAll('.mtab').forEach(b => {
     if (b.getAttribute('onclick')?.includes(`'${name}'`)) b.classList.add('active');
   });
-  if (name === 'overview' && mainChart) setTimeout(() => mainChart.resize(), 50);
+  if (name==='overview' && mainChart) setTimeout(()=>mainChart.resize(),50);
 }
 
 function closeModal() {
@@ -1312,7 +1361,7 @@ function closeModal() {
   document.body.style.overflow = '';
   if (mainChart) { mainChart.destroy(); mainChart = null; }
 }
-function closeOverlay(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
+function closeOverlay(e) { if (e.target===document.getElementById('overlay')) closeModal(); }
 
 // ================================================================
 // CALCULATOR
@@ -1321,38 +1370,38 @@ function toggleCalc(mode, btn) {
   calcMode = mode;
   document.querySelectorAll('.ctbtn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  document.getElementById('c-amt-label').textContent = mode === 'sip' ? 'Monthly SIP (₹)' : 'Lumpsum Amount (₹)';
+  document.getElementById('c-amt-label').textContent = mode==='sip' ? 'Monthly SIP (₹)' : 'Lumpsum Amount (₹)';
   runCalc();
 }
 
 function runCalc() {
   if (!currentP) return;
-  const amt  = parseFloat(document.getElementById('c-amount').value) || 10000;
-  const yrs  = parseFloat(document.getElementById('c-years').value)  || 10;
-  const r    = currentP._returns || RESEARCH_DATA[currentP.id];
-  const cagr = r?.r5y ?? r?.r3y ?? {low:14,medium:18,high:22,veryhigh:28}[currentP.vol];
-  const rm   = (cagr / 100) / 12;
-  const n    = yrs * 12;
+  const amt  = parseFloat(document.getElementById('c-amount').value)||10000;
+  const yrs  = parseFloat(document.getElementById('c-years').value)||10;
+  const r    = currentP._returns||RESEARCH_DATA[currentP.id];
+  const cagr = r?.r5y??r?.r3y??{low:14,medium:18,high:22,veryhigh:28}[currentP.vol];
+  const rm   = (cagr/100)/12;
+  const n    = yrs*12;
   let invested, total;
-  if (calcMode === 'sip') {
-    invested = amt * 12 * yrs;
-    total    = amt * (Math.pow(1 + rm, n) - 1) / rm * (1 + rm);
+  if (calcMode==='sip') {
+    invested = amt*12*yrs;
+    total    = amt*(Math.pow(1+rm,n)-1)/rm*(1+rm);
   } else {
     invested = amt;
-    total    = amt * Math.pow(1 + cagr / 100, yrs);
+    total    = amt*Math.pow(1+cagr/100,yrs);
   }
   const gain = total - invested;
-  document.getElementById('c-invested').textContent = '₹' + fmt(invested);
-  document.getElementById('c-gain').textContent     = '₹' + fmt(gain);
-  document.getElementById('c-total').textContent    = '₹' + fmt(total);
+  document.getElementById('c-invested').textContent = '₹'+fmt(invested);
+  document.getElementById('c-gain').textContent     = '₹'+fmt(gain);
+  document.getElementById('c-total').textContent    = '₹'+fmt(total);
   const noteEl = document.getElementById('c-cagr-note');
-  if (noteEl) noteEl.textContent = `Using ${Number(cagr).toFixed(1)}% CAGR (5Y ${r?.fromAI ? 'AI-sourced' : 'research est.'})`;
+  if (noteEl) noteEl.textContent = `Using ${Number(cagr).toFixed(1)}% CAGR (5Y ${r?.fromYF?'Yahoo Finance adjClose':'research est.'})`;
 }
 
 function fmt(n) {
-  if (n >= 10000000) return (n / 10000000).toFixed(2) + ' Cr';
-  if (n >= 100000)   return (n / 100000).toFixed(2) + ' L';
-  if (n >= 1000)     return (n / 1000).toFixed(1) + ' K';
+  if (n>=10000000) return (n/10000000).toFixed(2)+' Cr';
+  if (n>=100000)   return (n/100000).toFixed(2)+' L';
+  if (n>=1000)     return (n/1000).toFixed(1)+' K';
   return Math.round(n).toString();
 }
 
@@ -1366,8 +1415,8 @@ function buildCompare() {
   const vc = {low:'var(--green)',medium:'var(--gold)',high:'var(--red)',veryhigh:'var(--purple)'};
   const vb = {low:'var(--green3)',medium:'var(--gold2)',high:'var(--red2)',veryhigh:'rgba(196,181,253,0.1)'};
   tbody.innerHTML = PORTFOLIOS.map(p => {
-    const r = p._returns || RESEARCH_DATA[p.id];
-    const fmtR = v => v != null ? `<span class="${v>=0?'pos':'neg'}">${v>=0?'+':''}${Number(v).toFixed(1)}%</span>` : '—';
+    const r = p._returns||RESEARCH_DATA[p.id];
+    const fmtR = v => v!=null?`<span class="${v>=0?'pos':'neg'}">${v>=0?'+':''}${Number(v).toFixed(1)}%</span>`:'—';
     return `<tr onclick="openModalFromCompare(${p.id})">
       <td style="min-width:200px"><div class="td-name">${p.emoji} ${p.name}</div><div class="td-sect">${p.sectors.join(', ')}</div></td>
       <td><span style="background:${vb[p.vol]};color:${vc[p.vol]};border:1px solid ${vc[p.vol]}30;font-family:var(--font-mono);font-size:9px;padding:3px 8px;border-radius:100px">${volLabel[p.vol]}</span></td>
@@ -1410,17 +1459,15 @@ function sortTable(col) {
 function showPage(p, btn) {
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + p)?.classList.add('active');
+  document.getElementById('page-'+p)?.classList.add('active');
   if (btn) btn.classList.add('active');
-  if (p === 'compare') buildCompare();
+  if (p==='compare') buildCompare();
   window.scrollTo(0, 0);
 }
-
 function toggleMobileNav() {
   document.getElementById('mobile-nav').classList.toggle('open');
 }
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
 
 init();
 </script>
