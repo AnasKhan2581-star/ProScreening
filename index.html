@@ -302,17 +302,17 @@ nav{display:flex;gap:4px}
       <div class="lo-logo-mark">☪</div>
       <div class="lo-logo-name">Halal<span>Vest</span></div>
     </div>
-    <div class="lo-title">Fetching adjusted close prices from Yahoo Finance · Accounts for splits &amp; dividends</div>
+    <div class="lo-title">Fetching split-adjusted prices from Stooq.com · No proxy needed, accounts for splits &amp; dividends</div>
     <div class="lo-progress-outer"><div class="lo-progress-inner" id="lo-bar"></div></div>
     <div class="lo-steps" id="lo-steps">
-      <div class="lo-step" id="lstep-0"><div class="lo-step-num" id="lsi-0">1</div><span class="lo-step-text">Initialising Yahoo Finance pipeline · 21 portfolios</span><span id="lind-0"></span></div>
+      <div class="lo-step" id="lstep-0"><div class="lo-step-num" id="lsi-0">1</div><span class="lo-step-text">Initialising Stooq.com pipeline · 21 portfolios</span><span id="lind-0"></span></div>
       <div class="lo-step" id="lstep-1"><div class="lo-step-num" id="lsi-1">2</div><span class="lo-step-text">Fetching NSE index data (NIFTY 50, SENSEX, IT, PHARMA)</span><span id="lind-1"></span></div>
-      <div class="lo-step" id="lstep-2"><div class="lo-step-num" id="lsi-2">3</div><span class="lo-step-text">Fetching 10Y adjclose history for portfolio holdings</span><span id="lind-2"></span></div>
+      <div class="lo-step" id="lstep-2"><div class="lo-step-num" id="lsi-2">3</div><span class="lo-step-text">Fetching 10Y split-adj history for portfolio holdings</span><span id="lind-2"></span></div>
       <div class="lo-step" id="lstep-3"><div class="lo-step-num" id="lsi-3">4</div><span class="lo-step-text">Computing split-adjusted 1M · 6M · 1Y · 3Y · 5Y · 10Y CAGRs</span><span id="lind-3"></span></div>
       <div class="lo-step" id="lstep-4"><div class="lo-step-num" id="lsi-4">5</div><span class="lo-step-text">Weighting by allocation · Building app · Caching session</span><span id="lind-4"></span></div>
     </div>
     <div class="lo-status" id="lo-status">Initialising…</div>
-    <div class="lo-source-note">Data: <span>Yahoo Finance</span> adjClose · CORS proxy: allorigins.win · Once per session</div>
+    <div class="lo-source-note">Data: <span>Stooq.com</span> split-adjusted · Direct CORS · Once per session</div>
   </div>
 </div>
 
@@ -352,9 +352,9 @@ nav{display:flex;gap:4px}
 <div class="page active" id="page-portfolios">
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow"><span class="dot"></span>Yahoo Finance · Adj. Close · NSE India</div>
+    <div class="hero-eyebrow"><span class="dot"></span>Stooq.com · Split-Adj · NSE India</div>
     <h1>Invest <em>Halal.</em><br>Grow with Conviction.</h1>
-    <p class="hero-sub">21 Shariah-compliant portfolios across every risk level. Returns computed from split-adjusted close prices via Yahoo Finance. Zero riba. Built for Indian Muslims who want money to work ethically.</p>
+    <p class="hero-sub">21 Shariah-compliant portfolios across every risk level. Returns computed from split-adjusted prices via Stooq.com (direct CORS, no proxy). Zero riba. Built for Indian Muslims who want money to work ethically.</p>
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-n">21</div><div class="hstat-l">Portfolios</div></div>
       <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Riba</div></div>
@@ -378,7 +378,7 @@ nav{display:flex;gap:4px}
 
   <div class="data-freshness" id="data-freshness">
     <span>📊</span>
-    <span><strong id="df-source-label">Yahoo Finance adjClose</strong> <span class="sep">·</span> <span id="df-source-desc">Split &amp; dividend-adjusted · 10Y history · CORS via allorigins.win</span> <span class="sep">·</span> <span id="fetch-time">—</span></span>
+    <span><strong id="df-source-label">Stooq.com split-adj</strong> <span class="sep">·</span> <span id="df-source-desc">Split-adjusted 10Y history · Direct from Stooq.com</span> <span class="sep">·</span> <span id="fetch-time">—</span></span>
     <span id="df-source-chip"></span>
   </div>
 
@@ -438,12 +438,12 @@ nav{display:flex;gap:4px}
   <div class="about-section">
     <h2>What is HalalVest?</h2>
     <p>HalalVest is a curated portfolio platform for Muslim investors in India who want to grow wealth without compromising their faith. Every stock in our 21 portfolios is screened against Shariah principles — no banks, NBFCs, alcohol, tobacco, gambling, weapons, or adult content.</p>
-    <p>HalalVest fetches real adjusted close prices from Yahoo Finance on every session load. Returns are computed from the <strong>adjClose</strong> column, which accounts for stock splits, bonus issues, and dividends — giving you accurate, apples-to-apples historical performance.</p>
+    <p>HalalVest fetches 10Y monthly split-adjusted price history from Stooq.com on every session load. Stooq automatically adjusts historical prices for stock splits, bonus issues, and other corporate actions — giving you accurate, apples-to-apples CAGR figures.</p>
   </div>
   <div class="about-section">
     <h2>How the data engine works</h2>
-    <p>On load, HalalVest fetches 10Y monthly adjusted close data for all unique NSE tickers in the portfolios using Yahoo Finance's chart API (via a CORS proxy). CAGR for each period is computed as: <strong>((P_end / P_start) ^ (1/years)) − 1</strong>, where prices are split and dividend adjusted.</p>
-    <p>Portfolio returns are a weighted average of individual stock returns, using allocation weights. Data is cached in <code>sessionStorage</code> so the fetch only runs once per tab. If Yahoo Finance is unavailable or rate-limits, research benchmark estimates are shown instead and clearly labelled.</p>
+    <p>On load, HalalVest fetches monthly CSV data from stooq.com for all unique NSE tickers. Stooq supports CORS directly — no proxy needed. CAGR is computed as ((P_end / P_start) ^ (1/years)) − 1 using split-adjusted prices.</p>
+    <p>Portfolio returns are weighted averages of top-5 holdings by allocation. Data is cached in sessionStorage so the fetch runs only once per tab. If Stooq is unavailable, research benchmark estimates are shown and clearly labelled.</p>
   </div>
   <div class="about-section">
     <h2>Halal Screening Criteria</h2>
@@ -487,7 +487,7 @@ nav{display:flex;gap:4px}
           <button class="tbtn" onclick="loadChart('10y',this)">10Y</button>
         </div>
         <div class="chart-wrap"><canvas id="main-chart"></canvas></div>
-        <div class="chart-info" id="chart-info-text">📊 Simulated trajectory based on adjClose CAGR</div>
+        <div class="chart-info" id="chart-info-text">📊 Simulated trajectory based on Stooq split-adj CAGR</div>
         <div class="stats-grid" id="m-stats"></div>
       </div>
       <div class="tab-pane" id="tab-holdings">
@@ -519,7 +519,7 @@ nav{display:flex;gap:4px}
           <div class="cres"><div class="cres-label">Total Value</div><div class="cres-val" id="c-total">—</div></div>
         </div>
         <div class="cagr-note" id="c-cagr-note"></div>
-        <div class="calc-note">⚠ Returns use adjClose CAGR from Yahoo Finance. Past performance ≠ future results. For planning only — not financial advice. Consult a SEBI-registered advisor.</div>
+        <div class="calc-note">⚠ Returns use split-adjusted CAGR from Stooq.com. Past performance ≠ future results. For planning only — not financial advice. Consult a SEBI-registered advisor.</div>
       </div>
       <div class="tab-pane" id="tab-risk"><div id="risk-content"></div></div>
     </div>
@@ -577,7 +577,7 @@ const PORTFOLIOS = [
 ];
 
 // ================================================================
-// RESEARCH FALLBACK DATA (used when Yahoo Finance is unavailable)
+// RESEARCH FALLBACK DATA (used when Stooq.com is unavailable)
 // ================================================================
 const RESEARCH_DATA = {
   0:  {r1mo:2.1, r6mo:9.8,  r1y:22.4, r3y:28.6, r5y:24.8, r10y:17.2},
@@ -604,19 +604,24 @@ const RESEARCH_DATA = {
 };
 
 // ================================================================
-// YAHOO FINANCE CONFIG
+// STOOQ CONFIG
 // ================================================================
-// CORS proxy — allorigins.win works from GitHub Pages (no server needed)
-// Yahoo Finance NSE stocks use .NS suffix, indices use different symbols
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// Stooq.com: free, CORS-enabled, no API key, no proxy needed.
+// Historical data IS split-adjusted (Stooq adjusts for corporate actions).
+// NSE stocks: ticker.ns (lowercase), e.g. tcs.ns
+// Indices: ^nf50 (Nifty50), ^bsesn (Sensex), ^cnxit (Nifty IT)
+// CSV format: Date,Open,High,Low,Close,Volume (newest row first)
+// USD/INR: usd.inr symbol on Stooq
 
-// NSE index Yahoo Finance symbols
-const INDEX_SYMBOLS = {
-  nifty50:     '^NSEI',
-  sensex:      '^BSESN',
-  niftyIT:     '^CNXIT',
-  niftyPharma: 'NIFTYPHARMA.NS', // fallback: ^CNXPHARMA
-  usdInr:      'INR=X'
+const STOOQ_BASE = 'https://stooq.com/q/d/l/';
+
+// Stooq symbols for NSE indices
+const INDEX_STOOQ = {
+  nifty50:     '^nf50',
+  sensex:      '^bsesn',
+  niftyIT:     '^cnxit',
+  niftyPharma: '^cnxpharma',
+  usdInr:      'usd.inr'
 };
 
 // ================================================================
@@ -626,7 +631,7 @@ let portfolioData  = {};
 let marketData     = {};
 let fetchTimestamp = null;
 let dataSource     = 'research';
-let stockCache     = {}; // raw adjClose arrays by ticker
+let stockCache     = {}; // parsed price rows by ticker
 let tickerMeta     = {};
 
 // ================================================================
@@ -634,7 +639,6 @@ let tickerMeta     = {};
 // ================================================================
 function setLoStep(idx, state, extraText) {
   const step = document.getElementById(`lstep-${idx}`);
-  const icon = document.getElementById(`lsi-${idx}`);
   const ind  = document.getElementById(`lind-${idx}`);
   if (!step) return;
   step.className = 'lo-step' + (state==='active'?' active':state==='done'?' done':state==='warn'?' error':'');
@@ -652,115 +656,122 @@ function setLoStatus(txt) { document.getElementById('lo-status').textContent = t
 function delay(ms) { return new Promise(r=>setTimeout(r,ms)); }
 
 // ================================================================
-// YAHOO FINANCE FETCH — adjClose via CORS proxy
+// STOOQ CSV FETCH & PARSING
 // ================================================================
 /**
- * Fetch Yahoo Finance chart data for a symbol.
- * Returns { timestamps: [...], adjClose: [...] } or null on failure.
- * interval: '1mo', range: '10y' / '1y' / etc.
+ * Fetch Stooq CSV for a symbol, return array of { date, close } sorted
+ * chronologically (oldest first). Close prices on Stooq are split-adjusted.
+ *
+ * Stooq URL: https://stooq.com/q/d/l/?s=tcs.ns&i=m
+ *   i=d daily, i=w weekly, i=m monthly
+ * Stooq returns newest-first CSV:
+ *   Date,Open,High,Low,Close,Volume
+ *   2025-04-10,4200.50,...
  */
-async function fetchYahooChart(symbol, interval='1mo', range='10y') {
-  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${interval}&range=${range}&includeAdjustedClose=true`;
-  const proxyUrl = CORS_PROXY + encodeURIComponent(yfUrl);
-  const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  const data = await resp.json();
-  const result = data?.chart?.result?.[0];
-  if (!result) throw new Error('No result');
-  const timestamps = result.timestamp || [];
-  // adjClose is the split+dividend adjusted column
-  const adjCloseArr = result.indicators?.adjclose?.[0]?.adjclose
-    || result.indicators?.quote?.[0]?.close
-    || [];
-  if (!adjCloseArr.length) throw new Error('No adjClose data');
-  return { timestamps, adjClose: adjCloseArr };
+async function fetchStooqCSV(symbol, interval = 'm') {
+  const url = `${STOOQ_BASE}?s=${encodeURIComponent(symbol)}&i=${interval}`;
+  const resp = await fetch(url, { signal: AbortSignal.timeout(14000) });
+  if (!resp.ok) throw new Error(`Stooq HTTP ${resp.status} for ${symbol}`);
+  const text = await resp.text();
+  if (!text || text.startsWith('No data') || text.trim().length < 30) {
+    throw new Error(`No data for ${symbol}`);
+  }
+  const lines = text.trim().split('\n');
+  // First line is header: Date,Open,High,Low,Close,Volume
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',');
+    if (cols.length < 5) continue;
+    const dateStr = cols[0].trim();
+    const close   = parseFloat(cols[4]);
+    if (!dateStr || isNaN(close) || close <= 0) continue;
+    rows.push({ date: new Date(dateStr), close });
+  }
+  // Stooq returns newest-first; reverse to chronological order
+  rows.reverse();
+  if (rows.length < 2) throw new Error(`Insufficient rows for ${symbol}`);
+  return rows;
 }
 
 /**
- * Given adjClose array, compute return percentages for various periods.
- * Uses the most recent valid (non-null) price as end point,
- * and the price approximately N months ago as start point.
+ * Compute returns from a chronological price array.
+ * Prices are already split-adjusted on Stooq.
+ * CAGR formula: ((P_end / P_start) ^ (1/years)) - 1
  */
-function computeReturnsFromAdjClose(adjCloseRaw, timestampsRaw) {
-  // Filter out null values
-  const paired = adjCloseRaw.map((v, i) => ({ v, t: timestampsRaw[i] }))
-                            .filter(x => x.v != null && !isNaN(x.v) && x.v > 0);
-  if (paired.length < 2) return null;
+function computeReturnsFromRows(rows) {
+  if (!rows || rows.length < 2) return null;
 
-  const latest = paired[paired.length - 1];
-  const latestDate = new Date(latest.t * 1000);
-  const endPrice = latest.v;
+  const latest   = rows[rows.length - 1];
+  const endPrice = latest.close;
+  const endDate  = latest.date;
 
-  function getStartPrice(monthsAgo) {
-    const targetDate = new Date(latestDate);
-    targetDate.setMonth(targetDate.getMonth() - monthsAgo);
-    const targetTs = targetDate.getTime() / 1000;
-    // Find closest data point at or before targetDate
+  function getPrice(monthsAgo) {
+    const target = new Date(endDate);
+    target.setMonth(target.getMonth() - monthsAgo);
+    // Find closest row at or before target date
     let closest = null;
-    for (const p of paired) {
-      if (p.t <= targetTs) closest = p;
+    for (const r of rows) {
+      if (r.date <= target) closest = r;
     }
-    return closest ? closest.v : null;
+    return closest ? closest.close : null;
   }
 
-  function pctReturn(monthsAgo) {
-    const startPrice = getStartPrice(monthsAgo);
-    if (!startPrice) return null;
-    return ((endPrice / startPrice) - 1) * 100;
+  function pct(monthsAgo) {
+    const p = getPrice(monthsAgo);
+    return p ? ((endPrice / p) - 1) * 100 : null;
   }
 
-  function cagrReturn(monthsAgo) {
-    const startPrice = getStartPrice(monthsAgo);
-    if (!startPrice) return null;
+  function cagr(monthsAgo) {
+    const p = getPrice(monthsAgo);
+    if (!p) return null;
     const years = monthsAgo / 12;
-    return (Math.pow(endPrice / startPrice, 1 / years) - 1) * 100;
+    return (Math.pow(endPrice / p, 1 / years) - 1) * 100;
   }
 
   return {
-    r1mo:  pctReturn(1),
-    r6mo:  pctReturn(6),
-    r1y:   pctReturn(12),
-    r3y:   cagrReturn(36),
-    r5y:   cagrReturn(60),
-    r10y:  cagrReturn(120),
+    r1mo: pct(1),
+    r6mo: pct(6),
+    r1y:  pct(12),
+    r3y:  cagr(36),
+    r5y:  cagr(60),
+    r10y: cagr(120),
   };
 }
 
 /**
- * Fetch a single NSE stock's adjClose data.
- * Yahoo Finance NSE tickers: TCS.NS, INFY.NS etc.
+ * Fetch a single NSE stock from Stooq (monthly, 10Y).
+ * NSE symbol format on Stooq: ticker.ns (all lowercase)
  */
 async function fetchStockReturns(nseTicker) {
   if (stockCache[nseTicker]) return stockCache[nseTicker];
+  const symbol = nseTicker.toLowerCase() + '.ns';
   try {
-    const data = await fetchYahooChart(`${nseTicker}.NS`, '1mo', '10y');
-    const returns = computeReturnsFromAdjClose(data.adjClose, data.timestamps);
+    const rows    = await fetchStooqCSV(symbol, 'm');
+    const returns = computeReturnsFromRows(rows);
     if (returns) {
-      returns.fromYF = true;
+      returns.fromStooq = true;
       stockCache[nseTicker] = returns;
       return returns;
     }
   } catch (e) {
-    console.warn(`YF fetch failed for ${nseTicker}.NS:`, e.message);
+    console.warn(`Stooq failed [${symbol}]:`, e.message);
   }
   return null;
 }
 
 /**
- * Fetch index data — Yahoo Finance uses different symbols for NSE indices.
+ * Fetch index data from Stooq (daily, last 5 days to get today's change).
  * Returns { value, change_pct }.
  */
-async function fetchIndexData(symbol) {
+async function fetchIndexData(stooqSymbol) {
   try {
-    const data = await fetchYahooChart(symbol, '1d', '5d');
-    const prices = data.adjClose.filter(v => v != null);
-    if (prices.length < 2) return null;
-    const last  = prices[prices.length - 1];
-    const prev  = prices[prices.length - 2];
-    const change_pct = ((last - prev) / prev) * 100;
-    return { value: last, change_pct };
+    const rows = await fetchStooqCSV(stooqSymbol, 'd');
+    if (rows.length < 2) return null;
+    const last  = rows[rows.length - 1].close;
+    const prev  = rows[rows.length - 2].close;
+    return { value: last, change_pct: ((last - prev) / prev) * 100 };
   } catch (e) {
-    console.warn(`Index fetch failed for ${symbol}:`, e.message);
+    console.warn(`Index fetch failed [${stooqSymbol}]:`, e.message);
     return null;
   }
 }
@@ -769,10 +780,10 @@ async function fetchIndexData(symbol) {
 // BATCH FETCH WITH CONCURRENCY CONTROL
 // ================================================================
 /**
- * Fetch multiple tickers with max N concurrent requests to avoid
- * being rate-limited by Yahoo Finance / allorigins.
+ * Fetch multiple tickers with max N concurrent requests.
+ * Stooq is rate-limited; 3 concurrent is safe.
  */
-async function fetchBatch(tickers, concurrency = 4, onProgress) {
+async function fetchBatch(tickers, concurrency = 3, onProgress) {
   const results = {};
   let idx = 0;
   async function worker() {
@@ -791,34 +802,30 @@ async function fetchBatch(tickers, concurrency = 4, onProgress) {
 // PORTFOLIO RETURN COMPUTATION
 // ================================================================
 /**
- * Compute weighted portfolio return from fetched stock data.
- * Uses top holdings (up to 5) to compute a weighted average.
+ * Weighted average of top-5 holdings' returns.
+ * Falls back to RESEARCH_DATA per-field if coverage < 20% weight.
  */
 function computePortfolioReturns(portfolio, stockResults) {
   const fields = ['r1mo', 'r6mo', 'r1y', 'r3y', 'r5y', 'r10y'];
   const computed = {};
-  let anyFromYF = false;
+  let anyLive = false;
 
   for (const field of fields) {
     let totalWeight = 0, weightedSum = 0;
     for (const stock of portfolio.stocks.slice(0, 5)) {
       const sd = stockResults[stock.t];
       if (sd && sd[field] != null && !isNaN(sd[field]) && Math.abs(sd[field]) < 500) {
-        weightedSum  += sd[field] * stock.w;
-        totalWeight  += stock.w;
-        if (sd.fromYF) anyFromYF = true;
+        weightedSum += sd[field] * stock.w;
+        totalWeight += stock.w;
+        if (sd.fromStooq) anyLive = true;
       }
     }
-    // Need at least 20% weight coverage to trust the weighted average
-    if (totalWeight >= 20) {
-      computed[field] = parseFloat((weightedSum / totalWeight).toFixed(2));
-    } else {
-      // Fall back to research data for this field
-      computed[field] = RESEARCH_DATA[portfolio.id][field];
-    }
+    computed[field] = totalWeight >= 20
+      ? parseFloat((weightedSum / totalWeight).toFixed(2))
+      : RESEARCH_DATA[portfolio.id][field];
   }
 
-  computed.fromYF = anyFromYF;
+  computed.fromStooq = anyLive;
   return computed;
 }
 
@@ -826,8 +833,8 @@ function computePortfolioReturns(portfolio, stockResults) {
 // MAIN DATA PIPELINE
 // ================================================================
 async function runDataPipeline() {
-  // Check session cache first
-  const cached = sessionStorage.getItem('hv_yf_v3');
+  // Session cache check
+  const cached = sessionStorage.getItem('hv_stooq_v1');
   if (cached) {
     try {
       const p = JSON.parse(cached);
@@ -842,38 +849,42 @@ async function runDataPipeline() {
       setLoStatus('Loaded from session cache — instant start!');
       await delay(400);
       return;
-    } catch (e) { /* fall through */ }
+    } catch (e) { /* fall through to fresh fetch */ }
   }
 
-  // Step 0 — init
+  // Step 0 — init queue
   setLoStep(0, 'active'); setLoBar(5);
-  setLoStatus('Preparing fetch queue…');
+  setLoStatus('Building fetch queue for Stooq.com…');
   await delay(300);
 
-  // Collect unique tickers across all portfolios (top 5 per portfolio)
   const allTickers = [...new Set(
     PORTFOLIOS.flatMap(p => p.stocks.slice(0, 5).map(s => s.t))
   )];
   setLoStep(0, 'done');
 
-  // Step 1 — market indices
+  // Step 1 — indices
   setLoStep(1, 'active'); setLoBar(12);
-  setLoStatus('Fetching NIFTY 50, SENSEX, IT, PHARMA indices…');
+  setLoStatus('Fetching NIFTY 50, SENSEX, IT, PHARMA from Stooq…');
 
   const [niftyData, sensexData, itData, pharmaData, usdInrData] = await Promise.allSettled([
-    fetchIndexData(INDEX_SYMBOLS.nifty50),
-    fetchIndexData(INDEX_SYMBOLS.sensex),
-    fetchIndexData(INDEX_SYMBOLS.niftyIT),
-    fetchIndexData(INDEX_SYMBOLS.niftyPharma),
-    fetchIndexData(INDEX_SYMBOLS.usdInr),
-  ]).then(results => results.map(r => r.status === 'fulfilled' ? r.value : null));
+    fetchIndexData(INDEX_STOOQ.nifty50),
+    fetchIndexData(INDEX_STOOQ.sensex),
+    fetchIndexData(INDEX_STOOQ.niftyIT),
+    fetchIndexData(INDEX_STOOQ.niftyPharma),
+    fetchIndexData(INDEX_STOOQ.usdInr),
+  ]).then(rs => rs.map(r => r.status === 'fulfilled' ? r.value : null));
 
   const now = new Date().toLocaleString('en-IN', {
     hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short'
   });
 
-  // Build marketData — fall back to research values if fetch failed
-  const RMkt = { nifty50:{value:22419,change_pct:-0.58}, sensex:{value:73825,change_pct:-0.52}, niftyIT:{value:36142,change_pct:-0.91}, niftyPharma:{value:21638,change_pct:0.42}, usdInr:{value:84.47} };
+  const RMkt = {
+    nifty50:    { value: 22419, change_pct: -0.58 },
+    sensex:     { value: 73825, change_pct: -0.52 },
+    niftyIT:    { value: 36142, change_pct: -0.91 },
+    niftyPharma:{ value: 21638, change_pct:  0.42 },
+    usdInr:     { value: 84.47 }
+  };
   marketData = {
     nifty50:     niftyData     || RMkt.nifty50,
     sensex:      sensexData    || RMkt.sensex,
@@ -882,65 +893,65 @@ async function runDataPipeline() {
     usdInr:      usdInrData    || RMkt.usdInr,
   };
 
-  const mktFromYF = !!niftyData || !!sensexData;
+  const mktLive = !!niftyData || !!sensexData;
   tickerMeta = {
-    nifty50:     { fromYF: !!niftyData,    ...marketData.nifty50,    label: 'NIFTY 50',     source: niftyData     ? 'Yahoo Finance (^NSEI)' : 'Research est.', time: now },
-    sensex:      { fromYF: !!sensexData,   ...marketData.sensex,     label: 'BSE SENSEX',   source: sensexData    ? 'Yahoo Finance (^BSESN)' : 'Research est.', time: now },
-    niftyIT:     { fromYF: !!itData,       ...marketData.niftyIT,    label: 'NIFTY IT',     source: itData        ? 'Yahoo Finance (^CNXIT)' : 'Research est.', time: now },
-    niftyPharma: { fromYF: !!pharmaData,   ...marketData.niftyPharma,label: 'NIFTY PHARMA', source: pharmaData    ? 'Yahoo Finance (NIFTYPHARMA.NS)' : 'Research est.', time: now },
-    usdInr:      { fromYF: !!usdInrData,   ...marketData.usdInr,     label: 'USD/INR',      source: usdInrData    ? 'Yahoo Finance (INR=X)' : 'Research est.', time: now },
+    nifty50:     { fromStooq: !!niftyData,    ...marketData.nifty50,     label: 'NIFTY 50',     source: niftyData     ? 'Stooq.com (^nf50) · split-adj' : 'Research fallback', time: now },
+    sensex:      { fromStooq: !!sensexData,   ...marketData.sensex,      label: 'BSE SENSEX',   source: sensexData    ? 'Stooq.com (^bsesn) · split-adj' : 'Research fallback', time: now },
+    niftyIT:     { fromStooq: !!itData,       ...marketData.niftyIT,     label: 'NIFTY IT',     source: itData        ? 'Stooq.com (^cnxit) · split-adj' : 'Research fallback', time: now },
+    niftyPharma: { fromStooq: !!pharmaData,   ...marketData.niftyPharma, label: 'NIFTY PHARMA', source: pharmaData    ? 'Stooq.com (^cnxpharma) · split-adj' : 'Research fallback', time: now },
+    usdInr:      { fromStooq: !!usdInrData,   ...marketData.usdInr,      label: 'USD/INR',      source: usdInrData    ? 'Stooq.com (usd.inr)' : 'Research fallback', time: now },
   };
 
-  setLoStep(1, mktFromYF ? 'done' : 'warn'); setLoBar(22);
+  setLoStep(1, mktLive ? 'done' : 'warn'); setLoBar(22);
 
-  // Step 2 — stock adjClose data
+  // Step 2 — stock prices
   setLoStep(2, 'active');
-  setLoStatus(`Fetching adjClose for ${allTickers.length} unique NSE tickers…`);
+  setLoStatus(`Fetching split-adj prices for ${allTickers.length} NSE stocks from Stooq…`);
 
   let fetchedCount = 0;
-  const stockResults = await fetchBatch(allTickers, 4, (ticker, result) => {
+  const stockResults = await fetchBatch(allTickers, 3, (ticker, result) => {
     fetchedCount++;
-    const pct = Math.round(22 + (fetchedCount / allTickers.length) * 45);
+    const pct = Math.round(22 + (fetchedCount / allTickers.length) * 46);
     setLoBar(pct);
-    setLoStatus(`adjClose fetched: ${ticker}.NS (${fetchedCount}/${allTickers.length})`);
+    setLoStatus(`Stooq: ${ticker.toLowerCase()}.ns (${fetchedCount}/${allTickers.length})`);
   });
 
-  const yfCount = Object.values(stockResults).filter(v => v?.fromYF).length;
-  setLoStep(2, yfCount > 0 ? 'done' : 'warn',
-    `adjClose data: ${yfCount}/${allTickers.length} stocks from Yahoo Finance`);
-  setLoBar(70);
+  const liveCount = Object.values(stockResults).filter(v => v?.fromStooq).length;
+  setLoStep(2, liveCount > 0 ? 'done' : 'warn',
+    `Price data: ${liveCount}/${allTickers.length} stocks from Stooq`);
+  setLoBar(72);
 
-  // Step 3 — compute weighted returns
+  // Step 3 — compute weighted CAGRs
   setLoStep(3, 'active');
   setLoStatus('Computing split-adjusted weighted CAGRs…');
-  await delay(200);
+  await delay(150);
 
-  let yfPortfolios = 0;
+  let livePortfolios = 0;
   for (const p of PORTFOLIOS) {
     const computed = computePortfolioReturns(p, stockResults);
-    if (computed.fromYF) yfPortfolios++;
+    if (computed.fromStooq) livePortfolios++;
     portfolioData[p.id] = computed;
     p._returns = computed;
   }
 
-  dataSource = yfPortfolios >= 14 ? 'yahoo' : yfPortfolios >= 5 ? 'hybrid' : 'research';
+  dataSource = livePortfolios >= 14 ? 'stooq' : livePortfolios >= 5 ? 'hybrid' : 'research';
   setLoStep(3, 'done'); setLoBar(88);
 
-  // Step 4 — finalise & cache
+  // Step 4 — cache & finish
   setLoStep(4, 'active');
   setLoStatus('Caching session data…');
   fetchTimestamp = now;
   try {
-    sessionStorage.setItem('hv_yf_v3', JSON.stringify({
+    sessionStorage.setItem('hv_stooq_v1', JSON.stringify({
       portfolioData, marketData, fetchTimestamp, dataSource, tickerMeta
     }));
   } catch(e) {}
   await delay(300);
   setLoStep(4, 'done'); setLoBar(100);
   setLoStatus(
-    dataSource === 'yahoo'   ? `Yahoo Finance data ready — ${yfPortfolios}/21 portfolios live!` :
-    dataSource === 'hybrid'  ? `Hybrid — ${yfPortfolios}/21 from Yahoo Finance + research estimates.` :
-    'Using research benchmark estimates — Yahoo Finance unavailable.'
+    dataSource === 'stooq'   ? `Stooq live data ready — ${livePortfolios}/21 portfolios!` :
+    dataSource === 'hybrid'  ? `Hybrid — ${livePortfolios}/21 from Stooq + research estimates.` :
+    'Using research benchmark estimates — Stooq unavailable this session.'
   );
   await delay(700);
 }
@@ -954,7 +965,7 @@ async function init() {
   } catch (e) {
     console.error('Pipeline error:', e);
     PORTFOLIOS.forEach(p => {
-      portfolioData[p.id] = { ...RESEARCH_DATA[p.id], fromYF: false };
+      portfolioData[p.id] = { ...RESEARCH_DATA[p.id], fromStooq: false };
       p._returns = portfolioData[p.id];
     });
     marketData     = { nifty50:{value:22419,change_pct:-0.58}, sensex:{value:73825,change_pct:-0.52}, niftyIT:{value:36142,change_pct:-0.91}, niftyPharma:{value:21638,change_pct:0.42}, usdInr:{value:84.47} };
@@ -962,7 +973,7 @@ async function init() {
     fetchTimestamp = new Date().toLocaleString('en-IN');
     for (let i = 0; i < 5; i++) setLoStep(i, 'done');
     setLoBar(100);
-    setLoStatus('Using research benchmark data (Yahoo Finance unavailable).');
+    setLoStatus('Using research benchmark data (Stooq.com unavailable).');
     await delay(600);
   }
 
@@ -991,11 +1002,11 @@ function initFloatingTooltip() {
 }
 function buildTooltipHTML(meta) {
   if (!meta) return '';
-  const isYF  = meta.fromYF;
+  const isYF  = meta.fromStooq;
   const col   = isYF ? 'var(--blue)' : 'var(--gold)';
   const bdr   = isYF ? 'rgba(91,188,255,0.3)' : 'rgba(240,180,41,0.3)';
   const bg    = isYF ? 'rgba(91,188,255,0.08)' : 'rgba(240,180,41,0.08)';
-  const lbl   = isYF ? '● Yahoo Finance' : '● Research Est.';
+  const lbl   = isYF ? '● Stooq Live' : '● Research Est.';
   const chg   = meta.change_pct != null ? meta.change_pct : meta.change;
   const rawVal = meta.label === 'USD/INR'
     ? `₹${Number(meta.value).toFixed(2)}`
@@ -1058,8 +1069,8 @@ function renderTicker() {
   }
   const lbl = document.getElementById('ticker-source-label');
   if (lbl) {
-    const anyYF = Object.values(tickerMeta).some(x => x?.fromYF);
-    lbl.textContent = anyYF ? 'YAHOO FINANCE' : 'RESEARCH EST.';
+    const anyYF = Object.values(tickerMeta).some(x => x?.fromStooq);
+    lbl.textContent = anyYF ? 'STOOQ LIVE' : 'RESEARCH EST.';
     lbl.style.color = anyYF ? 'var(--blue)' : 'var(--gold)';
   }
   initFloatingTooltip();
@@ -1075,20 +1086,20 @@ function updateFreshnessBar() {
   const labelEl= document.getElementById('df-source-label');
   const descEl = document.getElementById('df-source-desc');
   if (ftEl && fetchTimestamp) ftEl.textContent = `Fetched ${fetchTimestamp}`;
-  if (dataSource === 'yahoo') {
-    if (badge)   badge.textContent  = 'Yahoo Finance';
-    if (labelEl) labelEl.textContent= 'Yahoo Finance adjClose';
-    if (descEl)  descEl.textContent = 'Split & dividend-adjusted returns · 10Y history · CORS via allorigins.win';
+  if (dataSource === 'stooq') {
+    if (badge)   badge.textContent  = 'Stooq Live';
+    if (labelEl) labelEl.textContent= 'Stooq.com split-adj';
+    if (descEl)  descEl.textContent = 'Split-adjusted 10Y returns · Direct from Stooq.com · No proxy needed';
     if (chipEl)  chipEl.innerHTML   = '<span class="source-chip yf">● YAHOO FINANCE</span>';
   } else if (dataSource === 'hybrid') {
     if (badge)   badge.textContent  = 'YF + Estimates';
     if (labelEl) labelEl.textContent= 'Hybrid data';
-    if (descEl)  descEl.textContent = 'Mix of Yahoo Finance adjClose and research sector estimates';
+    if (descEl)  descEl.textContent = 'Mix of Stooq.com live data and research sector estimates';
     if (chipEl)  chipEl.innerHTML   = '<span class="source-chip yf">YF+EST</span>';
   } else {
     if (badge)   badge.textContent  = 'Research Est.';
     if (labelEl) labelEl.textContent= 'Research benchmark data';
-    if (descEl)  descEl.textContent = 'NSE sector index historical CAGR benchmarks — Yahoo Finance unavailable this session';
+    if (descEl)  descEl.textContent = 'NSE sector index historical CAGR benchmarks — Stooq.com unavailable this session';
     if (chipEl)  chipEl.innerHTML   = '<span class="source-chip fb">● RESEARCH EST.</span>';
   }
 }
@@ -1108,8 +1119,8 @@ function renderCards() {
     const fmtR = v => v != null
       ? `<div class="metric-val ${v>=0?'g':'r'}">${v>=0?'+':''}${Number(v).toFixed(1)}%</div>`
       : `<div class="metric-val" style="color:var(--text3)">N/A</div>`;
-    const srcTag = r?.fromYF
-      ? '<span style="font-size:9px;color:var(--blue);font-family:var(--font-mono)"> · YF</span>'
+    const srcTag = r?.fromStooq
+      ? '<span style="font-size:9px;color:var(--blue);font-family:var(--font-mono)"> · Stooq</span>'
       : '<span style="font-size:9px;color:var(--text3);font-family:var(--font-mono)"> · est.</span>';
     const card = document.createElement('div');
     card.className = 'sc-card';
@@ -1249,8 +1260,8 @@ function openModal(id) {
       <div class="ret-val ${v!=null?(v>=0?'up':'dn'):''}">${v!=null?(v>=0?'+':'')+Number(v).toFixed(1)+'%':'N/A'}</div></div>`;
   }).join('');
 
-  const srcText = r?.fromYF
-    ? '📊 Yahoo Finance adjClose CAGR · split & dividend adjusted · weighted from holdings'
+  const srcText = r?.fromStooq
+    ? '📊 Stooq.com split-adjusted CAGR · weighted from top holdings'
     : '📐 Research benchmark estimates · NSE sector index historical data';
   document.getElementById('chart-info-text').textContent = srcText;
 
@@ -1395,7 +1406,7 @@ function runCalc() {
   document.getElementById('c-gain').textContent     = '₹'+fmt(gain);
   document.getElementById('c-total').textContent    = '₹'+fmt(total);
   const noteEl = document.getElementById('c-cagr-note');
-  if (noteEl) noteEl.textContent = `Using ${Number(cagr).toFixed(1)}% CAGR (5Y ${r?.fromYF?'Yahoo Finance adjClose':'research est.'})`;
+  if (noteEl) noteEl.textContent = `Using ${Number(cagr).toFixed(1)}% CAGR (5Y ${r?.fromStooq?'Stooq.com split-adj':'research est.'})`;
 }
 
 function fmt(n) {
