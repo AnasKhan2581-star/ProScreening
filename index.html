@@ -70,14 +70,7 @@ nav{display:flex;gap:4px}
 .hstat-n{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--green);line-height:1;margin-bottom:5px}
 .hstat-l{font-size:9px;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.08em;text-transform:uppercase}
 
-/* MARKET BAR */
-.market-bar{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 20px;margin:0 0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.mbar-item{display:flex;flex-direction:column;gap:2px}
-.mbar-label{font-size:9px;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.08em;text-transform:uppercase}
-.mbar-val{font-size:13px;font-weight:500;font-family:var(--font-mono)}
-.mbar-val.up{color:var(--green)}.mbar-val.dn{color:var(--red)}.mbar-val.nu{color:var(--gold)}
-.mbar-divider{width:1px;height:30px;background:var(--border);flex-shrink:0}
-.mbar-note{margin-left:auto;font-size:9px;color:var(--text3);font-family:var(--font-mono);text-align:right;line-height:1.5}
+
 
 /* FILTER */
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
@@ -312,18 +305,7 @@ nav{display:flex;gap:4px}
     </div>
   </div>
 
-  <div class="market-bar">
-    <div class="mbar-item"><div class="mbar-label">NIFTY 50</div><div class="mbar-val up">23,519 (+0.68%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">SENSEX</div><div class="mbar-val up">77,442 (+0.72%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">NIFTY IT</div><div class="mbar-val dn">33,812 (-0.44%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">NIFTY PHARMA</div><div class="mbar-val up">22,104 (+1.12%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">USD/INR</div><div class="mbar-val nu">₹84.22</div></div>
-    <div class="mbar-note">Market snapshot · Apr 14 2026<br>Reference only · Not real-time</div>
-  </div>
+
 
   <div class="filter-bar">
     <button class="filter-chip active" onclick="filterSC('all',this)">All 18</button>
