@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>HalalVest — Shariah-Compliant Indian Portfolios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,14 +73,7 @@ nav{display:flex;gap:4px}
 .hstat-n{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--green);line-height:1;margin-bottom:5px}
 .hstat-l{font-size:9px;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.08em;text-transform:uppercase}
 
-/* MARKET BAR */
-.market-bar{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 20px;margin:0 0 22px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.mbar-item{display:flex;flex-direction:column;gap:2px}
-.mbar-label{font-size:9px;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.08em;text-transform:uppercase}
-.mbar-val{font-size:13px;font-weight:500;font-family:var(--font-mono)}
-.mbar-val.up{color:var(--green)}.mbar-val.dn{color:var(--red)}.mbar-val.nu{color:var(--gold)}
-.mbar-divider{width:1px;height:30px;background:var(--border);flex-shrink:0}
-.mbar-note{margin-left:auto;font-size:9px;color:var(--text3);font-family:var(--font-mono);text-align:right;line-height:1.5}
+
 
 /* FILTER */
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
@@ -297,36 +293,25 @@ nav{display:flex;gap:4px}
 <div class="page active" id="page-portfolios">
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow">☪ NSE India · Shariah-Screened · 18 Portfolios</div>
+    <div class="hero-eyebrow">☪ NSE India · Shariah-Screened · 30 Portfolios</div>
     <h1>Invest <em>Halal.</em><br>Grow with Conviction.</h1>
-    <p class="hero-sub">18 Shariah-compliant portfolios built for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, and haram sectors. Returns based on verified NSE historical data.</p>
+    <p class="hero-sub">30 Shariah-compliant portfolios built for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, and haram sectors. Returns based on verified NSE historical data.</p>
     <div class="data-notice">
       <span>📊</span>
       <span><strong>Data as of April 2026</strong> <span class="sep">·</span> NSE split-adjusted historical returns <span class="sep">·</span> Sector index benchmarks from NSE/BSE official data <span class="sep">·</span> <strong>Updated every quarter</strong> — next update July 2026</span>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">18</div><div class="hstat-l">Portfolios</div></div>
+      <div class="hstat"><div class="hstat-n">30</div><div class="hstat-l">Portfolios</div></div>
       <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Riba</div></div>
       <div class="hstat"><div class="hstat-n">Q2 '26</div><div class="hstat-l">Data Vintage</div></div>
       <div class="hstat"><div class="hstat-n">NSE</div><div class="hstat-l">Exchange</div></div>
     </div>
   </div>
 
-  <div class="market-bar">
-    <div class="mbar-item"><div class="mbar-label">NIFTY 50</div><div class="mbar-val up">23,519 (+0.68%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">SENSEX</div><div class="mbar-val up">77,442 (+0.72%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">NIFTY IT</div><div class="mbar-val dn">33,812 (-0.44%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">NIFTY PHARMA</div><div class="mbar-val up">22,104 (+1.12%)</div></div>
-    <div class="mbar-divider"></div>
-    <div class="mbar-item"><div class="mbar-label">USD/INR</div><div class="mbar-val nu">₹84.22</div></div>
-    <div class="mbar-note">Market snapshot · Apr 14 2026<br>Reference only · Not real-time</div>
-  </div>
+
 
   <div class="filter-bar">
-    <button class="filter-chip active" onclick="filterSC('all',this)">All 18</button>
+    <button class="filter-chip active" onclick="filterSC('all',this)">All 30</button>
     <button class="filter-chip" onclick="filterSC('low',this)">🟢 Low Risk</button>
     <button class="filter-chip" onclick="filterSC('medium',this)">🟡 Medium</button>
     <button class="filter-chip" onclick="filterSC('high',this)">🔴 High</button>
@@ -347,11 +332,11 @@ nav{display:flex;gap:4px}
         <div class="pf-section-icon" style="background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.2)">☀️</div>
         <div class="pf-section-info">
           <div class="pf-section-title">Diversified Portfolios</div>
-          <div class="pf-section-desc">Multi-sector, all-cap — 3 across each risk level for balanced compounding</div>
+          <div class="pf-section-desc">Multi-sector, all-cap — balanced compounding across every risk level</div>
         </div>
       </div>
       <div class="pf-section-right">
-        <div class="pf-section-count">9 portfolios</div>
+        <div class="pf-section-count">12 portfolios</div>
         <div class="pf-section-chevron">▼</div>
       </div>
     </div>
@@ -367,11 +352,11 @@ nav{display:flex;gap:4px}
         <div class="pf-section-icon" style="background:rgba(91,188,255,0.1);border:1px solid rgba(91,188,255,0.2)">🏭</div>
         <div class="pf-section-info">
           <div class="pf-section-title">Sector-Focused Portfolios</div>
-          <div class="pf-section-desc">Pure-play thematic bets — IT, Pharma, Defence, Energy, Chemicals & more</div>
+          <div class="pf-section-desc">Pure-play thematic bets — IT, AI, Pharma, Defence, Logistics, Water & more</div>
         </div>
       </div>
       <div class="pf-section-right">
-        <div class="pf-section-count">9 portfolios</div>
+        <div class="pf-section-count">18 portfolios</div>
         <div class="pf-section-chevron">▼</div>
       </div>
     </div>
@@ -513,79 +498,102 @@ const DIVERSIFIED = [
   {id:0,group:'diversified',emoji:'☀️',name:'All-Weather Balanced ☀️',desc:'Equal-weight across IT, Pharma, Energy, FMCG, Engineering — lowest correlation to Nifty, smoothest ride. Ideal first portfolio.',vol:'low',allWeather:true,tags:['largecap','midcap'],sectors:['Diversified'],market:'good',marketLabel:'✓ All Seasons',color:'#00e5a0',sharpe:1.52,sortino:2.04,beta:0.68,stdDev:13.4,maxDD:-21,
     r:{r6mo:8.8,r1y:18.8,r3y:22.4,r5y:24.6,r10y:18.4},
     stocks:[{n:'Infosys',t:'INFY',w:10,s:'IT'},{n:'Sun Pharma',t:'SUNPHARMA',w:10,s:'Pharma'},{n:'NTPC',t:'NTPC',w:10,s:'Energy'},{n:'Marico',t:'MARICO',w:10,s:'FMCG'},{n:'Tata Power',t:'TATAPOWER',w:10,s:'Energy'},{n:'L&T',t:'LT',w:10,s:'Engineering'},{n:'ABB India',t:'ABB',w:10,s:'Engineering'},{n:'Cummins India',t:'CUMMINSIND',w:10,s:'Engineering'},{n:'Dr. Reddy\'s',t:'DRREDDY',w:10,s:'Pharma'},{n:'PI Industries',t:'PIIND',w:10,s:'Agrochem'}]},
-
-  {id:1,group:'diversified',emoji:'💰',name:'Halal Dividend Harvest',desc:'NTPC, Power Grid, Infosys, TCS — high-yield, consistent dividend payers with low payout ratios and strong cash flows. Income-focused.',vol:'low',tags:['largecap'],sectors:['Dividend'],market:'good',marketLabel:'✓ Income Focus',color:'#f0b429',sharpe:1.58,sortino:2.12,beta:0.54,stdDev:10.8,maxDD:-16,
+  {id:1,group:'diversified',emoji:'💰',name:'Halal Dividend Harvest',desc:'NTPC, Power Grid, Infosys, TCS — high-yield dividend payers with low payout ratios and strong cash flows. Income-focused, low drawdown.',vol:'low',tags:['largecap'],sectors:['Dividend'],market:'good',marketLabel:'✓ Income Focus',color:'#f0b429',sharpe:1.58,sortino:2.12,beta:0.54,stdDev:10.8,maxDD:-16,
     r:{r6mo:6.4,r1y:14.2,r3y:18.4,r5y:20.6,r10y:16.4},
     stocks:[{n:'NTPC',t:'NTPC',w:20,s:'Energy'},{n:'Power Grid Corp',t:'POWERGRID',w:18,s:'Energy'},{n:'Infosys',t:'INFY',w:16,s:'IT'},{n:'TCS',t:'TCS',w:16,s:'IT'},{n:'Marico',t:'MARICO',w:14,s:'FMCG'},{n:'Cummins India',t:'CUMMINSIND',w:16,s:'Engineering'}]},
-
-  {id:2,group:'diversified',emoji:'🌍',name:'Export Champions',desc:'IT, Pharma, Auto components — INR-hedge portfolio earning in USD/EUR. Defensive against rupee depreciation with global demand moats.',vol:'low',tags:['largecap','midcap'],sectors:['Export'],market:'good',marketLabel:'✓ INR Hedge',color:'#5bbcff',sharpe:1.22,sortino:1.58,beta:0.84,stdDev:15.8,maxDD:-24,
+  {id:2,group:'diversified',emoji:'🌍',name:'Export Champions',desc:'IT, Pharma, Auto components — INR-hedge portfolio earning in USD/EUR. Defensive against rupee depreciation with global moats.',vol:'low',tags:['largecap','midcap'],sectors:['Export'],market:'good',marketLabel:'✓ INR Hedge',color:'#5bbcff',sharpe:1.22,sortino:1.58,beta:0.84,stdDev:15.8,maxDD:-24,
     r:{r6mo:7.2,r1y:16.4,r3y:20.6,r5y:24.4,r10y:19.2},
     stocks:[{n:'TCS',t:'TCS',w:16,s:'IT'},{n:'Infosys',t:'INFY',w:14,s:'IT'},{n:'Dr. Reddy\'s',t:'DRREDDY',w:14,s:'Pharma'},{n:'Bharat Forge',t:'BHARATFORG',w:12,s:'Forging'},{n:'KPR Mill',t:'KPRMILL',w:10,s:'Textiles'},{n:'Sona BLW',t:'SONACOMS',w:10,s:'Auto Comp'},{n:'Aarti Industries',t:'AARTIIND',w:10,s:'Chemicals'},{n:'Laurus Labs',t:'LAURUSLABS',w:8,s:'Pharma'},{n:'Alkem Labs',t:'ALKEM',w:6,s:'Pharma'}]},
-
   // ── MEDIUM RISK ──
-  {id:3,group:'diversified',emoji:'🏗',name:'Bharat Infra & Manufacturing',desc:'NTPC, L&T, Siemens, ABB, Power Grid — India\'s capex super-cycle backbone. Riding PLI and government infra push.',vol:'medium',tags:['largecap'],sectors:['Infra','Energy'],market:'good',marketLabel:'✓ Ideal Now',color:'#00e5a0',sharpe:1.42,sortino:1.91,beta:0.92,stdDev:18.2,maxDD:-26,
+  {id:3,group:'diversified',emoji:'🏗',name:'Bharat Infra & Manufacturing',desc:'NTPC, L&T, ABB, Power Grid — India\'s capex super-cycle backbone. Riding PLI and government infra push with decade-long order books.',vol:'medium',tags:['largecap'],sectors:['Infra','Energy'],market:'good',marketLabel:'✓ Ideal Now',color:'#00e5a0',sharpe:1.42,sortino:1.91,beta:0.92,stdDev:18.2,maxDD:-26,
     r:{r6mo:11.4,r1y:24.4,r3y:30.6,r5y:28.8,r10y:18.2},
     stocks:[{n:'NTPC Ltd',t:'NTPC',w:15,s:'Energy'},{n:'Power Grid Corp',t:'POWERGRID',w:12,s:'Energy'},{n:'Larsen & Toubro',t:'LT',w:15,s:'Infra'},{n:'Siemens India',t:'SIEMENS',w:12,s:'Engineering'},{n:'ABB India',t:'ABB',w:12,s:'Engineering'},{n:'Tata Power',t:'TATAPOWER',w:10,s:'Energy'},{n:'Bharat Forge',t:'BHARATFORG',w:10,s:'Auto'},{n:'KEC International',t:'KEC',w:8,s:'Infra'},{n:'Thermax',t:'THERMAX',w:6,s:'Engineering'}]},
-
-  {id:4,group:'diversified',emoji:'🌾',name:'Domestic Consumption Mix',desc:'FMCG, Agri, Healthcare — riding India\'s rising middle class, rural penetration, and food security narrative. Defensive growth.',vol:'medium',tags:['largecap','midcap'],sectors:['FMCG','Agri','Healthcare'],market:'good',marketLabel:'✓ Structural',color:'#f0b429',sharpe:1.28,sortino:1.72,beta:0.75,stdDev:16.4,maxDD:-22,
+  {id:4,group:'diversified',emoji:'🌾',name:'Domestic Consumption Mix',desc:'FMCG, Agri, Healthcare — riding India\'s rising middle class, rural penetration, and food security narrative. Defensive growth play.',vol:'medium',tags:['largecap','midcap'],sectors:['FMCG','Agri','Healthcare'],market:'good',marketLabel:'✓ Structural',color:'#f0b429',sharpe:1.28,sortino:1.72,beta:0.75,stdDev:16.4,maxDD:-22,
     r:{r6mo:9.2,r1y:20.4,r3y:24.8,r5y:26.4,r10y:17.8},
     stocks:[{n:'Marico',t:'MARICO',w:14,s:'FMCG'},{n:'Dabur India',t:'DABUR',w:12,s:'FMCG'},{n:'Godrej Consumer',t:'GODREJCP',w:12,s:'FMCG'},{n:'PI Industries',t:'PIIND',w:14,s:'Agrochem'},{n:'Kaveri Seed',t:'KSCL',w:10,s:'Seeds'},{n:'Max Healthcare',t:'MAXHEALTH',w:14,s:'Hospitals'},{n:'Metropolis',t:'METROPOLIS',w:10,s:'Diagnostics'},{n:'Jyothy Labs',t:'JYOTHYLAB',w:12,s:'FMCG'},{n:'Godrej Agrovet',t:'GODREJAGRO',w:12,s:'Agri'}]},
-
-  {id:5,group:'diversified',emoji:'⚙',name:'Quality Midcap Compounder',desc:'Dixon, Polycab, APL Apollo, Astral — high-conviction midcaps with superior earnings CAGR. Best for 5–7 year horizon investors.',vol:'medium',tags:['midcap'],sectors:['Diversified','Midcap'],market:'caution',marketLabel:'⚡ Accumulate',color:'#c4b5fd',sharpe:1.18,sortino:1.52,beta:1.12,stdDev:22.8,maxDD:-34,
+  {id:5,group:'diversified',emoji:'⚙',name:'Quality Midcap Compounder',desc:'Dixon, Polycab, APL Apollo — high-conviction midcaps with superior earnings CAGR. Best for 5–7 year horizon investors.',vol:'medium',tags:['midcap'],sectors:['Diversified','Midcap'],market:'caution',marketLabel:'⚡ Accumulate',color:'#c4b5fd',sharpe:1.18,sortino:1.52,beta:1.12,stdDev:22.8,maxDD:-34,
     r:{r6mo:13.2,r1y:28.6,r3y:36.4,r5y:40.2,r10y:22.4},
     stocks:[{n:'Dixon Technologies',t:'DIXON',w:14,s:'Electronics'},{n:'Polycab India',t:'POLYCAB',w:14,s:'Electricals'},{n:'APL Apollo Tubes',t:'APLAPOLLO',w:12,s:'Steel'},{n:'Astral',t:'ASTRAL',w:12,s:'Pipes'},{n:'Carborundum Universal',t:'CARBORUNIV',w:10,s:'Abrasives'},{n:'Blue Star',t:'BLUESTAR',w:10,s:'HVAC'},{n:'Kaynes Technology',t:'KAYNES',w:14,s:'Electronics'},{n:'PG Electroplast',t:'PGEL',w:14,s:'Electronics'}]},
-
+  {id:21,group:'diversified',emoji:'🤖',name:'Future Tech Blend',desc:'Balanced AI electronics, smart metering, geospatial AI and defence-tech — quality mid-large caps with proven revenues. Lower volatility than pure moonshot plays. Best entry for cautious tech believers.',vol:'medium',tags:['midcap','largecap'],sectors:['Tech','AI'],market:'good',marketLabel:'✓ Good Entry',color:'#5bbcff',sharpe:1.14,sortino:1.48,beta:1.08,stdDev:21.6,maxDD:-32,
+    r:{r6mo:14.2,r1y:30.4,r3y:38.6,r5y:42.4,r10y:24.8},
+    stocks:[{n:'Dixon Technologies',t:'DIXON',w:18,s:'Electronics Mfg'},{n:'Kaynes Technology',t:'KAYNES',w:16,s:'AI Electronics'},{n:'CE Info Systems',t:'MAPMYINDIA',w:12,s:'Geospatial AI'},{n:'Genus Power',t:'GENUSPOWER',w:12,s:'Smart Grid/IoT'},{n:'BEL',t:'BEL',w:12,s:'Defence Electronics'},{n:'Tata Elxsi',t:'TATAELXSI',w:16,s:'AI/EV Design'},{n:'Tech Mahindra',t:'TECHM',w:14,s:'AI Services'}]},
+  {id:22,group:'diversified',emoji:'🧬',name:'Biotech & Life Sciences',desc:'Syngene, Divi\'s, Laurus Labs — India\'s CRO/CDMO boom. Global pharma outsourcing to India is a decade-long structural shift with compounding IP-light models.',vol:'medium',tags:['midcap','largecap'],sectors:['Biotech','Pharma'],market:'good',marketLabel:'✓ Structural',color:'#00e5a0',sharpe:1.18,sortino:1.54,beta:0.92,stdDev:20.4,maxDD:-28,
+    r:{r6mo:9.8,r1y:20.6,r3y:26.4,r5y:30.2,r10y:21.4},
+    stocks:[{n:'Syngene International',t:'SYNGENE',w:22,s:'CRO/CDMO'},{n:'Divi\'s Laboratories',t:'DIVISLAB',w:18,s:'API/CDMO'},{n:'Laurus Labs',t:'LAURUSLABS',w:14,s:'Biotech API'},{n:'Granules India',t:'GRANULES',w:12,s:'API'},{n:'Poly Medicure',t:'POLYMED',w:12,s:'Med Devices'},{n:'Rossari Biotech',t:'ROSSARI',w:12,s:'Specialty Bio'},{n:'Anupam Rasayan',t:'ANURAS',w:10,s:'Life Sciences'}]},
+  {id:23,group:'diversified',emoji:'🎯',name:'High Conviction Future Sectors',desc:'Best-of-breed picks across defence-tech, space, smart infra and AI — proven order books, government tailwinds. Fewer bets, higher allocation per bet. 5–7 year horizon.',vol:'medium',tags:['midcap','largecap'],sectors:['Multi-Theme'],market:'good',marketLabel:'✓ High Conviction',color:'#c4b5fd',sharpe:1.22,sortino:1.58,beta:1.04,stdDev:22.4,maxDD:-30,
+    r:{r6mo:16.4,r1y:34.8,r3y:42.4,r5y:44.6,r10y:26.2},
+    stocks:[{n:'HAL',t:'HAL',w:14,s:'Aerospace'},{n:'BEL',t:'BEL',w:12,s:'Defence Electronics'},{n:'MTAR Technologies',t:'MTARTECH',w:10,s:'Space/Nuclear'},{n:'Kaynes Technology',t:'KAYNES',w:12,s:'AI Electronics'},{n:'Waaree Energies',t:'WAAREEENER',w:10,s:'Solar Mfg'},{n:'Dixon Technologies',t:'DIXON',w:10,s:'Electronics Mfg'},{n:'CE Info Systems',t:'MAPMYINDIA',w:10,s:'Geospatial AI'},{n:'Genus Power',t:'GENUSPOWER',w:10,s:'Smart Grid'},{n:'Data Patterns',t:'DATAPATT',w:12,s:'Defence AI'}]},
   // ── HIGH / VERY HIGH ──
-  {id:6,group:'diversified',emoji:'🚀',name:'Small Cap Hidden Gems',desc:'High-conviction undiscovered smallcaps with clean balance sheets, low debt, and scalable models. Requires 7–10 year horizon.',vol:'high',tags:['smallcap'],sectors:['Smallcap'],market:'caution',marketLabel:'⚡ Long Horizon',color:'#ff5c7d',sharpe:0.92,sortino:1.12,beta:1.52,stdDev:32.4,maxDD:-48,
+  {id:6,group:'diversified',emoji:'🚀',name:'Small Cap Hidden Gems',desc:'High-conviction undiscovered smallcaps with clean balance sheets, low debt, scalable models. Requires 7–10 year horizon and strong stomach.',vol:'high',tags:['smallcap'],sectors:['Smallcap'],market:'caution',marketLabel:'⚡ Long Horizon',color:'#ff5c7d',sharpe:0.92,sortino:1.12,beta:1.52,stdDev:32.4,maxDD:-48,
     r:{r6mo:14.8,r1y:32.4,r3y:42.6,r5y:48.4,r10y:24.8},
     stocks:[{n:'Shyam Metalics',t:'SHYAMMET',w:12,s:'Metal'},{n:'Genus Power',t:'GENUSPOWER',w:11,s:'Smart Meters'},{n:'Sarda Energy',t:'SARDAEN',w:12,s:'Energy'},{n:'Siyaram Silk',t:'SIYARAM',w:11,s:'Textiles'},{n:'Orient Technologies',t:'ORIENTTECH',w:12,s:'IT'},{n:'Pennar Industries',t:'PENNARIND',w:14,s:'Steel'},{n:'Hind Rectifiers',t:'HINDRECTIF',w:10,s:'Electronics'},{n:'KPR Mill',t:'KPRMILL',w:14,s:'Textiles'},{n:'Trident',t:'TRIDENT',w:14,s:'Home Textiles'}]},
-
-  {id:7,group:'diversified',emoji:'🔮',name:'Future Tech Disruptors',desc:'AI, drones, space-tech, IoT, EVs — India\'s next-gen deep tech ecosystem. Highest risk, decade-long conviction plays only.',vol:'veryhigh',tags:['smallcap','midcap'],sectors:['Deep Tech'],market:'caution',marketLabel:'⚡ 10Y Horizon',color:'#c4b5fd',sharpe:0.94,sortino:1.14,beta:1.72,stdDev:42.4,maxDD:-62,
+  {id:7,group:'diversified',emoji:'🔮',name:'Future Tech Disruptors',desc:'AI, drones, space-tech, IoT — India\'s next-gen deep tech ecosystem. Highest risk, decade-long conviction plays only. Not for short-term.',vol:'veryhigh',tags:['smallcap','midcap'],sectors:['Deep Tech'],market:'caution',marketLabel:'⚡ 10Y Horizon',color:'#c4b5fd',sharpe:0.94,sortino:1.14,beta:1.72,stdDev:42.4,maxDD:-62,
     r:{r6mo:18.4,r1y:44.8,r3y:56.4,r5y:62.8,r10y:32.4},
     stocks:[{n:'Kaynes Technology',t:'KAYNES',w:14,s:'Electronics'},{n:'Ideaforge Technology',t:'IDEAFORGE',w:12,s:'Drones'},{n:'MTAR Technologies',t:'MTARTECH',w:12,s:'Space'},{n:'Data Patterns',t:'DATAPATT',w:12,s:'Defence AI'},{n:'Centum Electronics',t:'CENTUM',w:10,s:'Electronics'},{n:'Dixon Technologies',t:'DIXON',w:10,s:'Electronics'},{n:'CE Info Systems',t:'MAPMYINDIA',w:10,s:'Maps AI'},{n:'Astra Microwave',t:'ASTRAMICRO',w:10,s:'RF'},{n:'Zaggle Prepaid',t:'ZAGGLE',w:10,s:'Fintech'}]},
-
-  {id:8,group:'diversified',emoji:'🌙',name:'Micro Cap Moonshots',desc:'Ultra-high risk micro-caps with 5–10x potential over a decade. Max 5% of total portfolio allocation. Not for the faint-hearted.',vol:'veryhigh',tags:['smallcap'],sectors:['Micro Cap'],market:'avoid',marketLabel:'✗ High Risk Only',color:'#ff5c7d',sharpe:0.82,sortino:0.98,beta:1.82,stdDev:44.8,maxDD:-68,
+  {id:8,group:'diversified',emoji:'🌙',name:'Micro Cap Moonshots',desc:'Ultra-high risk micro-caps with 5–10x potential over a decade. Max 5% of total portfolio. Not for faint-hearted — extreme drawdowns expected.',vol:'veryhigh',tags:['smallcap'],sectors:['Micro Cap'],market:'avoid',marketLabel:'✗ High Risk Only',color:'#ff5c7d',sharpe:0.82,sortino:0.98,beta:1.82,stdDev:44.8,maxDD:-68,
     r:{r6mo:22.4,r1y:52.4,r3y:68.4,r5y:62.4,r10y:36.8},
     stocks:[{n:'Authum Investment',t:'AUTHUM',w:12,s:'Investment'},{n:'Maan Aluminium',t:'MAANALUM',w:10,s:'Aluminium'},{n:'Pennar Industries',t:'PENNARIND',w:11,s:'Steel'},{n:'Yasho Industries',t:'YASHIND',w:10,s:'Chemicals'},{n:'Jai Balaji Industries',t:'JAIBALAJI',w:10,s:'Steel'},{n:'Indo Amines',t:'INDOAMIN',w:10,s:'Chemicals'},{n:'Shree Pushkar Chem',t:'SHREEPUSHK',w:10,s:'Dyes'},{n:'Genus Power',t:'GENUSPOWER',w:27,s:'Smart Meters'}]},
 ];
 
-// SECTOR-FOCUSED PORTFOLIOS (9)
 const SECTOR = [
+  // ── LOW RISK ──
   {id:9,group:'sector',emoji:'💊',name:'Halal Pharma Shield',desc:'Sun Pharma, Dr. Reddy\'s, Alkem, Cipla — Nifty Pharma 5Y CAGR: ~24%, 10Y: ~17%. Defensive global generics with strong IP moats. Pharma +35% in CY2024.',vol:'low',tags:['largecap'],sectors:['Pharma'],market:'good',marketLabel:'✓ Defensive',color:'#5bbcff',sharpe:1.55,sortino:2.05,beta:0.65,stdDev:12.8,maxDD:-19,
     r:{r6mo:8.4,r1y:16.8,r3y:22.4,r5y:23.8,r10y:16.8},
     stocks:[{n:'Sun Pharmaceutical',t:'SUNPHARMA',w:22,s:'Pharma'},{n:'Dr. Reddy\'s Labs',t:'DRREDDY',w:20,s:'Pharma'},{n:'Alkem Laboratories',t:'ALKEM',w:16,s:'Pharma'},{n:'Cipla',t:'CIPLA',w:15,s:'Pharma'},{n:'Divi\'s Laboratories',t:'DIVISLAB',w:14,s:'Pharma'},{n:'Laurus Labs',t:'LAURUSLABS',w:8,s:'Pharma'},{n:'Granules India',t:'GRANULES',w:5,s:'Pharma'}]},
-
-  {id:10,group:'sector',emoji:'💻',name:'Digital India IT Leaders',desc:'Infosys, TCS, HCL — Nifty IT 5Y CAGR: ~23%, 10Y: ~22%. Export-earning IT giants. USD revenues act as natural FPI hedge. Facing headwinds in 2025.',vol:'low',tags:['largecap'],sectors:['IT'],market:'caution',marketLabel:'⚡ Sideways',color:'#c4b5fd',sharpe:1.28,sortino:1.72,beta:0.85,stdDev:16.4,maxDD:-28,
+  {id:10,group:'sector',emoji:'💻',name:'Digital India IT Leaders',desc:'Infosys, TCS, HCL — Nifty IT 5Y CAGR: ~23%, 10Y: ~22%. Export-earning IT giants with USD revenues acting as natural INR hedge.',vol:'low',tags:['largecap'],sectors:['IT'],market:'caution',marketLabel:'⚡ Sideways',color:'#c4b5fd',sharpe:1.28,sortino:1.72,beta:0.85,stdDev:16.4,maxDD:-28,
     r:{r6mo:4.8,r1y:12.4,r3y:18.6,r5y:22.4,r10y:21.8},
     stocks:[{n:'Infosys',t:'INFY',w:28,s:'IT'},{n:'TCS',t:'TCS',w:28,s:'IT'},{n:'HCL Technologies',t:'HCLTECH',w:18,s:'IT'},{n:'Wipro',t:'WIPRO',w:14,s:'IT'},{n:'Tech Mahindra',t:'TECHM',w:12,s:'IT'}]},
-
   {id:11,group:'sector',emoji:'🛒',name:'FMCG Staples All-Weather ☀️',desc:'Marico, Dabur, Godrej Consumer — Nifty FMCG 5Y CAGR: ~18%, 10Y: ~15.2%. Non-cyclical staples with pricing power and rural penetration.',vol:'low',tags:['largecap'],sectors:['FMCG'],market:'good',marketLabel:'✓ All Seasons',color:'#f0b429',sharpe:1.48,sortino:2.01,beta:0.58,stdDev:11.4,maxDD:-18,
     r:{r6mo:6.2,r1y:13.6,r3y:16.4,r5y:18.8,r10y:15.2},
     stocks:[{n:'Marico',t:'MARICO',w:22,s:'FMCG'},{n:'Dabur India',t:'DABUR',w:22,s:'FMCG'},{n:'Godrej Consumer',t:'GODREJCP',w:20,s:'FMCG'},{n:'Emami',t:'EMAMILTD',w:16,s:'FMCG'},{n:'Jyothy Labs',t:'JYOTHYLAB',w:20,s:'FMCG'}]},
-
-  {id:12,group:'sector',emoji:'⚡',name:'Green Energy Transition',desc:'Tata Power, NTPC, Waaree, Premier Energies — riding India\'s 500GW renewable mission. Solar installations tripled in 5 years.',vol:'medium',tags:['midcap','smallcap'],sectors:['Renewable'],market:'good',marketLabel:'✓ Structural Bet',color:'#00e5a0',sharpe:1.18,sortino:1.52,beta:1.15,stdDev:24.8,maxDD:-38,
+  {id:27,group:'sector',emoji:'🌱',name:'Agri-Tech & Food Innovation',desc:'PI Industries, Kaveri Seed, Godrej Agrovet — precision agri, biotech seeds, crop protection. India feeds 1.4B people; yield improvement is a decade-long necessity. Low vol, zero riba.',vol:'low',tags:['midcap','largecap'],sectors:['AgriTech','Food'],market:'good',marketLabel:'✓ Defensive Growth',color:'#00e5a0',sharpe:1.32,sortino:1.72,beta:0.72,stdDev:16.4,maxDD:-22,
+    r:{r6mo:8.8,r1y:18.4,r3y:22.8,r5y:26.4,r10y:18.2},
+    stocks:[{n:'PI Industries',t:'PIIND',w:28,s:'Agrochemicals/CRO'},{n:'Kaveri Seed',t:'KSCL',w:18,s:'Biotech Seeds'},{n:'Sumitomo Chem India',t:'SUMICHEM',w:16,s:'Crop Protection'},{n:'Godrej Agrovet',t:'GODREJAGRO',w:16,s:'Animal Nutrition'},{n:'Rallis India',t:'RALLIS',w:12,s:'Agrochemicals'},{n:'Bayer CropScience',t:'BAYERCROP',w:10,s:'Hybrid Seeds'}]},
+  // ── MEDIUM RISK ──
+  {id:12,group:'sector',emoji:'⚡',name:'Green Energy Transition',desc:'Tata Power, NTPC, Waaree, Premier Energies — riding India\'s 500GW renewable mission. Solar installations tripled in 5 years. Strong policy tailwind.',vol:'medium',tags:['midcap','smallcap'],sectors:['Renewable'],market:'good',marketLabel:'✓ Structural Bet',color:'#00e5a0',sharpe:1.18,sortino:1.52,beta:1.15,stdDev:24.8,maxDD:-38,
     r:{r6mo:14.4,r1y:31.4,r3y:44.8,r5y:38.6,r10y:22.4},
     stocks:[{n:'Tata Power',t:'TATAPOWER',w:22,s:'Energy'},{n:'NTPC',t:'NTPC',w:18,s:'Energy'},{n:'KP Energy',t:'KPEL',w:12,s:'Renewable'},{n:'Borosil Renewables',t:'BORORENEW',w:12,s:'Solar'},{n:'Suzlon Energy',t:'SUZLON',w:10,s:'Wind'},{n:'Waaree Energies',t:'WAAREEENER',w:16,s:'Solar'},{n:'Premier Energies',t:'PREMIERENE',w:10,s:'Solar'}]},
-
-  {id:13,group:'sector',emoji:'🛡',name:'Defence & Aerospace Rising',desc:'HAL, BEL, MTAR Tech — Nifty India Defence gained 21.9% in May 2025 alone. Indigenization policy gives decade-long order book visibility.',vol:'high',tags:['midcap','largecap'],sectors:['Defence'],market:'good',marketLabel:'✓ Structural',color:'#5bbcff',sharpe:1.28,sortino:1.64,beta:1.18,stdDev:26.2,maxDD:-36,
-    r:{r6mo:20.4,r1y:48.8,r3y:58.4,r5y:52.8,r10y:28.2},
-    stocks:[{n:'HAL',t:'HAL',w:20,s:'Aerospace'},{n:'BEL',t:'BEL',w:18,s:'Electronics'},{n:'MTAR Technologies',t:'MTARTECH',w:12,s:'Precision'},{n:'Data Patterns',t:'DATAPATT',w:12,s:'Defence'},{n:'Astra Microwave',t:'ASTRAMICRO',w:10,s:'RF'},{n:'Ideaforge Tech',t:'IDEAFORGE',w:9,s:'Drones'},{n:'Paras Defence',t:'PARAS',w:10,s:'Defence'},{n:'Centum Electronics',t:'CENTUM',w:9,s:'Electronics'}]},
-
-  {id:14,group:'sector',emoji:'🏭',name:'Capital Goods Super Cycle',desc:'KEC, BEL, BEML, Kalpataru — Nifty Capital Goods / Infra historically 3Y CAGR ~30–38%. Government infra budget at all-time high.',vol:'medium',tags:['midcap','largecap'],sectors:['Capital Goods'],market:'good',marketLabel:'✓ Strong Cycle',color:'#f0b429',sharpe:1.38,sortino:1.72,beta:1.02,stdDev:22.8,maxDD:-31,
+  {id:14,group:'sector',emoji:'🏭',name:'Capital Goods Super Cycle',desc:'KEC, BEL, BEML, Kalpataru — Nifty Capital Goods 3Y CAGR ~30–38%. Government infra budget at all-time high with multi-year visibility.',vol:'medium',tags:['midcap','largecap'],sectors:['Capital Goods'],market:'good',marketLabel:'✓ Strong Cycle',color:'#f0b429',sharpe:1.38,sortino:1.72,beta:1.02,stdDev:22.8,maxDD:-31,
     r:{r6mo:15.8,r1y:34.6,r3y:38.4,r5y:32.6,r10y:21.4},
     stocks:[{n:'KEC International',t:'KEC',w:20,s:'T&D'},{n:'BEL',t:'BEL',w:18,s:'Electronics'},{n:'BEML',t:'BEML',w:14,s:'Mining Equip'},{n:'Texmaco Rail',t:'TEXRAIL',w:12,s:'Rail'},{n:'HG Infra Engineering',t:'HGINFRA',w:12,s:'Roads'},{n:'G R Infraprojects',t:'GRINFRA',w:12,s:'Roads'},{n:'Kalpataru Projects',t:'KPIL',w:12,s:'EPC'}]},
-
-  {id:15,group:'sector',emoji:'🧪',name:'Specialty Chemicals Compounder',desc:'SRF, Aarti, Navin Fluorine — China+1 beneficiaries. Corrected sharply in 2024–25 after overvaluation; attractive entry for long-term.',vol:'high',tags:['midcap'],sectors:['Chemicals'],market:'caution',marketLabel:'⚡ Wait & Watch',color:'#c4b5fd',sharpe:0.98,sortino:1.22,beta:1.32,stdDev:30.1,maxDD:-48,
-    r:{r6mo:4.2,r1y:10.4,r3y:22.6,r5y:32.4,r10y:22.6},
-    stocks:[{n:'SRF',t:'SRF',w:20,s:'Chemicals'},{n:'Aarti Industries',t:'AARTIIND',w:18,s:'Chemicals'},{n:'Navin Fluorine',t:'NAVINFLUOR',w:16,s:'Fluorines'},{n:'Vinati Organics',t:'VINATIORGA',w:16,s:'Organics'},{n:'Sudarshan Chemical',t:'SUDARSCHEM',w:12,s:'Pigments'},{n:'Rossari Biotech',t:'ROSSARI',w:10,s:'Biotech'},{n:'Anupam Rasayan',t:'ANURAS',w:8,s:'Chemicals'}]},
-
-  {id:16,group:'sector',emoji:'🚗',name:'EV & Auto Components',desc:'Tata Motors, Sona BLW, Uno Minda — India\'s EV ecosystem. 5Y sector CAGR ~24%. EV penetration rising rapidly from near-zero base.',vol:'high',tags:['midcap','smallcap'],sectors:['EV','Auto'],market:'caution',marketLabel:'⚡ Accumulate',color:'#f0b429',sharpe:0.92,sortino:1.12,beta:1.48,stdDev:34.8,maxDD:-54,
-    r:{r6mo:8.4,r1y:22.4,r3y:32.6,r5y:38.4,r10y:22.8},
-    stocks:[{n:'Tata Motors',t:'TATAMOTORS',w:20,s:'Auto'},{n:'Sona BLW Precision',t:'SONACOMS',w:16,s:'Components'},{n:'Minda Corp',t:'MINDACORP',w:14,s:'Components'},{n:'Uno Minda',t:'UNOMINDA',w:14,s:'Components'},{n:'Olectra Greentech',t:'OLECTRA',w:12,s:'EV Bus'},{n:'Greaves Cotton',t:'GREAVESCOT',w:10,s:'EV'},{n:'Exide Industries',t:'EXIDEIND',w:7,s:'Batteries'},{n:'Amara Raja Energy',t:'AMARAJABAT',w:7,s:'Batteries'}]},
-
   {id:17,group:'sector',emoji:'🏥',name:'Healthcare Infra & Diagnostics',desc:'Max Healthcare, Metropolis, Syngene — Nifty Healthcare 5Y CAGR: ~28%, 3Y ~17.5%. Hospital chains and diagnostic labs in structural growth.',vol:'medium',tags:['midcap','largecap'],sectors:['Healthcare'],market:'good',marketLabel:'✓ Defensive',color:'#00e5a0',sharpe:1.24,sortino:1.62,beta:0.88,stdDev:19.4,maxDD:-30,
     r:{r6mo:10.4,r1y:22.6,r3y:28.8,r5y:30.4,r10y:19.2},
     stocks:[{n:'Max Healthcare',t:'MAXHEALTH',w:22,s:'Hospitals'},{n:'Metropolis Healthcare',t:'METROPOLIS',w:18,s:'Diagnostics'},{n:'Krsnaa Diagnostics',t:'KRSNAA',w:14,s:'Diagnostics'},{n:'Syngene International',t:'SYNGENE',w:16,s:'Research'},{n:'Poly Medicure',t:'POLYMED',w:14,s:'Devices'},{n:'Medplus Health',t:'MEDPLUS',w:16,s:'Pharmacy'}]},
+  {id:19,group:'sector',emoji:'💡',name:'Electronics & PLI Champions',desc:'Dixon, Kaynes, PG Electroplast — India\'s electronics manufacturing revolution under PLI scheme. China+1 biggest winner. PLI electronics stocks 3Y CAGR: 40%+.',vol:'medium',tags:['midcap','largecap'],sectors:['Electronics'],market:'good',marketLabel:'✓ PLI Tailwind',color:'#f0b429',sharpe:1.28,sortino:1.62,beta:1.18,stdDev:26.4,maxDD:-38,
+    r:{r6mo:16.8,r1y:36.4,r3y:48.6,r5y:52.4,r10y:28.4},
+    stocks:[{n:'Dixon Technologies',t:'DIXON',w:24,s:'Mobile/LED Mfg'},{n:'Kaynes Technology',t:'KAYNES',w:20,s:'PCB/Electronics'},{n:'PG Electroplast',t:'PGEL',w:16,s:'Appliances Mfg'},{n:'Centum Electronics',t:'CENTUM',w:14,s:'Defence Electronics'},{n:'Tata Elxsi',t:'TATAELXSI',w:14,s:'AI Design'},{n:'BEL',t:'BEL',w:12,s:'Defence Electronics'}]},
+  {id:24,group:'sector',emoji:'🔬',name:'Semiconductor Supply Chain',desc:'Dixon, Kaynes, Tata Elxsi — India\'s semiconductor ecosystem pre-fab. CHIPS Act equivalent underway; fab subsidies announced 2024. These companies win before fabs open. Asymmetric upside.',vol:'medium',tags:['midcap','largecap'],sectors:['Semiconductor','Electronics'],market:'good',marketLabel:'✓ Policy Backed',color:'#5bbcff',sharpe:1.22,sortino:1.58,beta:1.14,stdDev:24.2,maxDD:-36,
+    r:{r6mo:18.2,r1y:38.4,r3y:46.8,r5y:50.2,r10y:28.4},
+    stocks:[{n:'Dixon Technologies',t:'DIXON',w:22,s:'ATMP/PLI Anchor'},{n:'Kaynes Technology',t:'KAYNES',w:18,s:'PCB/SiP Modules'},{n:'Tata Elxsi',t:'TATAELXSI',w:16,s:'Chip Design/EDA'},{n:'BEL',t:'BEL',w:14,s:'ASIC/Radar SoC'},{n:'Centum Electronics',t:'CENTUM',w:14,s:'Hybrid Microelectronics'},{n:'PG Electroplast',t:'PGEL',w:16,s:'Electronics Mfg'}]},
+  {id:25,group:'sector',emoji:'🧠',name:'AI Services & Digital Infra',desc:'Infosys, Tech Mahindra, Tata Elxsi — Indian IT firms pivoting hard to GenAI. Agentic automation, AI-led BFSI and healthcare deals. Large proven revenues + AI re-rating upside.',vol:'medium',tags:['midcap','largecap'],sectors:['AI','IT Services'],market:'good',marketLabel:'✓ Re-Rating Play',color:'#c4b5fd',sharpe:1.28,sortino:1.62,beta:0.98,stdDev:20.8,maxDD:-30,
+    r:{r6mo:12.4,r1y:26.8,r3y:32.4,r5y:36.8,r10y:22.4},
+    stocks:[{n:'Infosys',t:'INFY',w:20,s:'GenAI Services'},{n:'Tech Mahindra',t:'TECHM',w:18,s:'AI Telecom/BFS'},{n:'Tata Elxsi',t:'TATAELXSI',w:18,s:'AI Product Design'},{n:'CE Info Systems',t:'MAPMYINDIA',w:14,s:'Geospatial AI/Maps'},{n:'Zaggle Prepaid',t:'ZAGGLE',w:14,s:'AI-Led Fintech'},{n:'Genus Power',t:'GENUSPOWER',w:16,s:'IoT/Smart Grid AI'}]},
+  {id:28,group:'sector',emoji:'💧',name:'Water & Environmental Tech',desc:'Va Tech Wabag, Ion Exchange, Thermax — water treatment and zero-liquid discharge. India\'s water stress and industrial effluent norms driving $40B+ capex. Niche regulatory moat.',vol:'medium',tags:['midcap','smallcap'],sectors:['WaterTech','Environment'],market:'good',marketLabel:'✓ Regulatory Moat',color:'#5bbcff',sharpe:1.18,sortino:1.52,beta:0.88,stdDev:21.4,maxDD:-28,
+    r:{r6mo:12.6,r1y:26.4,r3y:32.8,r5y:36.4,r10y:20.8},
+    stocks:[{n:'Va Tech Wabag',t:'WABAG',w:26,s:'Water Treatment EPC'},{n:'Ion Exchange India',t:'IONEXCHANG',w:22,s:'Industrial Water'},{n:'Thermax',t:'THERMAX',w:20,s:'Air/Water Systems'},{n:'Triveni Engineering',t:'TRIVENI',w:16,s:'Water Pumps'},{n:'Praj Industries',t:'PRAJIND',w:16,s:'Bio-Energy/Water'}]},
+  {id:29,group:'sector',emoji:'📦',name:'Logistics & Supply Chain Tech',desc:'Delhivery, TCI Express, Mahindra Logistics — India\'s logistics GDP share falling from 14% to 8% target. GST-led consolidation, e-commerce boom, multimodal infra. Secular formalisation winners.',vol:'medium',tags:['midcap','largecap'],sectors:['Logistics'],market:'good',marketLabel:'✓ Formalisation',color:'#f0b429',sharpe:1.14,sortino:1.48,beta:1.04,stdDev:22.6,maxDD:-32,
+    r:{r6mo:10.4,r1y:22.8,r3y:28.4,r5y:32.6,r10y:19.4},
+    stocks:[{n:'Delhivery',t:'DELHIVERY',w:22,s:'Express Logistics'},{n:'TCI Express',t:'TCIEXP',w:20,s:'Road Express'},{n:'Mahindra Logistics',t:'MAHLOG',w:18,s:'3PL/Supply Chain'},{n:'Allcargo Logistics',t:'ALLCARGO',w:16,s:'EXIM/LCL'},{n:'Redington India',t:'REDINGTON',w:14,s:'IT Supply Chain'},{n:'KEC International',t:'KEC',w:10,s:'Infra EPC'}]},
+  // ── HIGH RISK ──
+  {id:13,group:'sector',emoji:'🛡',name:'Defence & Aerospace Rising',desc:'HAL, BEL, MTAR Tech — Nifty India Defence gained 21.9% in a single month in 2025. Indigenization policy gives decade-long order book visibility.',vol:'high',tags:['midcap','largecap'],sectors:['Defence'],market:'good',marketLabel:'✓ Structural',color:'#5bbcff',sharpe:1.28,sortino:1.64,beta:1.18,stdDev:26.2,maxDD:-36,
+    r:{r6mo:20.4,r1y:48.8,r3y:58.4,r5y:52.8,r10y:28.2},
+    stocks:[{n:'HAL',t:'HAL',w:20,s:'Aerospace'},{n:'BEL',t:'BEL',w:18,s:'Electronics'},{n:'MTAR Technologies',t:'MTARTECH',w:12,s:'Precision'},{n:'Data Patterns',t:'DATAPATT',w:12,s:'Defence'},{n:'Astra Microwave',t:'ASTRAMICRO',w:10,s:'RF'},{n:'Ideaforge Tech',t:'IDEAFORGE',w:9,s:'Drones'},{n:'Paras Defence',t:'PARAS',w:10,s:'Defence'},{n:'Centum Electronics',t:'CENTUM',w:9,s:'Electronics'}]},
+  {id:15,group:'sector',emoji:'🧪',name:'Specialty Chemicals Compounder',desc:'SRF, Aarti, Navin Fluorine — China+1 beneficiaries. Corrected sharply in 2024–25 after overvaluation; now at attractive entry points for long-term investors.',vol:'high',tags:['midcap'],sectors:['Chemicals'],market:'caution',marketLabel:'⚡ Wait & Watch',color:'#c4b5fd',sharpe:0.98,sortino:1.22,beta:1.32,stdDev:30.1,maxDD:-48,
+    r:{r6mo:4.2,r1y:10.4,r3y:22.6,r5y:32.4,r10y:22.6},
+    stocks:[{n:'SRF',t:'SRF',w:20,s:'Chemicals'},{n:'Aarti Industries',t:'AARTIIND',w:18,s:'Chemicals'},{n:'Navin Fluorine',t:'NAVINFLUOR',w:16,s:'Fluorines'},{n:'Vinati Organics',t:'VINATIORGA',w:16,s:'Organics'},{n:'Sudarshan Chemical',t:'SUDARSCHEM',w:12,s:'Pigments'},{n:'Rossari Biotech',t:'ROSSARI',w:10,s:'Biotech'},{n:'Anupam Rasayan',t:'ANURAS',w:8,s:'Chemicals'}]},
+  {id:16,group:'sector',emoji:'🚗',name:'EV & Auto Components',desc:'Tata Motors, Sona BLW, Uno Minda — India\'s EV ecosystem. 5Y sector CAGR ~24%. EV penetration rising rapidly from a near-zero base.',vol:'high',tags:['midcap','smallcap'],sectors:['EV','Auto'],market:'caution',marketLabel:'⚡ Accumulate',color:'#f0b429',sharpe:0.92,sortino:1.12,beta:1.48,stdDev:34.8,maxDD:-54,
+    r:{r6mo:8.4,r1y:22.4,r3y:32.6,r5y:38.4,r10y:22.8},
+    stocks:[{n:'Tata Motors',t:'TATAMOTORS',w:20,s:'Auto'},{n:'Sona BLW Precision',t:'SONACOMS',w:16,s:'Components'},{n:'Minda Corp',t:'MINDACORP',w:14,s:'Components'},{n:'Uno Minda',t:'UNOMINDA',w:14,s:'Components'},{n:'Olectra Greentech',t:'OLECTRA',w:12,s:'EV Bus'},{n:'Greaves Cotton',t:'GREAVESCOT',w:10,s:'EV'},{n:'Exide Industries',t:'EXIDEIND',w:7,s:'Batteries'},{n:'Amara Raja Energy',t:'AMARAJABAT',w:7,s:'Batteries'}]},
+  {id:18,group:'sector',emoji:'🧠',name:'AI Infrastructure & Enablers',desc:'India\'s picks-and-shovels AI play — defence AI, geospatial data, electronics manufacturing, RF systems and smart grid. These companies build the pipes AI runs through.',vol:'high',tags:['midcap','smallcap'],sectors:['AI','Deep Tech'],market:'good',marketLabel:'✓ Decade Thesis',color:'#c4b5fd',sharpe:1.04,sortino:1.32,beta:1.38,stdDev:32.4,maxDD:-44,
+    r:{r6mo:18.6,r1y:42.4,r3y:52.6,r5y:58.4,r10y:30.2},
+    stocks:[{n:'Data Patterns',t:'DATAPATT',w:16,s:'Defence AI Systems'},{n:'CE Info Systems',t:'MAPMYINDIA',w:14,s:'Geospatial AI'},{n:'Kaynes Technology',t:'KAYNES',w:14,s:'AI Electronics'},{n:'Astra Microwave',t:'ASTRAMICRO',w:12,s:'RF/Radar'},{n:'Centum Electronics',t:'CENTUM',w:12,s:'Embedded Systems'},{n:'Tata Elxsi',t:'TATAELXSI',w:16,s:'AI/EV Design'},{n:'Genus Power',t:'GENUSPOWER',w:16,s:'Smart Grid AI'}]},
+  {id:26,group:'sector',emoji:'💳',name:'Fintech & Digital Payments',desc:'Zaggle, MapMyIndia, Orient Tech — only Shariah-clean zero-riba fintechs. No banks, no NBFCs, no interest income. SaaS spend management, location-tech and IT infra.',vol:'high',tags:['midcap','smallcap'],sectors:['Fintech'],market:'caution',marketLabel:'⚡ Early Movers',color:'#f0b429',sharpe:1.08,sortino:1.38,beta:1.22,stdDev:26.8,maxDD:-40,
+    r:{r6mo:14.8,r1y:28.4,r3y:36.2,r5y:42.4,r10y:24.8},
+    stocks:[{n:'Zaggle Prepaid Ocean',t:'ZAGGLE',w:22,s:'SaaS Spend Mgmt'},{n:'CE Info Systems',t:'MAPMYINDIA',w:18,s:'Location-Tech SaaS'},{n:'Dixon Technologies',t:'DIXON',w:16,s:'IoT/Device Payments'},{n:'Genus Power',t:'GENUSPOWER',w:16,s:'Smart Meter Infra'},{n:'Tata Elxsi',t:'TATAELXSI',w:14,s:'Digital Product Design'},{n:'Orient Technologies',t:'ORIENTTECH',w:14,s:'IT Infra Services'}]},
+  // ── VERY HIGH ──
+  {id:20,group:'sector',emoji:'🚀',name:'Space, Drones & New Defence',desc:'MTAR, Ideaforge, Data Patterns, Paras Defence — India\'s private space economy is opening. ISRO commercialisation, drone PLI and hypersonic programmes create decade-long winners.',vol:'veryhigh',tags:['smallcap','midcap'],sectors:['Space','Defence'],market:'caution',marketLabel:'⚡ Early Stage',color:'#ff5c7d',sharpe:0.92,sortino:1.12,beta:1.62,stdDev:40.2,maxDD:-58,
+    r:{r6mo:14.4,r1y:38.6,r3y:54.8,r5y:62.4,r10y:34.6},
+    stocks:[{n:'MTAR Technologies',t:'MTARTECH',w:20,s:'Space/Nuclear'},{n:'Ideaforge Technology',t:'IDEAFORGE',w:18,s:'Drones'},{n:'Data Patterns',t:'DATAPATT',w:18,s:'Defence AI'},{n:'Paras Defence',t:'PARAS',w:16,s:'Space Optics'},{n:'Centum Electronics',t:'CENTUM',w:14,s:'Satellite Systems'},{n:'Astra Microwave',t:'ASTRAMICRO',w:14,s:'RF/Radar'}]},
 ];
 
 const ALL_PORTFOLIOS = [...DIVERSIFIED, ...SECTOR];
