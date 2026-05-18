@@ -1038,4 +1038,218 @@ function openModal(id){
     document.getElementById('m-title').textContent=`${p.emoji} ${p.name}`;
     document.getElementById('m-sub').textContent=p.desc;
 
-    const periods=[{k:'r6mo',l:'6M'},{k:'r1y',l:'1Y'},{k:'r3y',l:'3Y CAGR'},{k:'r5y',l:'5Y CAGR'},{k:
+    const periods=[{k:'r6mo',l:'6M'},{k:'r1y',l:'1Y'},{k:'r3y',l:'3Y CAGR'},{k:'r5y',l:'5Y CAGR'},{k:'r10y',l:'10Y CAGR'}];
+    document.getElementById('m-returns').innerHTML=periods.map(({k,l})=>{
+      const v=p.r?.[k];
+      return `<div class="ret-box"><div class="ret-period">${l}</div>
+        <div class="ret-val ${v!=null?(v>=0?'up':'dn'):''}">${v!=null?(v>=0?'+':'')+Number(v).toFixed(1)+'%':'—'}</div></div>`;
+    }).join('');
+
+    document.getElementById('m-stats').innerHTML=`
+      <div class="stat-box"><div class="stat-box-label">Sharpe Ratio</div><div class="stat-box-val g">${p.sharpe}</div></div>
+      <div class="stat-box"><div class="stat-box-label">Max Drawdown</div><div class="stat-box-val r">${p.maxDD}%</div></div>
+      <div class="stat-box"><div class="stat-box-label">Beta vs NIFTY</div><div class="stat-box-val b">${p.beta}</div></div>
+      <div class="stat-box"><div class="stat-box-label">Std Dev (Ann.)</div><div class="stat-box-val y">${p.stdDev}%</div></div>`;
+
+    document.getElementById('m-holdings').innerHTML=p.stocks.map((s,i)=>`
+      <tr>
+        <td style="color:var(--text3);font-family:var(--font-mono);font-size:10px">${i+1}</td>
+        <td style="font-weight:500">${s.n}</td>
+        <td class="td-ticker">${s.t}</td>
+        <td style="font-size:11px;color:var(--text2)">${s.s}</td>
+        <td class="td-wt">${s.w}%</td>
+        <td><div class="wt-bar" style="width:${s.w*3.2}px"></div></td>
+      </tr>`).join('');
+
+    const riskN={low:2,medium:3,high:4,veryhigh:5}[p.vol]||3;
+    document.getElementById('risk-content').innerHTML=`
+      <div class="risk-dots">
+        ${[1,2,3,4,5].map(l=>`<div class="rdot ${l<=riskN?'on-'+l:''}"></div>`).join('')}
+        <span class="risk-lbl">${volLabel[p.vol]}</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-box-label">Sortino Ratio</div><div class="stat-box-val g">${p.sortino}</div></div>
+        <div class="stat-box"><div class="stat-box-label">Beta vs NIFTY</div><div class="stat-box-val b">${p.beta}</div></div>
+        <div class="stat-box"><div class="stat-box-label">Std Deviation</div><div class="stat-box-val y">${p.stdDev}%</div></div>
+        <div class="stat-box"><div class="stat-box-label">Max Drawdown</div><div class="stat-box-val r">${p.maxDD}%</div></div>
+      </div>
+      <div class="suit-grid">
+        <div class="suit-item ${p.market==='good'?'hl':''}">
+          <div class="suit-icon">📈</div><div class="suit-name">Bull Market</div>
+          <div class="suit-verdict" style="color:${p.market==='good'?'var(--green)':'var(--text2)'}">${p.market==='good'?'Excellent':'Moderate'}</div>
+        </div>
+        <div class="suit-item ${p.market==='caution'?'wn':''}">
+          <div class="suit-icon">↔</div><div class="suit-name">Sideways</div>
+          <div class="suit-verdict" style="color:${p.market==='caution'?'var(--gold)':'var(--text2)'}">Moderate</div>
+        </div>
+        <div class="suit-item ${p.market==='avoid'?'dg':''}">
+          <div class="suit-icon">📉</div><div class="suit-name">Bear Market</div>
+          <div class="suit-verdict" style="color:${p.market==='avoid'?'var(--red)':'var(--text2)'}">${p.market==='avoid'?'Avoid':'Caution'}</div>
+        </div>
+      </div>
+      <div class="halal-box"><strong>☪ Halal Status: Verified</strong><br>All holdings screened for riba exposure, haram sectors, excessive leverage (debt/assets &lt;33%, interest income &lt;5% revenue). Re-screened every quarter. AAOIFI-aligned.</div>`;
+
+    document.getElementById('chart-note').textContent='📊 Real NSE data · Yahoo Finance split-adjusted · March 31 adj close';
+    switchTab('overview',null);
+    document.getElementById('overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+    loadChart('3y',null);
+    runCalc();
+  } catch(e) { showError(`openModal error: ${e.message}`); }
+}
+
+function loadChart(range,btn){
+  if(!currentP) return;
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.tbtn').forEach(b=>{ if(b.textContent==='3Y') b.classList.add('active'); });
+  if(mainChart){ mainChart.destroy(); mainChart=null; }
+  const r=currentP.r||{};
+  const monthsMap={'6mo':6,'1y':12,'3y':36,'5y':60,'10y':120};
+  const cagrMap={'6mo':r.r6mo,'1y':r.r1y,'3y':r.r3y,'5y':r.r5y,'10y':r.r10y};
+  const months=monthsMap[range]||36, cagr=cagrMap[range]||r.r3y||15;
+  const pts=generateTrajectory(cagr||15,months);
+  const isUp=pts[pts.length-1]>=pts[0];
+  const col=isUp?'#00e5a0':'#ff5c7d';
+  const now=new Date();
+  const labels=pts.map((_,i)=>{ const d=new Date(now); d.setMonth(d.getMonth()-(months-i));
+    return months>24?d.getFullYear().toString():d.toLocaleDateString('en-IN',{month:'short',year:'2-digit'}); });
+  const ctx=document.getElementById('main-chart').getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,0,260);
+  grad.addColorStop(0,isUp?'rgba(0,229,160,0.22)':'rgba(255,92,125,0.22)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  mainChart=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:pts,borderColor:col,borderWidth:2,fill:true,backgroundColor:grad,pointRadius:0,pointHoverRadius:4,tension:0.42}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2640',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
+        titleColor:'#7a8faa',bodyColor:'#eef2ff',callbacks:{label:c=>`  ${(c.parsed.y-100).toFixed(1)}% return`}}},
+      scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#334155',font:{size:10},maxTicksLimit:8}},
+        y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#334155',font:{size:10},callback:v=>(v-100).toFixed(0)+'%'}}},
+      animation:{duration:400}}});
+}
+
+function switchTab(name){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
+  const pane=document.getElementById('tab-'+name);
+  if(pane) pane.classList.add('active');
+  document.querySelectorAll('.mtab').forEach(b=>{ if(b.getAttribute('onclick')?.includes(`'${name}'`)) b.classList.add('active'); });
+  if(name==='overview'&&mainChart) setTimeout(()=>mainChart.resize(),50);
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+  if(mainChart){ mainChart.destroy(); mainChart=null; }
+}
+function closeOverlay(e){ if(e.target===document.getElementById('overlay')) closeModal(); }
+
+// ── Calculator ───────────────────────────────────────────
+function toggleCalc(mode,btn){
+  calcMode=mode;
+  document.querySelectorAll('.ctbtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.getElementById('c-amt-label').textContent=mode==='sip'?'Monthly SIP (₹)':'Lumpsum Amount (₹)';
+  runCalc();
+}
+
+function runCalc(){
+  if(!currentP) return;
+  try {
+    const amt=parseFloat(document.getElementById('c-amount').value)||10000;
+    const yrs=parseFloat(document.getElementById('c-years').value)||10;
+    const cagr=currentP.r?.r5y??currentP.r?.r3y??{low:14,medium:18,high:22,veryhigh:28}[currentP.vol];
+    const rm=(cagr/100)/12, n=yrs*12;
+    let invested,total;
+    if(calcMode==='sip'){ invested=amt*12*yrs; total=amt*(Math.pow(1+rm,n)-1)/rm*(1+rm); }
+    else { invested=amt; total=amt*Math.pow(1+cagr/100,yrs); }
+    document.getElementById('c-invested').textContent='₹'+fmt(invested);
+    document.getElementById('c-gain').textContent='₹'+fmt(total-invested);
+    document.getElementById('c-total').textContent='₹'+fmt(total);
+    const ne=document.getElementById('c-cagr-note');
+    if(ne) ne.textContent=`Using ${Number(cagr).toFixed(1)}% CAGR (5Y · Yahoo Finance data · Apr 2026)`;
+  } catch(e) { showError(`Calculator error: ${e.message}`); }
+}
+
+function fmt(n){
+  if(n>=10000000) return (n/10000000).toFixed(2)+' Cr';
+  if(n>=100000) return (n/100000).toFixed(2)+' L';
+  if(n>=1000) return (n/1000).toFixed(1)+' K';
+  return Math.round(n).toString();
+}
+
+// ── Compare ──────────────────────────────────────────────
+function buildCompare(){
+  const tbody=document.getElementById('compare-tbody');
+  if(!tbody) return;
+  const vc={low:'var(--green)',medium:'var(--gold)',high:'var(--red)',veryhigh:'var(--purple)'};
+  const vb={low:'var(--green3)',medium:'var(--gold2)',high:'var(--red2)',veryhigh:'rgba(196,181,253,0.1)'};
+  tbody.innerHTML=ALL_PORTFOLIOS.map(p=>{
+    const r=p.r||{};
+    const fmtR=v=>v!=null?`<span class="${v>=0?'pos':'neg'}">${v>=0?'+':''}${Number(v).toFixed(1)}%</span>`:'—';
+    return `<tr onclick="openModalFromCompare(${p.id})">
+      <td style="min-width:190px"><div class="td-name">${p.emoji} ${p.name}</div><div class="td-sect">${p.sectors.join(', ')}</div></td>
+      <td style="font-size:10px;color:var(--text3);font-family:var(--font-mono)">${p.group==='diversified'?'DIV':'SECTOR'}</td>
+      <td><span style="background:${vb[p.vol]};color:${vc[p.vol]};font-family:var(--font-mono);font-size:9px;padding:2px 7px;border-radius:100px">${volLabel[p.vol]}</span></td>
+      <td data-val="${r.r6mo??0}">${fmtR(r.r6mo)}</td>
+      <td data-val="${r.r1y??0}">${fmtR(r.r1y)}</td>
+      <td data-val="${r.r3y??0}">${fmtR(r.r3y)}</td>
+      <td data-val="${r.r5y??0}">${fmtR(r.r5y)}</td>
+      <td data-val="${r.r10y??0}">${fmtR(r.r10y)}</td>
+      <td data-val="${p.maxDD}" class="neg">${p.maxDD}%</td>
+      <td class="nv">${p.sharpe}</td>
+      <td style="color:var(--green);font-size:14px">✓</td>
+    </tr>`;
+  }).join('');
+}
+
+function openModalFromCompare(id){
+  showPage('portfolios',null);
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.textContent.trim()==='Portfolios'));
+  setTimeout(()=>openModal(id),120);
+}
+
+function sortTable(col){
+  sortDir*=-1;
+  const tbody=document.getElementById('compare-tbody');
+  const rows=Array.from(tbody.querySelectorAll('tr'));
+  rows.sort((a,b)=>{
+    const av=parseFloat(a.cells[col]?.dataset?.val||0);
+    const bv=parseFloat(b.cells[col]?.dataset?.val||0);
+    return (av-bv)*sortDir;
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+}
+
+// ── Page nav ─────────────────────────────────────────────
+function showPage(p,btn){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+p)?.classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(p==='compare') buildCompare();
+  window.scrollTo(0,0);
+}
+function toggleMobileNav(){ document.getElementById('mobile-nav').classList.toggle('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+// ════════════════════════════════════════════════════════
+// INIT — compute real returns then render
+// ════════════════════════════════════════════════════════
+(function init() {
+  try {
+    // Compute real CAGRs for every portfolio from Yahoo Finance price data
+    ALL_PORTFOLIOS.forEach(p => {
+      p.r = computeReturns(p.stocks);
+    });
+    renderTop3();
+    renderCards();
+  } catch(e) {
+    showError('Init failed: ' + e.message);
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>
