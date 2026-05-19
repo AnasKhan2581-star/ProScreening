@@ -20,6 +20,15 @@
   --font-display:'Fraunces',serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
   --r:14px;--r-sm:8px;--r-xs:5px;
 }
+[data-theme="light"] {
+  --bg0:#f5f7fa;--bg1:#ffffff;--bg2:#f0f3f8;--bg3:#e6ebf2;--bg4:#d6dce8;
+  --card:#ffffff;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --green:#00a371;--green2:#008f5e;--green3:rgba(0,163,113,0.1);--green4:rgba(0,163,113,0.05);
+  --gold:#b8860b;--gold2:rgba(184,134,11,0.1);--red:#d63a5d;--red2:rgba(214,58,93,0.08);
+  --blue:#0768c2;--purple:#7c5bd9;--text:#0f1729;--text2:#475569;--text3:#94a3b8;
+}
+[data-theme="light"] body::before, [data-theme="light"] body::after,
+[data-theme="light"] .amb { display:none !important; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;line-height:1.5;overflow-x:hidden}
@@ -45,14 +54,18 @@ nav{display:flex;gap:4px}
 .header-right{display:flex;align-items:center;gap:10px}
 .halal-pill{background:var(--gold2);border:1px solid rgba(240,180,41,0.2);color:var(--gold);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);white-space:nowrap}
 .data-badge{background:var(--green4);border:1px solid rgba(0,229,160,0.15);color:var(--green);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);white-space:nowrap}
+
+.theme-toggle{background:none;border:1px solid var(--border2);color:var(--text);width:36px;height:36px;border-radius:var(--r-sm);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;-webkit-tap-highlight-color:rgba(0,229,160,0.2)}
+.theme-toggle:hover{border-color:var(--green);background:var(--bg3)}
+.theme-toggle:active{transform:scale(0.92)}
 .hamburger{display:none;background:none;border:1px solid var(--border2);color:var(--text2);width:38px;height:38px;border-radius:var(--r-sm);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;-webkit-tap-highlight-color:rgba(0,229,160,0.2);touch-action:manipulation}.hamburger:active{background:rgba(0,229,160,0.1);border-color:var(--green)}
 .hamburger span{display:block;width:16px;height:1.5px;background:currentColor;border-radius:1px}
 .mobile-nav{display:none;position:fixed;inset:0;z-index:9999;-webkit-tap-highlight-color:transparent}
 .mobile-nav.open{display:block}
 .mobile-nav-panel{transform:translateX(100%);transition:transform 0.25s ease-out;-webkit-transform:translateX(100%);will-change:transform}
 .mobile-nav.open .mobile-nav-panel{transform:translateX(0);-webkit-transform:translateX(0)}
-.mobile-nav-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px)}
-.mobile-nav-panel{position:absolute;right:0;top:0;bottom:0;width:260px;background:var(--bg1);border-left:1px solid var(--border);padding:24px 20px;display:flex;flex-direction:column;gap:8px}
+.mobile-nav-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.mobile-nav-panel{position:absolute;right:0;top:0;bottom:0;width:260px;background:var(--bg1);border-left:1px solid var(--border);padding:24px 20px;display:flex;flex-direction:column;gap:8px;box-shadow:-12px 0 40px rgba(0,0,0,0.6)}
 .mobile-nav-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;align-self:flex-end;margin-bottom:8px}
 
 /* LAYOUT */
@@ -127,7 +140,7 @@ nav{display:flex;gap:4px}
 .badge-high{color:var(--red);background:var(--red2);border-color:rgba(255,92,125,0.2)}
 .badge-vhigh{color:var(--purple);background:rgba(196,181,253,0.1);border-color:rgba(196,181,253,0.2)}
 .badge-sector{color:var(--blue);background:rgba(91,188,255,0.08);border-color:rgba(91,188,255,0.2)}
-.badge-aw{color:var(--gold);background:rgba(240,180,41,0.08);border-color:rgba(240,180,41,0.2);font-size:9px}
+.badge-aw{color:var(--gold);background:rgba(240,180,41,0.08);border-color:rgba(240,180,41,0.2);font-size:9px}.badge-disputed{color:var(--red);background:rgba(255,92,125,0.08);border-color:rgba(255,92,125,0.2);font-size:9px}
 .card-desc{font-size:11.5px;color:var(--text2);margin-bottom:14px;line-height:1.6;font-weight:300}
 .mini-chart-wrap{height:48px;margin-bottom:12px}
 .card-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
@@ -243,6 +256,7 @@ nav{display:flex;gap:4px}
 .principle-desc{font-size:11px;color:var(--text2);line-height:1.55;font-weight:300}
 
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){#custom-layout{grid-template-columns:1fr 1fr !important}}
 @media(max-width:768px){
   nav{display:none}.hamburger{display:flex}.halal-pill{display:none}
   .hero{padding:32px 0 24px}.sc-grid{grid-template-columns:1fr}
@@ -270,12 +284,14 @@ nav{display:flex;gap:4px}
     </div>
     <nav id="main-nav">
       <button class="nav-btn active" onclick="showPage('portfolios',this)">Portfolios</button>
+      <button class="nav-btn" onclick="showPage('custom',this)">🛠 Build Mine</button>
       <button class="nav-btn" onclick="showPage('compare',this)">Compare</button>
       <button class="nav-btn" onclick="showPage('about',this)">About</button>
     </nav>
     <div class="header-right">
       <div class="data-badge">📅 Last Updated Apr 2026</div>
       <div class="halal-pill">☪ 100% Shariah</div>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">🌙</button>
       <button class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -286,6 +302,7 @@ nav{display:flex;gap:4px}
   <div class="mobile-nav-panel">
     <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
     <button class="nav-btn active" onclick="showPage('portfolios',this);toggleMobileNav()">📊 Portfolios</button>
+    <button class="nav-btn" onclick="showPage('custom',this);toggleMobileNav()">🛠 Build My Portfolio</button>
     <button class="nav-btn" onclick="showPage('compare',this);toggleMobileNav()">⚖ Compare</button>
     <button class="nav-btn" onclick="showPage('about',this);toggleMobileNav()">☪ About Halal</button>
   </div>
@@ -383,6 +400,60 @@ nav{display:flex;gap:4px}
   <div style="margin-bottom:60px"></div>
 </div>
 </div>
+
+
+<!-- CUSTOM PORTFOLIO BUILDER PAGE -->
+<div class="page" id="page-custom">
+<div class="wrap" style="padding-top:40px;padding-bottom:60px">
+  <div class="page-title">Build Your Own Portfolio</div>
+  <div class="page-subtitle">Pick from 118 Shariah-screened NSE stocks. Set weights. See real CAGR live.</div>
+
+  <div style="display:grid;grid-template-columns:1fr;gap:18px;margin-top:24px" id="custom-layout">
+    <!-- LEFT: Stock picker -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap">
+        <div style="font-family:var(--font-display);font-size:16px;font-weight:600">Add Stocks</div>
+        <div style="font-size:11px;color:var(--text2)" id="cm-counter">0 stocks · 0% weight</div>
+      </div>
+      <div style="position:relative;margin-bottom:14px">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="cm-search" placeholder="Search stock (INFY, KEI, HAL...)" 
+          oninput="cmSearch(this.value)" 
+          onfocus="document.getElementById('cm-results').style.display='block'"
+          style="width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 36px;border-radius:var(--r-sm);font-size:13px;outline:none">
+        <div id="cm-results" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-sm);max-height:260px;overflow-y:auto;z-index:10;margin-top:4px;box-shadow:0 8px 24px rgba(0,0,0,0.5)"></div>
+      </div>
+
+      <!-- Selected stocks list -->
+      <div id="cm-selected" style="display:flex;flex-direction:column;gap:8px"></div>
+
+      <button onclick="cmReset()" style="margin-top:14px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:8px 14px;border-radius:var(--r-sm);font-size:12px;cursor:pointer;font-family:var(--font-body)">↻ Reset Portfolio</button>
+    </div>
+
+    <!-- RIGHT: Live results -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px">
+      <div style="font-family:var(--font-display);font-size:16px;font-weight:600;margin-bottom:14px">Live Returns</div>
+      <div id="cm-warning" style="display:none;background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.2);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--gold)"></div>
+      <div class="returns-strip" id="cm-returns" style="overflow-x:auto;padding-bottom:6px"></div>
+      <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px">
+          <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);margin-bottom:5px;text-transform:uppercase">Total Weight</div>
+          <div style="font-size:18px;font-weight:600;font-family:var(--font-display)" id="cm-total-weight">0%</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px">
+          <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);margin-bottom:5px;text-transform:uppercase">Stocks</div>
+          <div style="font-size:18px;font-weight:600;font-family:var(--font-display)" id="cm-stock-count">0</div>
+        </div>
+      </div>
+      <div style="margin-top:18px;padding:14px;background:var(--bg3);border-radius:var(--r-sm);font-size:11px;color:var(--text3);line-height:1.7">
+        💡 <strong>Tip:</strong> Set weights so they total 100%. Use the <strong>Auto-balance</strong> button to distribute equally. Returns use real Yahoo Finance data with inception-fallback CAGR.
+      </div>
+      <button onclick="cmAutoBalance()" style="margin-top:12px;width:100%;background:var(--green);border:none;color:#000;padding:10px;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body)">⚖ Auto-balance Weights</button>
+    </div>
+  </div>
+</div>
+</div>
+
 
 <!-- COMPARE PAGE -->
 <div class="page" id="page-compare">
@@ -520,10 +591,23 @@ function cagrPct(t, y1, y2) {
 }
 
 function weightedRet(stocks, y1, y2) {
+  // For each stock, use CAGR over its available history within [y1, y2]
+  // If stock listed after y1, use (its earliest year) -> y2 CAGR instead of skipping
   let wsum = 0, wt = 0;
   stocks.forEach(s => {
-    const v = cagrPct(s.t, y1, y2);
-    if (v !== null && Math.abs(v) < 300) { wsum += v * s.w; wt += s.w; }
+    const p = PRICES[s.t];
+    if (!p) return;
+    const years = Object.keys(p).map(Number).sort((a,b) => a-b);
+    if (!years.length) return;
+    // Use the later of: requested start year, stock's earliest year
+    const effectiveStart = Math.max(y1, years[0]);
+    const effectiveEnd = Math.min(y2, years[years.length-1]);
+    if (effectiveEnd - effectiveStart < 1) return;  // need at least 1 year span
+    const v = cagrPct(s.t, effectiveStart, effectiveEnd);
+    if (v !== null && Math.abs(v) < 300) {
+      wsum += v * s.w;
+      wt += s.w;
+    }
   });
   return wt >= 10 ? +( wsum / wt ).toFixed(2) : null;
 }
@@ -533,7 +617,12 @@ function computeReturns(stocks) {
   const r3y  = weightedRet(stocks, 2023, 2026);
   const r5y  = weightedRet(stocks, 2021, 2026);
   const r10y = weightedRet(stocks, 2016, 2026);
-  const r6mo = r1y !== null ? +(r1y / 2).toFixed(2) : null;
+  // 6M approximation from 1Y: (1+r1y)^0.5 - 1, with sign preservation
+  let r6mo = null;
+  if (r1y !== null) {
+    const ratio = 1 + r1y/100;
+    r6mo = ratio > 0 ? +((Math.pow(ratio, 0.5) - 1) * 100).toFixed(2) : +(r1y/2).toFixed(2);
+  }
   return { r6mo, r1y, r3y, r5y, r10y };
 }
 
@@ -630,7 +719,7 @@ const DIVERSIFIED = [
       {n:'Poly Medicure',t:'POLYMED',w:12,s:'Med Devices'},{n:'Rossari Biotech',t:'ROSSARI',w:12,s:'Specialty Bio'},
       {n:'Anupam Rasayan',t:'ANURAS',w:12,s:'Life Sciences'}]},
 
-  {id:23,group:'diversified',emoji:'🎯',name:'High Conviction Future Sectors',
+  {id:23,halalDisputed:true,group:'diversified',emoji:'🎯',name:'High Conviction Future Sectors',
     desc:'HAL, BEL, MTAR, Kaynes, KEI, Waaree, Data Patterns, CG Power — best-of-breed across defence, space, AI infra and solar. Fewer bets, higher conviction.',
     vol:'medium',tags:['midcap','largecap'],sectors:['Multi-Theme'],market:'good',marketLabel:'✓ High Conviction',
     color:'#c4b5fd',sharpe:1.22,sortino:1.58,beta:1.04,stdDev:22.4,maxDD:-30,
@@ -650,7 +739,7 @@ const DIVERSIFIED = [
       {n:'Carborundum Universal',t:'CARBORUNIV',w:10,s:'Abrasives'},{n:'Sterlite Tech',t:'STLTECH',w:10,s:'Fibre'},
       {n:'Triveni Engineering',t:'TRIVENI',w:8,s:'Water/Power'},{n:'Orient Technologies',t:'ORIENTTECH',w:8,s:'IT'}]},
 
-  {id:7,group:'diversified',emoji:'🔮',name:'Future Tech Disruptors',
+  {id:7,halalDisputed:true,group:'diversified',emoji:'🔮',name:'Future Tech Disruptors',
     desc:'Kaynes, Ideaforge, MTAR, Data Patterns, Centum, MapMyIndia, Astra Microwave, Sterlite — India deep tech. Decade conviction only.',
     vol:'veryhigh',tags:['smallcap','midcap'],sectors:['Deep Tech'],market:'caution',marketLabel:'⚡ 10Y Horizon',
     color:'#c4b5fd',sharpe:0.94,sortino:1.14,beta:1.72,stdDev:42.4,maxDD:-62,
@@ -781,7 +870,7 @@ const SECTOR = [
       {n:'Redington India',t:'REDINGTON',w:20,s:'IT Supply Chain'},{n:'Allcargo Logistics',t:'ALLCARGO',w:18,s:'EXIM/LCL'},
       {n:'Mahindra Logistics',t:'MAHLOG',w:16,s:'3PL/Supply Chain'}]},
 
-  {id:13,group:'sector',emoji:'🛡',name:'Defence & Aerospace Rising',
+  {id:13,halalDisputed:true,group:'sector',emoji:'🛡',name:'Defence & Aerospace Rising',
     desc:'HAL, BEL, MTAR, Data Patterns, Paras, Centum — Nifty Defence +21.9% in a single month 2025. Decade-long indigenization order books.',
     vol:'high',tags:['midcap','largecap'],sectors:['Defence'],market:'good',marketLabel:'✓ Structural',
     color:'#5bbcff',sharpe:1.28,sortino:1.64,beta:1.18,stdDev:26.2,maxDD:-36,
@@ -834,7 +923,7 @@ const SECTOR = [
       {n:'Tata Elxsi',t:'TATAELXSI',w:18,s:'Digital Product Design'},{n:'Genus Power',t:'GENUSPOWER',w:16,s:'Smart Meter Billing'},
       {n:'Orient Technologies',t:'ORIENTTECH',w:14,s:'IT Infra'},{n:'Sterlite Tech',t:'STLTECH',w:14,s:'Network Infra'}]},
 
-  {id:20,group:'sector',emoji:'🚀',name:'Space, Drones & New Defence',
+  {id:20,halalDisputed:true,group:'sector',emoji:'🚀',name:'Space, Drones & New Defence',
     desc:'MTAR, Ideaforge, Data Patterns, Paras, Centum, Astra — India private space economy opening. ISRO commercialisation + drone PLI.',
     vol:'veryhigh',tags:['smallcap','midcap'],sectors:['Space','Defence'],market:'caution',marketLabel:'⚡ Early Stage',
     color:'#ff5c7d',sharpe:0.92,sortino:1.12,beta:1.62,stdDev:40.2,maxDD:-58,
@@ -943,6 +1032,7 @@ function buildCard(p) {
       <div class="card-badges">
         <span class="badge ${volBadgeClass[p.vol]}">${volLabel[p.vol]}</span>
         ${p.allWeather ? '<span class="badge badge-aw">☀ ALL-WEATHER</span>' : ''}
+        ${p.halalDisputed ? '<span class="badge badge-disputed">⚠ DISPUTED</span>' : ''}
         <span class="badge badge-sector">${p.sectors[0]}</span>
       </div>
     </div>
@@ -1089,7 +1179,9 @@ function openModal(id){
           <div class="suit-verdict" style="color:${p.market==='avoid'?'var(--red)':'var(--text2)'}">${p.market==='avoid'?'Avoid':'Caution'}</div>
         </div>
       </div>
-      <div class="halal-box"><strong>☪ Halal Status: Verified</strong><br>All holdings screened for riba exposure, haram sectors, excessive leverage (debt/assets &lt;33%, interest income &lt;5% revenue). Re-screened every quarter. AAOIFI-aligned.</div>`;
+      ${p.halalDisputed
+      ? '<div class="halal-box" style="background:rgba(255,92,125,0.06);border-color:rgba(255,92,125,0.2)"><strong style="color:var(--red)">⚠ Halal Status: Disputed</strong><br>AAOIFI explicitly prohibits only riba, alcohol and pork. However, major Islamic screening platforms (Zoya, Tabadulat) and many scholars exclude weapons/defence companies under the principle of avoiding aid to violence. <strong>Decide based on your school of thought.</strong> All other Shariah criteria (debt &lt;33%, interest income &lt;5%) are met.</div>'
+      : '<div class="halal-box"><strong>☪ Halal Status: Verified</strong><br>All holdings screened for riba exposure, haram sectors, excessive leverage (debt/assets &lt;33%, interest income &lt;5% revenue). Re-screened every quarter. AAOIFI-aligned.</div>'}`;
 
     document.getElementById('chart-note').textContent='📊 Real NSE data · Yahoo Finance split-adjusted · March 31 adj close';
     switchTab('overview',null);
@@ -1231,10 +1323,178 @@ function showPage(p,btn){
   document.getElementById('page-'+p)?.classList.add('active');
   if(btn) btn.classList.add('active');
   if(p==='compare') buildCompare();
+  if(p==='custom') cmRender();
   window.scrollTo(0,0);
 }
-function toggleMobileNav(){ document.getElementById('mobile-nav').classList.toggle('open'); }
+
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('theme-btn').textContent = next === 'light' ? '☀️' : '🌙';
+  try { localStorage.setItem('hv-theme', next); } catch(e){}
+}
+(function loadTheme(){
+  try {
+    const saved = localStorage.getItem('hv-theme');
+    if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      setTimeout(() => { const b = document.getElementById('theme-btn'); if(b) b.textContent = '☀️'; }, 100);
+    }
+  } catch(e){}
+})();
+
+function toggleMobileNav(){
+  const nav = document.getElementById('mobile-nav');
+  nav.classList.toggle('open');
+  // Lock background scroll when open, restore when closed
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+
+// ════════════════════════════════════════════════════════
+// CUSTOM PORTFOLIO BUILDER
+// ════════════════════════════════════════════════════════
+let cmStocks = [];  // [{t: ticker, name, weight}]
+
+// Get all unique stocks with their names from the portfolios
+function getAllStocks() {
+  const seen = {};
+  ALL_PORTFOLIOS.forEach(p => {
+    p.stocks.forEach(s => {
+      if (!seen[s.t]) seen[s.t] = { t: s.t, n: s.n, sector: s.s };
+    });
+  });
+  return Object.values(seen).sort((a,b) => a.n.localeCompare(b.n));
+}
+
+function cmSearch(query) {
+  const q = (query || '').toLowerCase().trim();
+  const results = document.getElementById('cm-results');
+  if (!q) { results.style.display = 'none'; return; }
+  const all = getAllStocks();
+  const matched = all.filter(s => 
+    s.t.toLowerCase().includes(q) || s.n.toLowerCase().includes(q)
+  ).slice(0, 12);
+  if (matched.length === 0) {
+    results.innerHTML = '<div style="padding:14px;color:var(--text3);font-size:12px">No matches</div>';
+    results.style.display = 'block';
+    return;
+  }
+  results.innerHTML = matched.map(s => {
+    const inPortfolio = cmStocks.find(x => x.t === s.t);
+    return `<div onclick="cmAdd('${s.t}','${s.n.replace(/'/g, "\\'")}')" 
+      style="padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);${inPortfolio?'opacity:0.4':''}"
+      onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='transparent'">
+      <div>
+        <div style="font-size:12px;font-weight:500;color:var(--text)">${s.n}</div>
+        <div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)">${s.t} · ${s.sector}</div>
+      </div>
+      ${inPortfolio ? '<span style="font-size:10px;color:var(--green)">✓ added</span>' : '<span style="color:var(--green);font-size:16px">+</span>'}
+    </div>`;
+  }).join('');
+  results.style.display = 'block';
+}
+
+function cmAdd(ticker, name) {
+  if (cmStocks.find(s => s.t === ticker)) return;
+  cmStocks.push({ t: ticker, n: name, weight: 10 });
+  document.getElementById('cm-search').value = '';
+  document.getElementById('cm-results').style.display = 'none';
+  cmRender();
+}
+
+function cmRemove(ticker) {
+  cmStocks = cmStocks.filter(s => s.t !== ticker);
+  cmRender();
+}
+
+function cmUpdateWeight(ticker, value) {
+  const stock = cmStocks.find(s => s.t === ticker);
+  if (stock) {
+    stock.weight = Math.max(0, parseFloat(value) || 0);
+    cmComputeReturns();
+  }
+}
+
+function cmAutoBalance() {
+  if (cmStocks.length === 0) return;
+  const eq = +(100 / cmStocks.length).toFixed(2);
+  cmStocks.forEach(s => s.weight = eq);
+  cmRender();
+}
+
+function cmReset() {
+  cmStocks = [];
+  cmRender();
+}
+
+function cmRender() {
+  const container = document.getElementById('cm-selected');
+  if (cmStocks.length === 0) {
+    container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:12px;background:var(--bg3);border-radius:var(--r-sm);border:1px dashed var(--border2)">No stocks yet. Search above to add.</div>';
+  } else {
+    container.innerHTML = cmStocks.map(s => `
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;display:flex;align-items:center;gap:10px">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:500">${s.n}</div>
+          <div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)">${s.t}</div>
+        </div>
+        <input type="number" value="${s.weight}" min="0" max="100" step="1"
+          onchange="cmUpdateWeight('${s.t}', this.value)"
+          oninput="cmUpdateWeight('${s.t}', this.value)"
+          style="width:60px;background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:6px 8px;border-radius:5px;font-size:12px;font-family:var(--font-mono);text-align:right;outline:none">
+        <span style="font-size:11px;color:var(--text2)">%</span>
+        <button onclick="cmRemove('${s.t}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px">✕</button>
+      </div>
+    `).join('');
+  }
+  cmComputeReturns();
+}
+
+function cmComputeReturns() {
+  const totalWt = cmStocks.reduce((sum, s) => sum + s.weight, 0);
+  document.getElementById('cm-total-weight').textContent = totalWt.toFixed(0) + '%';
+  document.getElementById('cm-stock-count').textContent = cmStocks.length;
+  document.getElementById('cm-counter').textContent = `${cmStocks.length} stocks · ${totalWt.toFixed(0)}% weight`;
+
+  const warning = document.getElementById('cm-warning');
+  if (cmStocks.length === 0) {
+    warning.style.display = 'none';
+    document.getElementById('cm-returns').innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:12px;width:100%">Add stocks to see returns</div>';
+    return;
+  }
+  if (Math.abs(totalWt - 100) > 0.5) {
+    warning.style.display = 'block';
+    warning.innerHTML = `⚠ Weights total ${totalWt.toFixed(1)}% (should be 100%). Use Auto-balance below.`;
+  } else {
+    warning.style.display = 'none';
+  }
+
+  // Compute weighted CAGRs using same logic as portfolios
+  const r = computeReturns(cmStocks.map(s => ({ t: s.t, w: s.weight })));
+  const periods = [
+    { k: 'r6mo', l: '6M' },
+    { k: 'r1y', l: '1Y' },
+    { k: 'r3y', l: '3Y CAGR' },
+    { k: 'r5y', l: '5Y CAGR' },
+    { k: 'r10y', l: '10Y CAGR' },
+  ];
+  document.getElementById('cm-returns').innerHTML = periods.map(({k, l}) => {
+    const v = r[k];
+    return `<div class="ret-box"><div class="ret-period">${l}</div>
+      <div class="ret-val ${v!=null?(v>=0?'up':'dn'):''}">${v!=null?(v>=0?'+':'')+Number(v).toFixed(1)+'%':'—'}</div></div>`;
+  }).join('');
+}
+
+// Init custom builder on first nav
+document.addEventListener('click', e => {
+  if (!e.target.closest('#cm-search') && !e.target.closest('#cm-results')) {
+    const r = document.getElementById('cm-results');
+    if (r) r.style.display = 'none';
+  }
+});
 
 // ════════════════════════════════════════════════════════
 // INIT — compute real returns then render
