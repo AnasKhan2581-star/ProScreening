@@ -250,7 +250,6 @@ nav{display:flex;gap:4px}
     <nav id="main-nav">
       <button class="nav-btn active" onclick="showPage('portfolios',this)">Portfolios</button>
       <button class="nav-btn" onclick="showPage('custom',this)">🛠 Build Mine</button>
-      <button class="nav-btn" onclick="showPage('tracker',this)">📊 PF Tracker</button>
       <button class="nav-btn" onclick="showPage('compare',this)">Compare</button>
       <button class="nav-btn" onclick="showPage('about',this)">About</button>
     </nav>
@@ -264,7 +263,7 @@ nav{display:flex;gap:4px}
 </header>
 
 <div style="background:linear-gradient(90deg,rgba(240,180,41,0.12),rgba(240,180,41,0.04));border-top:1px solid rgba(240,180,41,0.3);border-bottom:1px solid rgba(240,180,41,0.3);padding:10px 20px;text-align:center;font-size:11px;color:var(--gold);font-family:var(--font-mono);letter-spacing:0.02em">
-  ⚠️ EDUCATIONAL PURPOSES ONLY · Historical data · NOT financial advice · Past performance ≠ future returns · Consult SEBI-registered advisor before investing
+  ⚠️ EDUCATIONAL PURPOSES ONLY · Returns shown are yearly CAGR estimates based on historical NSE data — actual returns depend on your exact entry date, market timing, and price path · NOT financial advice · Past performance ≠ future returns · Consult a SEBI-registered advisor before investing
 </div>
 
 <div class="mobile-nav" id="mobile-nav">
@@ -273,7 +272,6 @@ nav{display:flex;gap:4px}
     <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
     <button class="nav-btn active" onclick="showPage('portfolios',this);toggleMobileNav()">📊 Portfolios</button>
     <button class="nav-btn" onclick="showPage('custom',this);toggleMobileNav()">🛠 Build Mine</button>
-    <button class="nav-btn" onclick="showPage('tracker',this);toggleMobileNav()">📈 PF Tracker</button>
     <button class="nav-btn" onclick="showPage('compare',this);toggleMobileNav()">⚖ Compare</button>
     <button class="nav-btn" onclick="showPage('about',this);toggleMobileNav()">☪ About</button>
   </div>
@@ -373,7 +371,6 @@ nav{display:flex;gap:4px}
       <div class="page-title">Build Your Own Portfolio</div>
       <div class="page-subtitle">Pick from 95 Shariah-screened halal stocks. Set weights. See live CAGR.</div>
     </div>
-    <button onclick="trackerAddCustom()" style="background:linear-gradient(135deg,var(--gold),#d99800);border:none;color:#000;padding:10px 18px;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer">📊 Track This Portfolio →</button>
   </div>
 
   <div style="background:rgba(91,188,255,0.06);border:1px solid rgba(91,188,255,0.2);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:18px;font-size:11.5px;color:var(--text2);line-height:1.6">
@@ -420,31 +417,6 @@ nav{display:flex;gap:4px}
       </div>
     </div>
   </div>
-</div>
-</div>
-
-<!-- PORTFOLIO TRACKER PAGE -->
-<div class="page" id="page-tracker">
-<div class="wrap" style="padding-top:40px;padding-bottom:60px">
-  <div class="page-title">Portfolio Tracker</div>
-  <div class="page-subtitle">Track one or more portfolios with SIP, lumpsum, lumpsum+SIP, or ad-hoc top-ups.</div>
-
-  <div style="background:rgba(91,188,255,0.06);border:1px solid rgba(91,188,255,0.2);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:20px;font-size:12px;color:var(--text2);line-height:1.7">
-    💡 <strong style="color:var(--blue)">Tip:</strong> Add any of the 23 built-in portfolios below to track. Want to track your own selection? <a href="javascript:showPage('custom',null)" style="color:var(--green);text-decoration:underline">Build a custom portfolio</a> first, then come back here.<br>
-    💾 <strong style="color:var(--blue)">Browser storage:</strong> Investment data is saved in your browser only. Clearing cache erases it. Google login (coming soon) will enable cross-device sync.
-  </div>
-
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">
-    <button onclick="trackerShowAddDialog()" style="background:var(--green);border:none;color:#000;padding:10px 18px;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer">+ Add Portfolio to Track</button>
-    <button onclick="trackerClearAll()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:10px 18px;border-radius:var(--r-sm);font-size:13px;cursor:pointer">↻ Clear All</button>
-  </div>
-
-  <div id="tracker-empty" style="display:none;padding:40px 24px;text-align:center;background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--r);color:var(--text3);font-size:13px">
-    📈 No portfolios being tracked yet.<br><br>
-    <span style="font-size:12px">Click "Add Portfolio to Track" to start. You can choose between SIP, lumpsum, or both, and add ad-hoc top-ups whenever.</span>
-  </div>
-
-  <div id="tracker-list" style="display:flex;flex-direction:column;gap:16px"></div>
 </div>
 </div>
 
@@ -527,9 +499,6 @@ nav{display:flex;gap:4px}
         <div class="chart-wrap"><canvas id="main-chart"></canvas></div>
         <div class="chart-note">📊 Real NSE data · Yahoo Finance split-adjusted</div>
         <div class="stats-grid" id="m-stats"></div>
-        <div style="margin-top:16px">
-          <button onclick="trackerAddFromModal()" style="background:linear-gradient(135deg,var(--gold),#d99800);border:none;color:#000;padding:10px 18px;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;width:100%">📊 Track This Portfolio →</button>
-        </div>
       </div>
       <div class="tab-pane" id="tab-holdings">
         <div class="holdings-wrap">
@@ -572,20 +541,6 @@ nav{display:flex;gap:4px}
       <button onclick="closeCovExplainer()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:15px;flex-shrink:0">✕</button>
     </div>
     <div id="cov-body" style="font-size:13px;color:var(--text);line-height:1.7"></div>
-  </div>
-</div>
-
-<!-- TRACKER ADD DIALOG -->
-<div id="tracker-dialog" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:18px;overflow-y:auto" onclick="if(event.target===this) closeTrackerDialog()">
-  <div style="background:var(--bg1);border:1px solid var(--border2);border-radius:16px;max-width:600px;width:100%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.6);max-height:90vh;overflow-y:auto">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px">
-      <div>
-        <div style="font-family:var(--font-display);font-size:20px;font-weight:600;line-height:1.2;margin-bottom:4px">Track a Portfolio</div>
-        <div style="font-size:12px;color:var(--text2)">Choose a portfolio and investment mode</div>
-      </div>
-      <button onclick="closeTrackerDialog()" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:15px">✕</button>
-    </div>
-    <div id="tracker-dialog-body"></div>
   </div>
 </div>
 
@@ -715,7 +670,7 @@ const SECTOR = [
 ];
 
 // ════════════════════════════════════════════════════════
-// HALALVEST v6 — 23 PFs · 95 halal stocks · PF Tracker
+// HALALVEST v6 — 23 PFs · 95 halal stocks
 // ════════════════════════════════════════════════════════
 
 // ── Display tickers map ──
@@ -1175,14 +1130,13 @@ function showPage(p, btn) {
   if (btn) btn.classList.add('active');
   else {
     // sync active button by text match
-    const map = {portfolios:'Portfolios', custom:'Build Mine', tracker:'PF Tracker', compare:'Compare', about:'About'};
+    const map = {portfolios:'Portfolios', custom:'Build Mine', compare:'Compare', about:'About'};
     document.querySelectorAll('.nav-btn').forEach(b => {
       if (b.textContent.includes(map[p])) b.classList.add('active');
     });
   }
   if (p === 'compare') buildCompare();
   if (p === 'custom') cmRender();
-  if (p === 'tracker') trackerRender();
   window.scrollTo(0, 0);
 }
 
@@ -1213,7 +1167,6 @@ function toggleMobileNav() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (document.getElementById('cov-explainer').style.display === 'flex') closeCovExplainer();
-    else if (document.getElementById('tracker-dialog').style.display === 'flex') closeTrackerDialog();
     else closeModal();
   }
 });
@@ -1397,295 +1350,6 @@ document.addEventListener('click', e => {
     if (r) r.style.display = 'none';
   }
 });
-
-// ════════════════════════════════════════════════════════
-// PORTFOLIO TRACKER
-// ════════════════════════════════════════════════════════
-let trackerEntries = [];
-
-try {
-  const saved = localStorage.getItem('hv-tracker');
-  if (saved) trackerEntries = JSON.parse(saved);
-} catch(e) {}
-
-function trackerSave() {
-  try { localStorage.setItem('hv-tracker', JSON.stringify(trackerEntries)); } catch(e){}
-}
-
-function trackerShowAddDialog(presetPid) {
-  const body = document.getElementById('tracker-dialog-body');
-  // List all PFs + custom option
-  let pfsHtml = '<div style="margin-bottom:14px;font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;font-family:var(--font-mono)">Select Portfolio</div>';
-  pfsHtml += '<div style="max-height:280px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--bg3);padding:6px;margin-bottom:18px">';
-  if (cmStocks.length > 0) {
-    pfsHtml += `<label style="display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;border-radius:6px" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='transparent'">
-      <input type="radio" name="tk-pf" value="custom" ${presetPid==='custom'?'checked':''} style="cursor:pointer">
-      <div><div style="font-size:13px;font-weight:600;color:var(--gold)">🛠 My Custom Portfolio</div>
-      <div style="font-size:11px;color:var(--text3)">${cmStocks.length} stocks · ${cmStocks.reduce((s,x)=>s+x.weight,0).toFixed(0)}% total</div></div>
-    </label>`;
-  }
-  ALL_PORTFOLIOS.forEach(p => {
-    const checked = presetPid === p.id ? 'checked' : '';
-    pfsHtml += `<label style="display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;border-radius:6px" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='transparent'">
-      <input type="radio" name="tk-pf" value="${p.id}" ${checked} style="cursor:pointer">
-      <div><div style="font-size:13px;font-weight:500">${p.emoji} ${p.name}</div>
-      <div style="font-size:11px;color:var(--text3)">${p.stocks.length} stocks · ${p.sectors[0]}</div></div>
-    </label>`;
-  });
-  pfsHtml += '</div>';
-
-  pfsHtml += `
-    <div style="margin-bottom:14px;font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;font-family:var(--font-mono)">Investment Mode</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px">
-      <label style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer">
-        <input type="radio" name="tk-mode" value="sip" checked>
-        <div><div style="font-size:12px;font-weight:600">SIP only</div><div style="font-size:10px;color:var(--text3)">Monthly recurring</div></div>
-      </label>
-      <label style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer">
-        <input type="radio" name="tk-mode" value="lumpsum">
-        <div><div style="font-size:12px;font-weight:600">Lumpsum only</div><div style="font-size:10px;color:var(--text3)">One-time</div></div>
-      </label>
-      <label style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer">
-        <input type="radio" name="tk-mode" value="lump_sip">
-        <div><div style="font-size:12px;font-weight:600">Lumpsum + SIP</div><div style="font-size:10px;color:var(--text3)">Initial + recurring</div></div>
-      </label>
-      <label style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer">
-        <input type="radio" name="tk-mode" value="lump_adhoc">
-        <div><div style="font-size:12px;font-weight:600">Lumpsum + Ad-hoc</div><div style="font-size:10px;color:var(--text3)">Initial + random top-ups</div></div>
-      </label>
-    </div>
-
-    <div style="margin-bottom:14px;font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;font-family:var(--font-mono)">Amounts</div>
-    <div id="tk-amounts" style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:18px"></div>
-
-    <button onclick="trackerSubmit()" style="width:100%;background:var(--green);border:none;color:#000;padding:12px;border-radius:var(--r-sm);font-size:14px;font-weight:600;cursor:pointer">+ Start Tracking</button>
-  `;
-
-  body.innerHTML = pfsHtml;
-  document.getElementById('tracker-dialog').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-  // Wire mode change to amount fields
-  document.querySelectorAll('input[name="tk-mode"]').forEach(r => r.addEventListener('change', trackerUpdateAmountFields));
-  trackerUpdateAmountFields();
-}
-
-function trackerUpdateAmountFields() {
-  const mode = document.querySelector('input[name="tk-mode"]:checked')?.value || 'sip';
-  const c = document.getElementById('tk-amounts');
-  let html = '';
-  if (mode === 'sip') {
-    html = `<div><label class="calc-lbl">Monthly SIP (₹)</label><input id="tk-sip" type="number" class="calc-in" value="10000"></div>
-            <div><label class="calc-lbl">Start Date</label><input id="tk-start" type="date" class="calc-in" value="${new Date().toISOString().substr(0,10)}"></div>`;
-  } else if (mode === 'lumpsum') {
-    html = `<div><label class="calc-lbl">Lumpsum (₹)</label><input id="tk-lump" type="number" class="calc-in" value="100000"></div>
-            <div><label class="calc-lbl">Investment Date</label><input id="tk-start" type="date" class="calc-in" value="${new Date().toISOString().substr(0,10)}"></div>`;
-  } else if (mode === 'lump_sip') {
-    html = `<div><label class="calc-lbl">Initial Lumpsum (₹)</label><input id="tk-lump" type="number" class="calc-in" value="100000"></div>
-            <div><label class="calc-lbl">Monthly SIP (₹)</label><input id="tk-sip" type="number" class="calc-in" value="10000"></div>
-            <div><label class="calc-lbl">Start Date</label><input id="tk-start" type="date" class="calc-in" value="${new Date().toISOString().substr(0,10)}"></div>`;
-  } else if (mode === 'lump_adhoc') {
-    html = `<div><label class="calc-lbl">Initial Lumpsum (₹)</label><input id="tk-lump" type="number" class="calc-in" value="100000"></div>
-            <div><label class="calc-lbl">Start Date</label><input id="tk-start" type="date" class="calc-in" value="${new Date().toISOString().substr(0,10)}"></div>
-            <div style="font-size:11px;color:var(--text3);font-style:italic">💡 You can add ad-hoc top-ups anytime after starting</div>`;
-  }
-  c.innerHTML = html;
-}
-
-function trackerSubmit() {
-  const pfVal = document.querySelector('input[name="tk-pf"]:checked')?.value;
-  if (!pfVal) { alert('Please select a portfolio'); return; }
-  const mode = document.querySelector('input[name="tk-mode"]:checked')?.value || 'sip';
-  const start = document.getElementById('tk-start')?.value || new Date().toISOString().substr(0,10);
-  const sipAmt = parseFloat(document.getElementById('tk-sip')?.value) || 0;
-  const lumpAmt = parseFloat(document.getElementById('tk-lump')?.value) || 0;
-  const entry = {
-    id: Date.now(),
-    pfId: pfVal === 'custom' ? 'custom' : parseInt(pfVal),
-    pfName: pfVal === 'custom' ? '🛠 My Custom Portfolio' : (ALL_PORTFOLIOS.find(x=>x.id===parseInt(pfVal))?.name || 'Unknown'),
-    pfEmoji: pfVal === 'custom' ? '🛠' : (ALL_PORTFOLIOS.find(x=>x.id===parseInt(pfVal))?.emoji || '📊'),
-    mode,
-    sipAmt,
-    lumpAmt,
-    startDate: start,
-    adhoc: [],  // ad-hoc top-ups: [{date, amount}]
-  };
-  trackerEntries.push(entry);
-  trackerSave();
-  closeTrackerDialog();
-  trackerRender();
-}
-
-function closeTrackerDialog() {
-  document.getElementById('tracker-dialog').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-function trackerAddCustom() {
-  trackerShowAddDialog('custom');
-}
-
-function trackerAddFromModal() {
-  if (!currentP) return;
-  const id = currentP.id;
-  closeModal();
-  setTimeout(() => { showPage('tracker', null); trackerShowAddDialog(id); }, 200);
-}
-
-function trackerRemove(entryId) {
-  if (!confirm('Stop tracking this portfolio?')) return;
-  trackerEntries = trackerEntries.filter(e => e.id !== entryId);
-  trackerSave();
-  trackerRender();
-}
-
-function trackerClearAll() {
-  if (trackerEntries.length === 0) return;
-  if (!confirm('Clear ALL tracked portfolios? This cannot be undone.')) return;
-  trackerEntries = [];
-  trackerSave();
-  trackerRender();
-}
-
-function trackerAddTopup(entryId) {
-  const e = trackerEntries.find(x => x.id === entryId);
-  if (!e) return;
-  const amtStr = prompt('Ad-hoc top-up amount (₹):', '25000');
-  if (!amtStr) return;
-  const amt = parseFloat(amtStr);
-  if (isNaN(amt) || amt <= 0) { alert('Invalid amount'); return; }
-  const date = prompt('Date (YYYY-MM-DD):', new Date().toISOString().substr(0,10));
-  if (!date) return;
-  e.adhoc = e.adhoc || [];
-  e.adhoc.push({ date, amount: amt });
-  trackerSave();
-  trackerRender();
-}
-
-function trackerGetPortfolio(entry) {
-  if (entry.pfId === 'custom') {
-    return { stocks: cmStocks.map(s => ({ t: s.t, w: s.weight })), name: '🛠 Custom' };
-  }
-  return ALL_PORTFOLIOS.find(p => p.id === entry.pfId);
-}
-
-function trackerCompute(entry) {
-  // Compute current value based on mode, dates, and ad-hoc top-ups
-  const pf = trackerGetPortfolio(entry);
-  if (!pf || !pf.stocks || pf.stocks.length === 0) return null;
-  const r = (pf.r || computeReturns(pf.stocks));
-  const cagr = r.r5y ?? r.r3y ?? r.r1y ?? 15;
-  const today = new Date();
-  const start = new Date(entry.startDate);
-  const monthsElapsed = Math.max(0.1, ((today - start) / (1000*60*60*24*30.44)));
-  const yrs = monthsElapsed / 12;
-  const monthlyR = Math.pow(1+cagr/100, 1/12) - 1;
-  
-  let invested = 0;
-  let currentValue = 0;
-  
-  // Lumpsum component
-  if (entry.mode === 'lumpsum' || entry.mode === 'lump_sip' || entry.mode === 'lump_adhoc') {
-    invested += entry.lumpAmt;
-    currentValue += entry.lumpAmt * Math.pow(1 + cagr/100, yrs);
-  }
-  // SIP component
-  if (entry.mode === 'sip' || entry.mode === 'lump_sip') {
-    const n = Math.floor(monthsElapsed);
-    invested += entry.sipAmt * n;
-    if (n > 0 && monthlyR > 0) {
-      currentValue += entry.sipAmt * (Math.pow(1+monthlyR, n) - 1) / monthlyR * (1+monthlyR);
-    } else {
-      currentValue += entry.sipAmt * n;
-    }
-  }
-  // Ad-hoc top-ups
-  (entry.adhoc || []).forEach(t => {
-    const td = new Date(t.date);
-    const yrsAgo = Math.max(0, (today - td) / (1000*60*60*24*365.25));
-    invested += t.amount;
-    currentValue += t.amount * Math.pow(1 + cagr/100, yrsAgo);
-  });
-  
-  const gain = currentValue - invested;
-  const gainPct = invested > 0 ? (gain/invested)*100 : 0;
-  
-  return { invested, currentValue, gain, gainPct, cagr, monthsElapsed: monthsElapsed.toFixed(1) };
-}
-
-function trackerRender() {
-  const listEl = document.getElementById('tracker-list');
-  const emptyEl = document.getElementById('tracker-empty');
-  if (!listEl) return;
-  
-  if (trackerEntries.length === 0) {
-    listEl.innerHTML = '';
-    emptyEl.style.display = 'block';
-    return;
-  }
-  emptyEl.style.display = 'none';
-  
-  let totalInvested = 0, totalValue = 0;
-  const cards = trackerEntries.map(entry => {
-    const calc = trackerCompute(entry);
-    if (!calc) {
-      return `<div style="background:var(--bg2);border:1px solid var(--red);border-radius:var(--r);padding:18px">
-        <div style="font-size:12px;color:var(--red)">${entry.pfEmoji} ${entry.pfName} — error computing (portfolio may have no stocks)</div>
-        <button onclick="trackerRemove(${entry.id})" style="margin-top:10px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:6px 12px;border-radius:5px;font-size:11px;cursor:pointer">Remove</button>
-      </div>`;
-    }
-    totalInvested += calc.invested;
-    totalValue += calc.currentValue;
-    const modeLabels = {sip:'SIP', lumpsum:'Lumpsum', lump_sip:'Lumpsum + SIP', lump_adhoc:'Lumpsum + Ad-hoc'};
-    const adhocList = (entry.adhoc || []).map(t => 
-      `<div style="font-size:10px;color:var(--text3);padding:2px 0">• ₹${fmt(t.amount)} on ${t.date}</div>`
-    ).join('');
-    return `
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap">
-          <div>
-            <div style="font-family:var(--font-display);font-size:16px;font-weight:600">${entry.pfEmoji} ${entry.pfName}</div>
-            <div style="font-size:11px;color:var(--text2);margin-top:3px">${modeLabels[entry.mode]} · Since ${entry.startDate} · ${calc.monthsElapsed} months · CAGR ${calc.cagr.toFixed(1)}%</div>
-          </div>
-          <div style="display:flex;gap:6px">
-            <button onclick="trackerAddTopup(${entry.id})" style="background:var(--green);border:none;color:#000;padding:6px 12px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer">+ Top-up</button>
-            <button onclick="trackerRemove(${entry.id})" style="background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:6px 12px;border-radius:5px;font-size:11px;cursor:pointer">✕</button>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:12px">
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:4px">Invested</div>
-            <div style="font-size:18px;font-weight:600;font-family:var(--font-display)">₹${fmt(calc.invested)}</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:4px">Current Value</div>
-            <div style="font-size:18px;font-weight:600;font-family:var(--font-display);color:var(--green)">₹${fmt(calc.currentValue)}</div>
-          </div>
-          <div style="background:var(--bg3);border-radius:8px;padding:12px">
-            <div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;margin-bottom:4px">Gain/Loss</div>
-            <div style="font-size:18px;font-weight:600;font-family:var(--font-display);color:${calc.gain>=0?'var(--green)':'var(--red)'}">${calc.gain>=0?'+':''}₹${fmt(Math.abs(calc.gain))}</div>
-            <div style="font-size:11px;color:${calc.gain>=0?'var(--green)':'var(--red)'};font-family:var(--font-mono);margin-top:2px">${calc.gain>=0?'+':''}${calc.gainPct.toFixed(1)}%</div>
-          </div>
-        </div>
-        ${adhocList ? `<div style="background:var(--bg3);border-radius:8px;padding:10px 12px;margin-top:8px"><div style="font-size:10px;color:var(--text2);text-transform:uppercase;font-family:var(--font-mono);margin-bottom:6px">Top-ups (${entry.adhoc.length})</div>${adhocList}</div>` : ''}
-      </div>`;
-  }).join('');
-  
-  const summary = `
-    <div style="background:linear-gradient(135deg,rgba(0,229,160,0.1),rgba(0,229,160,0.03));border:1px solid rgba(0,229,160,0.25);border-radius:var(--r);padding:20px;margin-bottom:16px">
-      <div style="font-size:11px;color:var(--text2);text-transform:uppercase;font-family:var(--font-mono);letter-spacing:0.06em;margin-bottom:10px">Combined Portfolio Summary</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px">
-        <div><div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase">Total Invested</div>
-          <div style="font-size:22px;font-weight:600;font-family:var(--font-display)">₹${fmt(totalInvested)}</div></div>
-        <div><div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase">Total Value</div>
-          <div style="font-size:22px;font-weight:600;font-family:var(--font-display);color:var(--green)">₹${fmt(totalValue)}</div></div>
-        <div><div style="font-size:9px;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase">Total Gain</div>
-          <div style="font-size:22px;font-weight:600;font-family:var(--font-display);color:${(totalValue-totalInvested)>=0?'var(--green)':'var(--red)'}">${(totalValue-totalInvested)>=0?'+':''}₹${fmt(Math.abs(totalValue-totalInvested))}</div>
-          <div style="font-size:12px;color:${(totalValue-totalInvested)>=0?'var(--green)':'var(--red)'};font-family:var(--font-mono);margin-top:2px">${totalInvested>0?(((totalValue-totalInvested)/totalInvested)*100).toFixed(1):'0.0'}%</div></div>
-      </div>
-    </div>`;
-  
-  listEl.innerHTML = summary + cards;
-}
 
 // ════════════════════════════════════════════════════════
 // INIT
