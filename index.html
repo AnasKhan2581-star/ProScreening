@@ -282,15 +282,15 @@ nav{display:flex;gap:4px}
 <div class="page active" id="page-portfolios">
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow">☪ NSE India · Real Yahoo Finance Data · 23 Portfolios</div>
+    <div class="hero-eyebrow">☪ NSE India · Real Yahoo Finance Data · 27 Portfolios</div>
     <h1>Invest <em>Halal.</em><br>Grow with Conviction.</h1>
-    <p class="hero-sub">23 Shariah-compliant portfolios for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, haram sectors. Returns from verified NSE historical data.</p>
+    <p class="hero-sub">27 Shariah-compliant portfolios for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, haram sectors. Returns from verified NSE historical data.</p>
     <div class="data-notice">
       <span>📊</span>
       <span><strong>Real NSE Data · Yahoo Finance</strong> <span class="sep">·</span> 97 halal stocks · adj close 2001–2026 · CAGRs computed live in-browser <span class="sep">·</span> <strong>Quarterly updates</strong></span>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">23</div><div class="hstat-l">Portfolios</div></div>
+      <div class="hstat"><div class="hstat-n">27</div><div class="hstat-l">Portfolios</div></div>
       <div class="hstat"><div class="hstat-n">97</div><div class="hstat-l">Halal Stocks</div></div>
       <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Riba</div></div>
       <div class="hstat"><div class="hstat-n">NSE</div><div class="hstat-l">Exchange</div></div>
@@ -298,7 +298,7 @@ nav{display:flex;gap:4px}
   </div>
 
   <div class="filter-bar">
-    <button class="filter-chip active" onclick="filterSC('all',this)">All 23</button>
+    <button class="filter-chip active" onclick="filterSC('all',this)">All 27</button>
     <button class="filter-chip" onclick="filterSC('low',this)">🟢 Low Risk</button>
     <button class="filter-chip" onclick="filterSC('medium',this)">🟡 Medium</button>
     <button class="filter-chip" onclick="filterSC('high',this)">🔴 High</button>
@@ -425,7 +425,7 @@ nav{display:flex;gap:4px}
 <div class="page" id="page-compare">
 <div class="wrap compare-wrap">
   <div class="page-title">Compare All Portfolios</div>
-  <div class="page-subtitle">All 23 portfolios side-by-side. Data as of April 2026 · NSE. Click any row to open details.</div>
+  <div class="page-subtitle">All 27 portfolios side-by-side. Data as of April 2026 · NSE. Click any row to open details.</div>
   <div class="table-wrap">
     <table class="compare-table">
       <thead><tr>
@@ -719,7 +719,27 @@ const DIVERSIFIED = [
   desc:'10 stocks the portfolio manager would bet on for a decade. Category leaders, durable moats, strong promoters, at least one secular tailwind each.',
   vol:'medium',tags:["largecap", "midcap", "conviction"],sectors:["High Conviction"],market:'caution',marketLabel:'⚡ Buy on Dips',
   color:'#c084fc',
-  stocks:[{n:'TCS',t:'TCS',w:11,s:'IT Leader'},{n:'Sun Pharma',t:'SUNPHARMA',w:10,s:'Pharma Leader'},{n:'Polycab India',t:'POLYCAB',w:10,s:'Cables Duopoly'},{n:'SRF Ltd',t:'SRF',w:10,s:'Chem Compounder'},{n:'PI Industries',t:'PIIND',w:10,s:'Agri-Tech'},{n:'Asian Paints',t:'ASIANPAINT',w:10,s:'Paints Moat'},{n:'ABB India',t:'ABB',w:10,s:'Automation'},{n:'Navin Fluorine',t:'NAVINFLUOR',w:10,s:'Fluorochem'},{n:'Divis Laboratories',t:'DIVISLAB',w:10,s:'APIs'},{n:'Max Healthcare',t:'MAXHEALTH',w:9,s:'Hospitals'}]}
+  stocks:[{n:'TCS',t:'TCS',w:11,s:'IT Leader'},{n:'Sun Pharma',t:'SUNPHARMA',w:10,s:'Pharma Leader'},{n:'Polycab India',t:'POLYCAB',w:10,s:'Cables Duopoly'},{n:'SRF Ltd',t:'SRF',w:10,s:'Chem Compounder'},{n:'PI Industries',t:'PIIND',w:10,s:'Agri-Tech'},{n:'Asian Paints',t:'ASIANPAINT',w:10,s:'Paints Moat'},{n:'ABB India',t:'ABB',w:10,s:'Automation'},{n:'Navin Fluorine',t:'NAVINFLUOR',w:10,s:'Fluorochem'},{n:'Divis Laboratories',t:'DIVISLAB',w:10,s:'APIs'},{n:'Max Healthcare',t:'MAXHEALTH',w:9,s:'Hospitals'}]},
+{id:23,group:'diversified',emoji:'🎖',name:'PM Conviction Core 15',
+  desc:'15 category leaders, conviction-weighted (10% top, 4% tail). Multi-sector — IT, Pharma, Cables, Chem, Automation, Hospitals, Pipes, Precision Mfg, Electronics, Design, Adhesives, Transformers. Drops the most-disrupted name (Asian Paints) and replaces with Astral + Tube Investments for higher forward CAGR. The PM\'s upgrade to High Conviction.',
+  vol:'medium',tags:["largecap", "midcap", "conviction"],sectors:["PM Picks"],market:'good',marketLabel:'✓ PM Conviction',
+  color:'#fbbf24',
+  stocks:[{n:'TCS',t:'TCS',w:10,s:'IT Cash Machine'},{n:'Sun Pharma',t:'SUNPHARMA',w:9,s:'Branded Generics'},{n:'SRF Ltd',t:'SRF',w:9,s:'Fluorochem Leader'},{n:'PI Industries',t:'PIIND',w:8,s:'CSM Agri'},{n:'Polycab India',t:'POLYCAB',w:8,s:'Cables Duopoly'},{n:'ABB India',t:'ABB',w:7,s:'Automation MNC'},{n:'Navin Fluorine',t:'NAVINFLUOR',w:7,s:'Fluorochem CDMO'},{n:'Divis Laboratories',t:'DIVISLAB',w:6,s:'APIs'},{n:'Max Healthcare',t:'MAXHEALTH',w:6,s:'Hospitals'},{n:'Astral Ltd',t:'ASTRAL',w:6,s:'Pipes Leader'},{n:'Tube Investments',t:'TIINDIA',w:6,s:'Precision Mfg'},{n:'Dixon Technologies',t:'DIXON',w:5,s:'Electronics PLI'},{n:'Tata Elxsi',t:'TATAELXSI',w:5,s:'Product Design'},{n:'Pidilite Industries',t:'PIDILITIND',w:4,s:'Adhesives Moat'},{n:'Voltamp Transformers',t:'VOLTAMP',w:4,s:'Transformers'}]},
+{id:24,group:'diversified',emoji:'⚖️',name:'India 2035 Barbell',
+  desc:'12 stocks. 60% defensive cash compounders (TCS, Marico, Dabur, Sun, Dr Reddy\'s, Pidilite, Cummins) + 40% asymmetric growth (SRF, PI, Polycab, Tata Elxsi, Dixon, Max Healthcare). Bimodal by construction — defensives protect in drawdowns, growth sleeve drives upside. Lower correlation than any single-theme basket.',
+  vol:'low',tags:["largecap", "midcap", "barbell"],sectors:["Barbell"],market:'good',marketLabel:'✓ Risk Balanced',
+  color:'#a78bfa',
+  stocks:[{n:'TCS',t:'TCS',w:12,s:'Defensive · IT'},{n:'Sun Pharma',t:'SUNPHARMA',w:10,s:'Defensive · Pharma'},{n:'Marico',t:'MARICO',w:10,s:'Defensive · FMCG'},{n:'Dabur India',t:'DABUR',w:8,s:'Defensive · FMCG'},{n:'Dr Reddys',t:'DRREDDY',w:8,s:'Defensive · Pharma'},{n:'Pidilite Industries',t:'PIDILITIND',w:6,s:'Defensive · Adhesives'},{n:'Cummins India',t:'CUMMINSIND',w:6,s:'Defensive · Industrial'},{n:'Max Healthcare',t:'MAXHEALTH',w:8,s:'Growth · Hospitals'},{n:'SRF Ltd',t:'SRF',w:8,s:'Growth · Chem'},{n:'PI Industries',t:'PIIND',w:7,s:'Growth · Agri-Tech'},{n:'Polycab India',t:'POLYCAB',w:7,s:'Growth · Cables'},{n:'Tata Elxsi',t:'TATAELXSI',w:5,s:'Growth · Design'},{n:'Dixon Technologies',t:'DIXON',w:5,s:'Growth · Electronics'}]},
+{id:25,group:'diversified',emoji:'🏭',name:'Capex Picks-and-Shovels Pure',
+  desc:'10 stocks. Stricter than Bharat Build-Out — only product/component makers with structural pricing power. Excludes EPC contractors. Adds Cummins for the data-centre power-backup angle that other capex baskets miss. Pure beneficiaries of India\'s 2024–2034 capex super-cycle.',
+  vol:'medium',tags:["largecap", "midcap", "capex"],sectors:["Capex Pure"],market:'good',marketLabel:'✓ Order Books Locked',
+  color:'#fb923c',
+  stocks:[{n:'Polycab India',t:'POLYCAB',w:14,s:'Cables + DC'},{n:'KEI Industries',t:'KEI',w:12,s:'Cables #2'},{n:'ABB India',t:'ABB',w:12,s:'Automation MNC'},{n:'Siemens India',t:'SIEMENS',w:11,s:'Grid Automation'},{n:'Voltamp Transformers',t:'VOLTAMP',w:11,s:'Transformers Pure'},{n:'CG Power',t:'CGPOWER',w:10,s:'Motors/Transformers'},{n:'Cummins India',t:'CUMMINSIND',w:8,s:'Gensets · DC Power'},{n:'Thermax',t:'THERMAX',w:8,s:'Industrial Energy'},{n:'Astral Ltd',t:'ASTRAL',w:7,s:'Plumbing Capex'},{n:'APL Apollo Tubes',t:'APLAPOLLO',w:7,s:'Structural Steel'}]},
+{id:26,group:'diversified',emoji:'💎',name:'QARP Quality Compounders',
+  desc:'12 stocks. The "boring outperformer". Hard filter — category leader, decade of >18% ROCE, no post-2015 IPOs, weight tilted toward less-frothy multiples. Contains a contrarian Asian Paints position after its multiple collapse. Designed to lose less in bear markets and still compound 12–15% CAGR.',
+  vol:'low',tags:["largecap", "quality", "QARP"],sectors:["QARP"],market:'good',marketLabel:'✓ Quality at Price',
+  color:'#06b6d4',
+  stocks:[{n:'TCS',t:'TCS',w:12,s:'40%+ ROCE'},{n:'HCL Technologies',t:'HCLTECH',w:10,s:'IT · Reasonable Multiple'},{n:'Marico',t:'MARICO',w:10,s:'FMCG · High ROCE'},{n:'Cipla',t:'CIPLA',w:9,s:'Pharma · Clean BS'},{n:'Pidilite Industries',t:'PIDILITIND',w:8,s:'Adhesives Monopoly'},{n:'Cummins India',t:'CUMMINSIND',w:8,s:'Industrial Compounder'},{n:'SRF Ltd',t:'SRF',w:8,s:'Chem · Post-Derating'},{n:'PI Industries',t:'PIIND',w:8,s:'Agri · Post-Correction'},{n:'ABB India',t:'ABB',w:7,s:'MNC Quality'},{n:'Asian Paints',t:'ASIANPAINT',w:7,s:'Contrarian · Multiple Collapsed'},{n:'Tube Investments',t:'TIINDIA',w:7,s:'Murugappa Capital'},{n:'Dr Reddys',t:'DRREDDY',w:6,s:'Pharma Cash'}]}
 ];
 
 const SECTOR = [
@@ -781,7 +801,7 @@ const SECTOR = [
 ];
 
 // ════════════════════════════════════════════════════════
-// HALALVEST v6 — 23 PFs · 97 halal stocks
+// HALALVEST v6 — 27 PFs · 97 halal stocks
 // ════════════════════════════════════════════════════════
 
 // ── Display tickers map ──
@@ -988,11 +1008,11 @@ function clearError() {
 
 // ── State ──
 const ALL_PORTFOLIOS = [...DIVERSIFIED, ...SECTOR];
-const TOP3_IDS = [0, 15, 3];
+const TOP3_IDS = [23, 11, 24];
 const TOP3_REASONS = {
-  0:  '🥇 #1 · The "just start here" pick. 10 stocks, 9 sectors. Ideal for new investors and conservative uncles wanting peace of mind.',
-  15: '🥈 #2 · Specialty Chemicals. India replacing China as global supplier. 5-year order visibility, structural decade-long story.',
-  3:  '🥉 #3 · Bharat Build-Out. Every road, DC, solar plant needs cables + switchgear. Pure domestic capex story, government tailwind.'
+  23: '🥇 #1 · PM Conviction Core 15 (Score 91%). 15 conviction-weighted category leaders. The PM\'s personal upgrade to High Conviction — drops disrupted names, adds higher-CAGR midcaps. Best risk-adjusted pick for a 10-year halal mandate.',
+  11: '🥈 #2 · High Conviction 10Y Picks (Score 88%). 10 stocks explicitly mandated for a decade. Each has a moat and a secular tailwind. Lowest single-stock blow-up risk in the catalogue.',
+  24: '🥉 #3 · India 2035 Barbell (Score 87%). 60% defensives + 40% asymmetric growth. Bimodal by construction — protects in drawdowns, captures upside in bull markets. Lowest correlation portfolio.'
 };
 const volBadgeClass = {low:'badge-low',medium:'badge-med',high:'badge-high',veryhigh:'badge-vhigh'};
 const volLabel = {low:'LOW VOL',medium:'MED VOL',high:'HIGH VOL',veryhigh:'V.HIGH'};
