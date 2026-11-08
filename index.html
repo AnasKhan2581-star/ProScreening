@@ -457,7 +457,8 @@ nav{display:flex;gap:4px}
   <div class="about-section">
     <h2>Halal Verification</h2>
     <p>All 97 stocks are screened against AAOIFI Shariah principles — no banks, NBFCs, insurance, alcohol, tobacco, gambling, weapons, pork, or adult content. Verified via <strong>halalstock.in</strong> (NSECode-based screening) and cross-checked with Zoya for borderline cases.</p>
-    <p>Financial ratios checked: debt/assets &lt; 33%, interest income &lt; 5% of revenue. Re-screened quarterly.</p>
+    <p>Financial ratios, as applied by halalstock.in's AAOIFI-based screen: interest-bearing debt &lt; 33% of 3-year average market capitalisation; cash and interest-bearing deposits &lt; 33% of the same; non-permissible revenue — including all forms of interest income — &lt; 5% of total revenue. Re-screened quarterly.</p>
+    <p>On the standard itself: AAOIFI Shariah Standard No. 21 caps interest-bearing debt and interest-bearing deposits at <strong>30% of market capitalisation</strong>, so the 33% screen above is marginally more permissive than the standard it derives from. Other methodologies differ again — MSCI Islamic uses 33⅓% of <em>total assets</em>, Dow Jones Islamic 33% of a trailing 24-month average market cap — so a borderline stock can pass one screen and fail another. Verify individual holdings against your own preferred standard.</p>
   </div>
   <div class="about-section">
     <h2>Coverage-Weighted CAGR</h2>
@@ -1230,7 +1231,7 @@ function openModal(id) {
         <div class="stat-box"><div class="stat-box-label">Std Dev</div><div class="stat-box-val y">${rfmt(p.stdDev,'%')}</div></div>
         <div class="stat-box"><div class="stat-box-label">Max DD</div><div class="stat-box-val r">${rfmt(p.maxDD,'%')}</div></div>
       </div>
-      <div class="halal-box"><strong>☪ Halal Status: Verified</strong><br>All holdings screened via halalstock.in (NSECode-based) — debt/assets &lt;33%, interest income &lt;5%. AAOIFI-aligned. Re-screened quarterly.</div>`;
+      <div class="halal-box"><strong>☪ Halal Status: Verified</strong><br>All holdings screened via halalstock.in (NSECode-based) — interest-bearing debt and liquid assets each &lt;33% of 3Y average market cap, non-permissible revenue &lt;5%. AAOIFI-based screen (the standard itself caps debt at 30% of market cap). Re-screened quarterly.</div>`;
 
     switchTab('overview', null);
     document.getElementById('overlay').classList.add('open');
