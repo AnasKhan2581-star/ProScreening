@@ -56,6 +56,17 @@ nav{display:flex;gap:4px}
 .header-right{display:flex;align-items:center;gap:10px}
 .halal-pill{background:var(--gold2);border:1px solid rgba(240,180,41,0.2);color:var(--gold);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono)}
 .data-badge{background:var(--green4);border:1px solid rgba(0,229,160,0.15);color:var(--green);border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono)}
+/* Live price refresh indicator */
+#live-status{display:flex;align-items:center;gap:7px;border-radius:100px;padding:5px 12px;font-size:11px;font-family:var(--font-mono);border:1px solid var(--border2);color:var(--text2);background:var(--bg3);white-space:nowrap}
+#live-status .live-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex:0 0 auto}
+#live-status[data-state="loading"]{color:var(--gold);border-color:rgba(240,180,41,0.3);background:var(--gold2)}
+#live-status[data-state="loading"] .live-dot{background:var(--gold);animation:live-pulse 1s ease-in-out infinite}
+#live-status[data-state="ok"]{color:var(--green);border-color:rgba(0,229,160,0.2);background:var(--green4)}
+#live-status[data-state="ok"] .live-dot{background:var(--green)}
+#live-status[data-state="stale"]{color:var(--text2)}
+@keyframes live-pulse{0%,100%{opacity:1}50%{opacity:0.25}}
+@media (prefers-reduced-motion:reduce){#live-status[data-state="loading"] .live-dot{animation:none}}
+@media(max-width:900px){#live-status .live-text{display:none}#live-status{padding:5px 8px}}
 .theme-toggle{background:none;border:1px solid var(--border2);color:var(--text);width:36px;height:36px;border-radius:var(--r-sm);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .theme-toggle:hover{border-color:var(--green);background:var(--bg3)}
 .hamburger{display:none;background:none;border:1px solid var(--border2);color:var(--text2);width:38px;height:38px;border-radius:var(--r-sm);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px}
@@ -256,6 +267,7 @@ nav{display:flex;gap:4px}
     </nav>
     <div class="header-right">
       <div class="data-badge">📅 <span class="dyn-asof">Apr 2026</span></div>
+      <div id="live-status" data-state="off" style="display:none" title="Live price refresh"><span class="live-dot"></span><span class="live-text"></span></div>
       <div class="halal-pill">☪ 100% Shariah</div>
       <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
       <button class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
@@ -665,10 +677,13 @@ const RISK_FREE_ANNUAL = 0.065;
 // itself, so refreshing PRICES/MONTHLY_PRICES needs no code or copy edits.
 // Previously the windows hardcoded 2026, which silently produced wrong CAGRs
 // the moment the datasets were refreshed past that year.
-const ALL_YEARS = Object.values(PRICES).flatMap(p => Object.keys(p).map(Number));
-const LATEST_YEAR = Math.max(...ALL_YEARS);
-const EARLIEST_YEAR = Math.min(...ALL_YEARS);
-const LATEST_MONTH = (() => {
+// Recomputed after a live refresh merges newer months in, so every window
+// and label follows the data that is actually loaded.
+let LATEST_YEAR, EARLIEST_YEAR, LATEST_MONTH;
+function recomputeBounds() {
+  const years = Object.values(PRICES).flatMap(p => Object.keys(p).map(Number));
+  LATEST_YEAR = Math.max(...years);
+  EARLIEST_YEAR = Math.min(...years);
   let best = '';
   for (const s of Object.values(MONTHLY_PRICES)) {
     const [y, m] = s.start.split('-').map(Number);
@@ -676,8 +691,9 @@ const LATEST_MONTH = (() => {
     const ym = Math.floor(i / 12) + '-' + String((i % 12) + 1).padStart(2, '0');
     if (ym > best) best = ym; // zero-padded YYYY-MM compares lexically
   }
-  return best;
-})();
+  LATEST_MONTH = best;
+}
+recomputeBounds();
 const MON_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MON_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function latestMonthLabel(long) {
@@ -1661,25 +1677,163 @@ function applyDataCopy() {
   if (search) search.placeholder = `Search or tap to browse all ${Object.keys(PRICES).length} halal stocks…`;
 }
 
+function computeAllPortfolios() {
+  ALL_PORTFOLIOS.forEach(p => {
+    p.navSeries = portfolioNAVSeries(p.stocks);
+    p.r = computeReturns(p.stocks, p.navSeries);
+    const k = computeRisk(p.navSeries);
+    if (k.stdDev  !== null) p.stdDev  = k.stdDev;
+    if (k.sharpe  !== null) p.sharpe  = k.sharpe;
+    if (k.sortino !== null) p.sortino = k.sortino;
+    if (k.maxDD   !== null) p.maxDD   = k.maxDD;
+    if (k.beta    !== null) p.beta    = k.beta;
+  });
+}
+
+function renderAll() {
+  applyDataCopy();
+  renderTop3();
+  renderCards();
+  // The compare table is built on demand; only refresh it if it is populated.
+  const cmp = document.getElementById('compare-tbody');
+  if (cmp && cmp.children.length) buildCompare();
+}
+
+// ════════════════════════════════════════════════════════
+// LIVE PRICE REFRESH
+// ════════════════════════════════════════════════════════
+// The embedded datasets render instantly, then this tops them up with recent
+// months. Yahoo sends no CORS header, so the browser cannot call it directly;
+// requests go through the Cloudflare Worker in tools/worker.js, which fetches
+// server-side and caches. Leave LIVE_ENDPOINT empty and the site behaves
+// exactly as before — the refresh is strictly additive and never blocks paint.
+const LIVE_ENDPOINT = '';           // e.g. 'https://halalvest-prices.you.workers.dev'
+const LIVE_RANGE = '2y';            // only need to cover the gap since the embedded cutoff
+const LIVE_CHUNK = 40;              // must be <= the Worker's MAX_SYMBOLS
+const LIVE_TIMEOUT_MS = 20000;
+
+function yahooSymbol(t) { return (DISPLAY_TICKER[t] || t) + '.NS'; }
+
+function setLiveStatus(state, text) {
+  const el = document.getElementById('live-status');
+  if (!el) return;
+  el.dataset.state = state;           // loading | ok | stale | off
+  el.querySelector('.live-text').textContent = text;
+  el.style.display = state === 'off' ? 'none' : '';
+}
+
+/**
+ * Merge month-end closes into a ticker's embedded series.
+ * Returns how many months were added or revised.
+ */
+function mergeLiveMonthly(ticker, ymMap) {
+  const s = MONTHLY_PRICES[ticker];
+  if (!s) return 0;
+  let touched = 0;
+  for (const ym of Object.keys(ymMap).sort()) {
+    const v = ymMap[ym];
+    if (!isFinite(v) || v <= 0) continue;
+    const i = monthIndex(s.start, ym);
+    if (i < 0) continue;                       // predates the embedded series
+    if (i < s.values.length) {
+      if (s.values[i] !== v) { s.values[i] = v; touched++; }
+    } else {
+      // Forward-fill any gap so the array stays dense, as the renderer assumes.
+      while (s.values.length < i) s.values.push(s.values[s.values.length - 1]);
+      s.values.push(v);
+      touched++;
+    }
+    // Keep the annual (March-anchored) series in step, so CAGRs move too.
+    if (ym.endsWith('-03')) {
+      const yr = ym.slice(0, 4);
+      if (PRICES[ticker] && PRICES[ticker][yr] !== v) PRICES[ticker][yr] = v;
+    }
+  }
+  return touched;
+}
+
+async function fetchChunk(symbols, signal) {
+  const url = `${LIVE_ENDPOINT.replace(/\/$/, '')}/?symbols=${encodeURIComponent(symbols.join(','))}`
+    + `&range=${LIVE_RANGE}&interval=1mo`;
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const j = await res.json();
+  if (!j || typeof j.data !== 'object') throw new Error('bad payload');
+  return j.data;
+}
+
+async function refreshLive() {
+  if (!LIVE_ENDPOINT) { setLiveStatus('off', ''); return; }
+  const tickers = Object.keys(MONTHLY_PRICES);
+  const symToTicker = new Map(tickers.map(t => [yahooSymbol(t), t]));
+  const symbols = [...symToTicker.keys(), '^NSEI'];
+  const chunks = [];
+  for (let i = 0; i < symbols.length; i += LIVE_CHUNK) chunks.push(symbols.slice(i, i + LIVE_CHUNK));
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), LIVE_TIMEOUT_MS);
+  let done = 0, merged = 0, failedChunks = 0;
+  setLiveStatus('loading', `Fetching live prices… 0/${chunks.length}`);
+
+  const results = await Promise.all(chunks.map(async (c) => {
+    try { const d = await fetchChunk(c, ctrl.signal); return d; }
+    catch { failedChunks++; return null; }
+    finally {
+      done++;
+      setLiveStatus('loading', `Fetching live prices… ${done}/${chunks.length}`);
+    }
+  }));
+  clearTimeout(timer);
+
+  for (const data of results) {
+    if (!data) continue;
+    for (const [sym, ymMap] of Object.entries(data)) {
+      if (sym === '^NSEI') {
+        for (const ym of Object.keys(ymMap).sort()) {
+          const i = monthIndex(NIFTY50_MONTHLY.start, ym);
+          if (i < 0) continue;
+          if (i < NIFTY50_MONTHLY.values.length) NIFTY50_MONTHLY.values[i] = ymMap[ym];
+          else {
+            while (NIFTY50_MONTHLY.values.length < i) NIFTY50_MONTHLY.values.push(NIFTY50_MONTHLY.values[NIFTY50_MONTHLY.values.length - 1]);
+            NIFTY50_MONTHLY.values.push(ymMap[ym]);
+          }
+        }
+        continue;
+      }
+      const t = symToTicker.get(sym);
+      if (t) merged += mergeLiveMonthly(t, ymMap);
+    }
+  }
+
+  if (failedChunks === chunks.length) {
+    setLiveStatus('stale', 'Live prices unavailable — showing data as of ' + latestMonthLabel());
+    return;
+  }
+  if (!merged) {
+    setLiveStatus('ok', 'Up to date · ' + latestMonthLabel());
+    return;
+  }
+  recomputeBounds();
+  computeAllPortfolios();
+  renderAll();
+  setLiveStatus(failedChunks ? 'stale' : 'ok',
+    (failedChunks ? 'Partially updated · ' : 'Live · ') + latestMonthLabel());
+}
+
 (function init() {
   try {
-    applyDataCopy();
-    ALL_PORTFOLIOS.forEach(p => {
-      p.navSeries = portfolioNAVSeries(p.stocks);
-      p.r = computeReturns(p.stocks, p.navSeries);
-      const k = computeRisk(p.navSeries);
-      if (k.stdDev  !== null) p.stdDev  = k.stdDev;
-      if (k.sharpe  !== null) p.sharpe  = k.sharpe;
-      if (k.sortino !== null) p.sortino = k.sortino;
-      if (k.maxDD   !== null) p.maxDD   = k.maxDD;
-      if (k.beta    !== null) p.beta    = k.beta;
-    });
-    renderTop3();
-    renderCards();
+    recomputeBounds();
+    computeAllPortfolios();
+    renderAll();
   } catch(e) {
     showError('Init failed: ' + e.message);
     console.error(e);
   }
+  // Non-blocking: the page is already interactive before this runs.
+  refreshLive().catch(e => {
+    console.error(e);
+    setLiveStatus('stale', 'Live prices unavailable — showing data as of ' + latestMonthLabel());
+  });
 })();
 
 </script>
