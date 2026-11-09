@@ -255,7 +255,7 @@ nav{display:flex;gap:4px}
       <button class="nav-btn" onclick="showPage('about',this)">About</button>
     </nav>
     <div class="header-right">
-      <div class="data-badge">📅 Apr 2026</div>
+      <div class="data-badge">📅 <span class="dyn-asof">Apr 2026</span></div>
       <div class="halal-pill">☪ 100% Shariah</div>
       <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">🌙</button>
       <button class="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
@@ -282,16 +282,16 @@ nav{display:flex;gap:4px}
 <div class="page active" id="page-portfolios">
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow">☪ NSE India · Real Yahoo Finance Data · 27 Portfolios</div>
+    <div class="hero-eyebrow">☪ NSE India · Real Yahoo Finance Data · <span class="dyn-pf">27</span> Portfolios</div>
     <h1>Invest <em>Halal.</em><br>Grow with Conviction.</h1>
-    <p class="hero-sub">27 Shariah-compliant portfolios for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, haram sectors. Returns from verified NSE historical data.</p>
+    <p class="hero-sub"><span class="dyn-pf">27</span> Shariah-compliant portfolios for Indian Muslim investors. Zero riba. Every stock screened for debt ratio, interest income, haram sectors. Returns from verified NSE historical data.</p>
     <div class="data-notice">
       <span>📊</span>
-      <span><strong>Real NSE Data · Yahoo Finance</strong> <span class="sep">·</span> 97 halal stocks · adj close 2001–2026 · CAGRs computed live in-browser <span class="sep">·</span> <strong>Quarterly updates</strong></span>
+      <span><strong>Real NSE Data · Yahoo Finance</strong> <span class="sep">·</span> <span class="dyn-stocks">97</span> halal stocks · adj close <span class="dyn-years">2001–2026</span> · CAGRs computed live in-browser <span class="sep">·</span> <strong>Quarterly updates</strong></span>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">27</div><div class="hstat-l">Portfolios</div></div>
-      <div class="hstat"><div class="hstat-n">97</div><div class="hstat-l">Halal Stocks</div></div>
+      <div class="hstat"><div class="hstat-n dyn-pf">27</div><div class="hstat-l">Portfolios</div></div>
+      <div class="hstat"><div class="hstat-n dyn-stocks">97</div><div class="hstat-l">Halal Stocks</div></div>
       <div class="hstat"><div class="hstat-n">0%</div><div class="hstat-l">Riba</div></div>
       <div class="hstat"><div class="hstat-n">NSE</div><div class="hstat-l">Exchange</div></div>
     </div>
@@ -332,7 +332,7 @@ nav{display:flex;gap:4px}
         </div>
       </div>
       <div class="pf-section-right">
-        <div class="pf-section-count">16 portfolios</div>
+        <div class="pf-section-count"><span class="dyn-div">16</span> portfolios</div>
         <div class="pf-section-chevron">▼</div>
       </div>
     </div>
@@ -351,7 +351,7 @@ nav{display:flex;gap:4px}
         </div>
       </div>
       <div class="pf-section-right">
-        <div class="pf-section-count">11 portfolios</div>
+        <div class="pf-section-count"><span class="dyn-sector">11</span> portfolios</div>
         <div class="pf-section-chevron">▼</div>
       </div>
     </div>
@@ -370,7 +370,7 @@ nav{display:flex;gap:4px}
   <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px">
     <div>
       <div class="page-title">Build Your Own Portfolio</div>
-      <div class="page-subtitle">Pick from 97 Shariah-screened halal stocks. Set weights. See live CAGR.</div>
+      <div class="page-subtitle">Pick from <span class="dyn-stocks">97</span> Shariah-screened halal stocks. Set weights. See live CAGR.</div>
     </div>
   </div>
 
@@ -425,7 +425,7 @@ nav{display:flex;gap:4px}
 <div class="page" id="page-compare">
 <div class="wrap compare-wrap">
   <div class="page-title">Compare All Portfolios</div>
-  <div class="page-subtitle">All 27 portfolios side-by-side. Data as of April 2026 · NSE. Click any row to open details.</div>
+  <div class="page-subtitle">All <span class="dyn-pf">27</span> portfolios side-by-side. Data as of <span class="dyn-asof-long">April 2026</span> · NSE. Click any row to open details.</div>
   <div class="table-wrap">
     <table class="compare-table">
       <thead><tr>
@@ -456,7 +456,7 @@ nav{display:flex;gap:4px}
   </div>
   <div class="about-section">
     <h2>Halal Verification</h2>
-    <p>All 97 stocks are screened against AAOIFI Shariah principles — no banks, NBFCs, insurance, alcohol, tobacco, gambling, weapons, pork, or adult content. Verified via <strong>halalstock.in</strong> (NSECode-based screening) and cross-checked with Zoya for borderline cases.</p>
+    <p>All <span class="dyn-stocks">97</span> stocks are screened against AAOIFI Shariah principles — no banks, NBFCs, insurance, alcohol, tobacco, gambling, weapons, pork, or adult content. Verified via <strong>halalstock.in</strong> (NSECode-based screening) and cross-checked with Zoya for borderline cases.</p>
     <p>Financial ratios, as applied by halalstock.in's AAOIFI-based screen: interest-bearing debt &lt; 33% of 3-year average market capitalisation; cash and interest-bearing deposits &lt; 33% of the same; non-permissible revenue — including all forms of interest income — &lt; 5% of total revenue. Re-screened quarterly.</p>
     <p>On the standard itself: AAOIFI Shariah Standard No. 21 caps interest-bearing debt and interest-bearing deposits at <strong>30% of market capitalisation</strong>, so the 33% screen above is marginally more permissive than the standard it derives from. Other methodologies differ again — MSCI Islamic uses 33⅓% of <em>total assets</em>, Dow Jones Islamic 33% of a trailing 24-month average market cap — so a borderline stock can pass one screen and fail another. Verify individual holdings against your own preferred standard.</p>
   </div>
@@ -467,7 +467,7 @@ nav{display:flex;gap:4px}
   </div>
   <div class="about-section">
     <h2>Data Source</h2>
-    <p>Prices: Yahoo Finance split-adjusted close, fetched annually (March 31 each year, 2001–2026) for CAGR returns, plus monthly adj-close series for risk statistics and chart trajectories. Returns and risk numbers computed live in-browser using JavaScript — no server backend, no API rate limits, no stale data.</p>
+    <p>Prices: Yahoo Finance split-adjusted close, fetched annually (March 31 each year, <span class="dyn-years">2001–2026</span>) for CAGR returns, plus monthly adj-close series for risk statistics and chart trajectories. Returns and risk numbers computed live in-browser using JavaScript — no server backend, no API rate limits, no stale data.</p>
   </div>
   <div class="about-section">
     <h2>Risk Statistics Methodology</h2>
@@ -659,6 +659,31 @@ const MONTHLY_PRICES = {
 
 const NIFTY50_MONTHLY = {start:"2007-09",values:[5021.35, 5900.65, 5762.75, 6138.6, 5137.45, 5223.5, 4734.5, 5165.9, 4870.1, 4040.55, 4332.95, 4360.0, 3921.2, 2885.6, 2755.1, 2959.15, 2874.8, 2763.65, 3020.95, 3473.95, 4448.95, 4291.1, 4636.45, 4662.1, 5083.95, 4711.7, 5032.7, 5201.05, 4882.05, 4922.3, 5249.1, 5278.0, 5086.3, 5312.5, 5367.6, 5402.4, 6029.95, 6017.7, 5862.7, 6134.5, 5505.9, 5333.25, 5833.75, 5749.5, 5473.1, 5647.4, 5482.0, 5001.0, 4943.25, 5326.6, 4832.05, 4624.3, 5199.25, 5385.2, 5295.55, 5248.15, 4924.25, 5278.9, 5229.0, 5258.5, 5703.3, 5619.7, 5879.85, 5905.1, 6034.75, 5693.05, 5682.55, 5930.2, 5985.95, 5842.2, 5742.0, 5471.8, 5735.3, 6299.15, 6176.1, 6304.0, 6089.5, 6276.95, 6704.2, 6696.4, 7229.95, 7611.35, 7721.3, 7954.35, 7964.8, 8322.2, 8588.25, 8282.7, 8808.9, 8844.6, 8491.0, 8181.5, 8433.65, 8368.5, 8532.85, 7971.3, 7948.9, 8065.8, 7935.25, 7946.35, 7563.55, 6987.05, 7738.4, 7849.8, 8160.1, 8287.75, 8638.5, 8786.2, 8611.15, 8638.0, 8224.5, 8185.8, 8561.3, 8879.6, 9173.75, 9304.05, 9621.25, 9520.9, 10077.1, 9917.9, 9788.6, 10335.3, 10226.55, 10530.7, 11027.7, 10492.85, 10113.7, 10739.35, 10736.15, 10714.3, 11356.5, 11680.5, 10930.45, 10386.6, 10876.75, 10862.55, 10830.95, 10792.5, 11623.9, 11748.15, 11922.8, 11788.85, 11118.0, 11023.25, 11474.45, 11877.45, 12056.05, 12168.45, 11962.1, 11201.75, 8597.75, 9859.9, 9580.3, 10302.1, 11073.45, 11387.5, 11247.55, 11642.4, 12968.95, 13981.75, 13634.6, 14529.15, 14690.7, 14631.1, 15582.8, 15721.5, 15763.05, 17132.2, 17618.15, 17671.65, 16983.2, 17354.05, 17339.85, 16793.9, 17464.75, 17102.55, 16584.55, 15780.25, 17158.25, 17759.3, 17094.35, 18012.2, 18758.35, 18105.3, 17662.15, 17303.95, 17359.75, 18065.0, 18534.4, 19189.05, 19753.8, 19253.8, 19638.3, 19079.6, 20133.15, 21731.4, 21725.7, 21982.8, 22326.9, 22604.85, 22530.7, 24010.6, 24951.15, 25235.9, 25810.85, 24205.35, 24131.1, 23644.8, 23508.4, 22124.7, 23519.35, 24334.2, 24750.7, 25517.05, 24768.35, 24426.85, 24611.1, 25722.1, 26202.95, 26129.6, 25320.65, 25178.65, 22331.4, 23997.55]};
 const RISK_FREE_ANNUAL = 0.065;
+
+// ── Dataset bounds (derived — never hardcode these) ──
+// Every CAGR window and every "data as of" label is measured from the data
+// itself, so refreshing PRICES/MONTHLY_PRICES needs no code or copy edits.
+// Previously the windows hardcoded 2026, which silently produced wrong CAGRs
+// the moment the datasets were refreshed past that year.
+const ALL_YEARS = Object.values(PRICES).flatMap(p => Object.keys(p).map(Number));
+const LATEST_YEAR = Math.max(...ALL_YEARS);
+const EARLIEST_YEAR = Math.min(...ALL_YEARS);
+const LATEST_MONTH = (() => {
+  let best = '';
+  for (const s of Object.values(MONTHLY_PRICES)) {
+    const [y, m] = s.start.split('-').map(Number);
+    const i = y * 12 + (m - 1) + s.values.length - 1;
+    const ym = Math.floor(i / 12) + '-' + String((i % 12) + 1).padStart(2, '0');
+    if (ym > best) best = ym; // zero-padded YYYY-MM compares lexically
+  }
+  return best;
+})();
+const MON_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MON_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function latestMonthLabel(long) {
+  const [y, m] = LATEST_MONTH.split('-').map(Number);
+  return (long ? MON_LONG : MON_SHORT)[m - 1] + ' ' + y;
+}
 
 const DIVERSIFIED = [
 {id:0,group:'diversified',emoji:'☀️',name:'All-Weather India',
@@ -852,10 +877,10 @@ function weightedRet(stocks, y1, y2) {
 }
 
 function computeReturns(stocks, navSeries) {
-  const w1y = weightedRet(stocks, 2025, 2026);
-  const w3y = weightedRet(stocks, 2023, 2026);
-  const w5y = weightedRet(stocks, 2021, 2026);
-  const w10y = weightedRet(stocks, 2016, 2026);
+  const w1y  = weightedRet(stocks, LATEST_YEAR - 1,  LATEST_YEAR);
+  const w3y  = weightedRet(stocks, LATEST_YEAR - 3,  LATEST_YEAR);
+  const w5y  = weightedRet(stocks, LATEST_YEAR - 5,  LATEST_YEAR);
+  const w10y = weightedRet(stocks, LATEST_YEAR - 10, LATEST_YEAR);
   let r6mo = null;
   if (navSeries && navSeries.nav && navSeries.nav.length >= 7) {
     const n = navSeries.nav;
@@ -1329,7 +1354,7 @@ function runCalc() {
     document.getElementById('c-gain').textContent = '₹'+fmt(total-invested);
     document.getElementById('c-total').textContent = '₹'+fmt(total);
     const note = document.getElementById('c-cagr-note');
-    if (note) note.textContent = 'Using '+Number(cagr).toFixed(1)+'% CAGR (5Y · Yahoo Finance · Apr 2026)';
+    if (note) note.textContent = 'Using '+Number(cagr).toFixed(1)+'% CAGR (5Y · Yahoo Finance · '+latestMonthLabel()+')';
   } catch(e) { showError('Calculator: '+e.message); }
 }
 
@@ -1439,7 +1464,7 @@ function showCovExplainer(portfolioId, period, coverage) {
   const periodLabels = { r1y:'1 Year', r3y:'3 Year CAGR', r5y:'5 Year CAGR', r10y:'10 Year CAGR', r6mo:'6 Month' };
   const periodYears = { r1y:1, r3y:3, r5y:5, r10y:10, r6mo:1 };
   const reqYrs = periodYears[period] || 5;
-  const startYear = 2026 - reqYrs;
+  const startYear = LATEST_YEAR - reqYrs;
   const full = [], partial = [], missing = [];
   p.stocks.forEach(s => {
     const px = PRICES[s.t];
@@ -1447,7 +1472,7 @@ function showCovExplainer(portfolioId, period, coverage) {
     const yrs = Object.keys(px).map(Number).sort((a,b) => a-b);
     if (!yrs.length) { missing.push(s); return; }
     if (yrs[0] <= startYear) full.push({...s, earliest: yrs[0]});
-    else partial.push({...s, earliest: yrs[0], yearsHave: 2026 - yrs[0]});
+    else partial.push({...s, earliest: yrs[0], yearsHave: LATEST_YEAR - yrs[0]});
   });
   document.getElementById('cov-title').textContent = periodLabels[period] + ' · ' + coverage + '% coverage';
   document.getElementById('cov-subtitle').textContent = p.emoji + ' ' + p.name;
@@ -1559,7 +1584,7 @@ function cmRender() {
   const container = document.getElementById('cm-selected');
   if (!container) return;
   if (cmStocks.length === 0) {
-    container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:12px;background:var(--bg3);border-radius:var(--r-sm);border:1px dashed var(--border2)">No stocks yet. Tap the search box to browse all 97 halal stocks.</div>';
+    container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3);font-size:12px;background:var(--bg3);border-radius:var(--r-sm);border:1px dashed var(--border2)">No stocks yet. Tap the search box to browse all '+Object.keys(PRICES).length+' halal stocks.</div>';
   } else {
     container.innerHTML = cmStocks.map(s => `
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;display:flex;align-items:center;gap:10px">
@@ -1593,7 +1618,10 @@ function cmComputeReturns() {
     warning.style.display = 'block';
     warning.innerHTML = '⚠ Weights total ' + totalWt.toFixed(1) + '% (should be 100%). Use Auto-balance.';
   } else warning.style.display = 'none';
-  const r = computeReturns(cmStocks.map(s => ({ t: s.t, w: s.weight })));
+  // Pass the NAV series too, or the 6M tile below can never be populated
+  // (computeReturns derives r6mo from it) and always rendered as "—".
+  const cmPf = cmStocks.map(s => ({ t: s.t, w: s.weight }));
+  const r = computeReturns(cmPf, portfolioNAVSeries(cmPf));
   const periods = [{k:'r6mo',l:'6M'},{k:'r1y',l:'1Y'},{k:'r3y',l:'3Y CAGR'},{k:'r5y',l:'5Y CAGR'},{k:'r10y',l:'10Y CAGR'}];
   const covMap = {r1y:r.cov1y, r3y:r.cov3y, r5y:r.cov5y, r10y:r.cov10y, r6mo:r.cov1y};
   document.getElementById('cm-returns').innerHTML = periods.map(({k,l}) => {
@@ -1615,8 +1643,27 @@ document.addEventListener('click', e => {
 // ════════════════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════════════════
+// ── Data-derived copy ──
+// Portfolio/stock counts and "as of" dates used to be typed into the markup
+// in nine places and drifted out of step with the data on every refresh
+// (see the "95 -> 97" and "12 -> 16" fix commits). They are now filled from
+// the datasets at load, so the copy cannot go stale again.
+function applyDataCopy() {
+  const set = (sel, val) => document.querySelectorAll(sel).forEach(el => { el.textContent = val; });
+  set('.dyn-pf', ALL_PORTFOLIOS.length);
+  set('.dyn-stocks', Object.keys(PRICES).length);
+  set('.dyn-div', DIVERSIFIED.length);
+  set('.dyn-sector', SECTOR.length);
+  set('.dyn-asof', latestMonthLabel(false));
+  set('.dyn-asof-long', latestMonthLabel(true));
+  set('.dyn-years', EARLIEST_YEAR + '–' + LATEST_YEAR);
+  const search = document.getElementById('cm-search');
+  if (search) search.placeholder = `Search or tap to browse all ${Object.keys(PRICES).length} halal stocks…`;
+}
+
 (function init() {
   try {
+    applyDataCopy();
     ALL_PORTFOLIOS.forEach(p => {
       p.navSeries = portfolioNAVSeries(p.stocks);
       p.r = computeReturns(p.stocks, p.navSeries);
